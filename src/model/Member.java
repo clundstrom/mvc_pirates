@@ -1,19 +1,19 @@
 package model;
 
-import java.util.UUID;
+import java.util.Random;
 
 public class Member {
 
     
     private String name;
-    private String id;
+    private String id = "";
     private String personalNumber;
 
 
     public Member(String nm, String persNum) {
         name = nm;
         personalNumber = persNum;
-        id = UUID.randomUUID().toString();
+        setId();
     }
 
     public String getName() {
@@ -32,8 +32,16 @@ public class Member {
         this.name = name;
     }
 
-    private void setId(){
-       
+    public void setPersonalNumber(String personalNumber) {
+        this.personalNumber = personalNumber;
+    }
+
+    private void setId() {
+        Random rand = new Random();
+        int idLenght = 6;
+        for(int i = 0; i < idLenght; i++) {
+            id += Integer.toString(rand.nextInt(10));
+        }
     }
 }
 
