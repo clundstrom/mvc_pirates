@@ -1,6 +1,7 @@
 import model.*;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class Program {
 
@@ -15,7 +16,8 @@ public class Program {
         boatList.add(boat);
         boatList.add(boat1);
 
-
+        String uniqueID = UUID.randomUUID().toString();
+        System.out.println(uniqueID);
 
     }
 
