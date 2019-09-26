@@ -81,7 +81,10 @@ public class Menu {
     public String[] register() {
         clearConsole();
         String[] info = new String[2];
+        System.out.println("Press \'r\' to go back");
         info[0] = requireInput("Please enter your name: ");
+        if(info[0].equals("r"))
+            presentation();
         info[1] = requireInput("Social security number: ");
 
         notifySubscribers(info);
