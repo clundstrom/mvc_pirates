@@ -18,7 +18,7 @@ public class MemberController implements IViewObserver {
 
 
     @Override
-    public void viewUpdated(String[] args) {
+    public void onViewUpdated(String[] args) {
         Member member = new Member(args[0], args[1]);
         System.out.println("Success.");
         System.out.println(member.getName() + member.getPersonalNumber() + member.getId());

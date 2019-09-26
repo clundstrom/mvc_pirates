@@ -1,6 +1,4 @@
 package view;
-
-import controller.MemberController;
 import model.IViewObserver;
 
 import java.io.IOException;
@@ -10,12 +8,8 @@ import java.util.Scanner;
 public class Menu {
 
     private static final String ERR_INVALID_INPUT = "Invalid input";
-    private char quitKey = 'q';
-
     Scanner sc;
-
     ArrayList<IViewObserver> mSubscribers;
-
 
     public Menu() {
         sc = new Scanner(System.in);
@@ -134,7 +128,7 @@ public class Menu {
 
     private void notifySubscribers(String[] info) {
         for(IViewObserver sub : mSubscribers){
-            sub.viewUpdated(info);
+            sub.onViewUpdated(info);
         }
     }
 
