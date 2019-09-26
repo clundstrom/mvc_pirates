@@ -85,7 +85,8 @@ public class Menu {
         info[0] = requireInput("Please enter your name: ");
         if(info[0].equals("r"))
             presentation();
-        info[1] = requireInput("Social security number: ");
+        else
+            info[1] = requireInput("Social security number: ");
 
         notifySubscribers(info);
         return info;
