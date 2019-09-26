@@ -5,11 +5,12 @@ plugins {
 group ''
 version '1.0-SNAPSHOT'
 
-sourceCompatibility = 1.8
+sourceCompatibility = 1.11
+targetCompatibility = 1.11
 
 sourceSets {
     main.java.srcDirs = ['src/']
-    main.resources.srcDirs = ['src/resources']
+    main.resources.srcDirs = ['src/assets']
 }
 
 repositories {
