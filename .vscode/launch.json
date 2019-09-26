@@ -1,0 +1,18 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Program",
+            "request": "launch",
+            "mainClass": "Program",
+            "projectName": "mvc_pirates_d5b44ea3"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Member",
+            "request": "launch",
+            "mainClass": "model.Member",
+            "projectName": "mvc_pirates_d5b44ea3"
+        }
+    ]
+}
