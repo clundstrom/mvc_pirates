@@ -8,6 +8,8 @@ public class Program {
 
         MemberController mc = new MemberController();
         Menu menu = new Menu();
+        menu.addSubscriber(mc);
+
         menu.presentation();
 
 

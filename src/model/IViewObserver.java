@@ -2,7 +2,6 @@ package model;
 
 public interface IViewObserver {
 
-    public String[] notifySubscriber();
-
+    void viewUpdated(String[] args);
 
 }

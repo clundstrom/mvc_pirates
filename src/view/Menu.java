@@ -11,6 +11,7 @@ public class Menu {
 
     private static final String ERR_INVALID_INPUT = "Invalid input";
     private char quitKey = 'q';
+
     Scanner sc;
 
     ArrayList<IViewObserver> mSubscribers;
@@ -18,6 +19,11 @@ public class Menu {
 
     public Menu() {
         sc = new Scanner(System.in);
+        mSubscribers = new ArrayList<>();
+    }
+
+    public void addSubscriber(IViewObserver subscriber) {
+        mSubscribers.add(subscriber);
     }
 
     String[] presentationActions = {
@@ -77,6 +83,8 @@ public class Menu {
         String[] info = new String[2];
         info[0] = requireInput("Please enter your name: ");
         info[1] = requireInput("Social security number: ");
+
+        notifySubscribers(info);
         return info;
     }
 
@@ -91,7 +99,7 @@ public class Menu {
      *
      * @return
      */
-    public String[] changeMember() {
+    public void changeMember() {
         System.out.println("What would you like to change?\n");
         for(String s: changeMemberActions){
             System.out.println(s);
@@ -116,7 +124,14 @@ public class Menu {
                 break;
         }
 
-        return newInfo;
+        notifySubscribers(newInfo);
+
+    }
+
+    private void notifySubscribers(String[] info) {
+        for(IViewObserver sub : mSubscribers){
+            sub.viewUpdated(info);
+        }
     }
 
 
