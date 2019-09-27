@@ -17,19 +17,7 @@ public class SavedInstanceState {
     private static SavedInstanceState savedInstanceState;
 
 
-    /**
-     * Using singleton pattern to avoid duplicate InstanceStates.
-     *
-     * @return A singleton object.
-     */
-    public static SavedInstanceState getInstance() {
-        if(savedInstanceState == null){
-            savedInstanceState = new SavedInstanceState();
-        }
-        return savedInstanceState;
-    }
-
-    SavedInstanceState(){
+    public SavedInstanceState(){
         this.instanceObjects = new ArrayList<>();
     }
 

@@ -23,7 +23,6 @@ public class BaseController {
 
     public BaseController() {
         dbFile = new File(DB_PATH);
-        this.savedInstanceState = SavedInstanceState.getInstance();
         verifyDatabase();
         fetchDatabase();
     }
@@ -37,6 +36,9 @@ public class BaseController {
             String formattedString = Files.readString(dbFile.toPath());
             if (!formattedString.isEmpty()) {
                 savedInstanceState = new Gson().fromJson(formattedString, SavedInstanceState.class);
+            }
+            else{
+                savedInstanceState = new SavedInstanceState();
             }
 
         }
