@@ -1,11 +1,11 @@
 package view;
 
 import controller.RegisterController;
-import model.IViewObserver;
-
 import java.io.IOException;
-import java.util.ArrayList;
 
+/**
+ * The view which handles the main menu.
+ */
 public class MenuView extends BaseView {
 
 
@@ -53,7 +53,7 @@ public class MenuView extends BaseView {
                     new EditMemberView(controller).changeMember();
                     break;
                 case '3':
-                    // exit
+                    new EditMemberView(controller).deleteMember();
                     break;
                 case '4':
                     break;

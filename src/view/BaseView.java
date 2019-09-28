@@ -60,15 +60,20 @@ public abstract class BaseView {
     }
 
 
-    public void onViewInit(){};
+    public void onViewInit() {
+    }
 
-    protected void welcomeMessage(String message){
+    ;
+
+    protected void welcomeMessage(String message) {
         System.out.println(message);
-    };
+    }
 
-    protected void presentActions(String[] presentActions){
-        if(presentActions != null){
-            for (String msg : presentActions){
+    ;
+
+    protected void presentActions(String[] presentActions) {
+        if (presentActions != null) {
+            for (String msg : presentActions) {
                 System.out.println(msg);
             }
         }
@@ -80,7 +85,7 @@ public abstract class BaseView {
      * @param subscriber Subscriber who listens to information from the View.
      */
     public void addSubscriber(IViewObserver subscriber) {
-        if(mSubscribers == null){
+        if (mSubscribers == null) {
             mSubscribers = new ArrayList<>();
         }
         mSubscribers.add(subscriber);
@@ -91,9 +96,15 @@ public abstract class BaseView {
      *
      * @param info
      */
-    protected void notifyMemberSubscribers(String[] info) {
+    protected void notifyMemberChanged(String[] info) {
         for (IViewObserver sub : mSubscribers) {
             sub.onMemberUpdated(info);
+        }
+    }
+
+    protected void notifyMemberDeleted(String id) {
+        for (IViewObserver sub : mSubscribers) {
+            sub.onMemberDeleted(id);
         }
     }
 }

@@ -117,6 +117,7 @@ public class BaseController {
         if(this.savedInstanceState.getSavedStates().contains(state)){
             this.savedInstanceState.removeState(state);
         }
+        writeToDB();
     }
 
 

@@ -1,11 +1,9 @@
 package controller;
 
-import model.Boat;
 import model.IViewObserver;
 import model.Member;
 import model.SavedState;
 
-import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
 
@@ -49,6 +47,11 @@ public class RegisterController extends BaseController implements IViewObserver 
         registerSavedState(this.currentState);
     }
 
+    @Override
+    public void onMemberDeleted(String id) {
+        removeFromInstanceState(getStateById(id));
+    }
+
     /**
      * Receives updates and registers boat info with controller.
      *
@@ -66,17 +69,17 @@ public class RegisterController extends BaseController implements IViewObserver 
     }
 
     /**
-     * Tries to fetch a local save state.
+     * Queries DB for Saved State. Sets local state if found and returns true.
      * @param id Member id.
      * @return True/false
      */
-    public boolean getLocalSaveState(String id){
+    public boolean hasLocalSaveState(String id){
         try {
             this.currentState = super.getStateById(id);
             return true;
         }
         catch (NoSuchElementException e){
-            System.out.println("Could not find a member with that ID.");
+            System.out.println("Could not find a saved state with that ID.");
         }
         return false;
     }

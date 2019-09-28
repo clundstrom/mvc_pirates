@@ -2,6 +2,10 @@ package view;
 
 import controller.RegisterController;
 
+
+/**
+ * The view handles editing of members.
+ */
 public class EditMemberView extends BaseView {
 
     private String[] presentActions = {
@@ -18,6 +22,10 @@ public class EditMemberView extends BaseView {
         super.addSubscriber(controller);
     }
 
+
+    /**
+     * Register member view. Notifies controller with new information.
+     */
     public void register() {
         super.clearConsole();
         String[] info = new String[2];
@@ -29,11 +37,11 @@ public class EditMemberView extends BaseView {
         else{
             info[1] = requireInput("Social security number: ");
         }
-        notifyMemberSubscribers(info);
+        notifyMemberChanged(info);
     }
 
     /**
-     * Changes a members information.
+     * Change member view. Notifies controller.
      *
      * @return
      */
@@ -69,12 +77,19 @@ public class EditMemberView extends BaseView {
                 break;
         }
 
-        notifyMemberSubscribers(changedMemberInfo);
+        notifyMemberChanged(changedMemberInfo);
+    }
+
+    /**
+     * Delete member view. Notifies controller.
+     */
+    public void deleteMember(){
+        String id = requireInput("Which member would you like to delete? Enter an id: ");
+        notifyMemberDeleted(id);
     }
 
     private void promptMemberId() {
-        if (controller.getLocalSaveState(requireInput("Please enter your member ID: "))) {
-            welcomeMessage("Welcome! What would you like to do?");
+        if (controller.hasLocalSaveState(requireInput("Please enter your member ID: "))) {
         }
     }
 }
