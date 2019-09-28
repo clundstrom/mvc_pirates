@@ -28,6 +28,22 @@ public class SavedInstanceState {
         }
     }
 
+    public boolean contains(SavedState objectState){
+        return savedStates.contains(objectState);
+    }
+
+    /**
+     * Overwrites Object in InstanceState.
+     * @param objectState State to overwrite with.
+     */
+    public void updateState(SavedState objectState){
+        if(savedStates.contains(objectState)){
+            int index = savedStates.indexOf(objectState);
+            savedStates.set(index, objectState);
+        }
+
+    }
+
     public void removeState(SavedState objectState){
         if(savedStates.contains(objectState)){
             savedStates.remove(objectState);
@@ -44,7 +60,7 @@ public class SavedInstanceState {
 
     public SavedState getSavedStateById(String id){
         for(SavedState state: savedStates){
-            if(state.getMember().getId() == id){
+            if(state.getMember().getId().equalsIgnoreCase(id)){
                 return state;
             }
         }

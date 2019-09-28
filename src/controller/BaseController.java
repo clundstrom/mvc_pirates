@@ -95,16 +95,24 @@ public class BaseController {
         }
     }
 
+    /**
+     * Adds or overwrites state depending on previous entries.
+     * @param state
+     */
     protected void addToInstanceState(SavedState state){
-        if(!this.savedInstanceState.getSavedStates().contains(state)){
-            this.savedInstanceState.addState(state);
+        if(savedInstanceState.contains(state)){
+            savedInstanceState.updateState(state);
             writeToDB();
         }
         else {
-            System.out.println("Cannot register duplicate states.");
+            savedInstanceState.addState(state);
         }
     }
 
+    /**
+     * Removes state object.
+     * @param state
+     */
     protected void removeFromInstanceState(SavedState state){
         if(this.savedInstanceState.getSavedStates().contains(state)){
             this.savedInstanceState.removeState(state);

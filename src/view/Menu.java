@@ -1,4 +1,6 @@
 package view;
+
+import controller.RegisterController;
 import model.IViewObserver;
 
 import java.io.IOException;
@@ -10,12 +12,18 @@ public class Menu {
     private static final String ERR_INVALID_INPUT = "Invalid input";
     Scanner sc;
     ArrayList<IViewObserver> mSubscribers;
+    RegisterController controller;
 
-    public Menu() {
+    public Menu(RegisterController controller) {
+        this.controller = controller;
         sc = new Scanner(System.in);
         mSubscribers = new ArrayList<>();
     }
 
+    /**
+     * Adds a subscriber to the view.
+     * @param subscriber Subscriber who listens to information from the View.
+     */
     public void addSubscriber(IViewObserver subscriber) {
         mSubscribers.add(subscriber);
     }
@@ -52,7 +60,7 @@ public class Menu {
                     register();
                     break;
                 case '2':
-                    changeMember();
+                    promptMemberId();
                     break;
                 case '3':
                     // exit
@@ -62,7 +70,7 @@ public class Menu {
                 case '5':
                     break;
                 default:
-                    System.out.println(ERR_INVALID_INPUT);
+                    System.err.println(ERR_INVALID_INPUT);
                     break;
             }
 
@@ -77,7 +85,7 @@ public class Menu {
         String[] info = new String[2];
         System.out.println("Press \'r\' to go back");
         info[0] = requireInput("Please enter your name: ");
-        if(info[0].equals("r"))
+        if (info[0].equals("r"))
             presentation();
         else
             info[1] = requireInput("Social security number: ");
@@ -92,6 +100,13 @@ public class Menu {
     }
 
 
+    public void promptMemberId(){
+        System.out.println("What is the member id? ");
+        if(controller.getLocalSaveState(sc.next())){
+            changeMember();
+        }
+    }
+
     /**
      * Changes a members information.
      *
@@ -99,7 +114,7 @@ public class Menu {
      */
     public void changeMember() {
         System.out.println("What would you like to change?\n");
-        for(String s: changeMemberActions){
+        for (String s : changeMemberActions) {
             System.out.println(s);
         }
         String answer = requireInput("");
@@ -109,16 +124,19 @@ public class Menu {
         switch (answer) {
             case "1":
                 newInfo[0] = requireInput("Please enter your name: ");
+                newInfo[1] = "";
                 break;
             case "2":
+                newInfo[0] = "";
                 newInfo[1] = requireInput("Please enter your social security number: ");
+
                 break;
             case "3":
                 clearConsole();
                 presentation();
                 break;
             default:
-                System.out.println(ERR_INVALID_INPUT);
+                System.err.println(ERR_INVALID_INPUT);
                 break;
         }
 
@@ -126,8 +144,12 @@ public class Menu {
 
     }
 
+    /**
+     * Notifies any subscribers with provided information from the view.
+     * @param info
+     */
     private void notifySubscribers(String[] info) {
-        for(IViewObserver sub : mSubscribers){
+        for (IViewObserver sub : mSubscribers) {
             sub.onMemberUpdated(info);
         }
     }

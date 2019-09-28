@@ -7,7 +7,7 @@ public class Member {
     
     private String name;
     private String id = "";
-    private String personalNumber;
+    private String personalNumber = "";
 
 
     public Member(String nm, String persNum) {

@@ -1,15 +1,17 @@
 import controller.BaseController;
 import controller.RegisterController;
+import view.Menu;
 
 public class Program {
 
 
     public static void main(String[] args) {
-        RegisterController mc = new RegisterController();
         BaseController bs = new BaseController();
-//        Menu menu = new Menu();
-//        menu.addSubscriber(mc);
-//        menu.presentation();
+        RegisterController registerController = new RegisterController();
+
+        Menu menu = new Menu(registerController);
+        menu.addSubscriber(registerController);
+        menu.presentation();
     }
 
 }
