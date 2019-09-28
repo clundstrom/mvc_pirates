@@ -1,17 +1,17 @@
-import com.google.gson.Gson;
 import controller.BaseController;
-import controller.MemberController;
-import view.Menu;
+import controller.RegisterController;
+import view.MenuView;
 
 public class Program {
 
 
     public static void main(String[] args) {
-        MemberController mc = new MemberController();
         BaseController bs = new BaseController();
-//        Menu menu = new Menu();
-//        menu.addSubscriber(mc);
-//        menu.presentation();
+        RegisterController registerController = new RegisterController();
+
+        MenuView menu = new MenuView(registerController);
+        menu.addSubscriber(registerController);
+        menu.onViewInit();
     }
 
 }

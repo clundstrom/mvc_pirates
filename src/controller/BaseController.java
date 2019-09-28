@@ -2,14 +2,14 @@ package controller;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
-import model.Member;
 import model.SavedInstanceState;
+import model.SavedState;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InvalidClassException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.util.NoSuchElementException;
 
 /**
  * Class which handles communication with database.
@@ -23,7 +23,6 @@ public class BaseController {
 
     public BaseController() {
         dbFile = new File(DB_PATH);
-        this.savedInstanceState = SavedInstanceState.getInstance();
         verifyDatabase();
         fetchDatabase();
     }
@@ -37,6 +36,9 @@ public class BaseController {
             String formattedString = Files.readString(dbFile.toPath());
             if (!formattedString.isEmpty()) {
                 savedInstanceState = new Gson().fromJson(formattedString, SavedInstanceState.class);
+            }
+            else{
+                savedInstanceState = new SavedInstanceState();
             }
 
         }
@@ -84,7 +86,7 @@ public class BaseController {
     /**
      * Function responsible for updating the database file.
      */
-    void setDatabaseEntry() {
+    private void writeToDB() {
         String formatted = new Gson().toJson(savedInstanceState);
         try {
             Files.writeString(this.dbFile.toPath(), formatted, StandardCharsets.UTF_8);
@@ -92,6 +94,48 @@ public class BaseController {
         catch (IOException e ){
             System.out.println("There was an error writing to the database.");
         }
+    }
+
+    /**
+     * Adds or overwrites state depending on previous entries.
+     * @param state
+     */
+    protected void addToInstanceState(SavedState state){
+        if(savedInstanceState.contains(state)){
+            savedInstanceState.updateState(state);
+        }
+        else {
+            savedInstanceState.addState(state);
+        }
+        writeToDB();
+    }
+
+    /**
+     * Removes state object.
+     * @param state
+     */
+    protected void removeFromInstanceState(SavedState state){
+        if(this.savedInstanceState.getSavedStates().contains(state)){
+            this.savedInstanceState.removeState(state);
+        }
+        writeToDB();
+    }
+
+
+    /**
+     * Returns a registry SavedState entry.
+     *
+     * @param id Unique member id.
+     * @return A SavedState object.
+     */
+    protected SavedState getStateById(String id){
+       try{
+           return this.savedInstanceState.getSavedStateById(id);
+       }
+       catch (NoSuchElementException e){
+           System.out.println("Could not find an entry with id: " + id);
+       }
+       return null;
     }
 
 

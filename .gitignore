@@ -2,3 +2,5 @@
 *.iml
 /out
 /.vscode/
+/.gradle/*
+src/assets/*
