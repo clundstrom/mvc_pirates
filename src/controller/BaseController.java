@@ -106,6 +106,7 @@ public class BaseController {
         }
         else {
             savedInstanceState.addState(state);
+            writeToDB();
         }
     }
 

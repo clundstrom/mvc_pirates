@@ -31,14 +31,18 @@ public class RegisterController extends BaseController implements IViewObserver 
      */
     @Override
     public void onMemberUpdated(String[] args) {
-        if(args.length > 2 || args == null) throw new IndexOutOfBoundsException();
+        // Check if member exists
+        if(currentState.hasMember()){
+            if(args[0].length() != 0){
+                this.currentState.getMember().setName(args[0]);
+            }
 
-        if(args[0].length() != 0){
-            this.currentState.getMember().setName(args[0]);
+            if(args[1].length() != 0){
+                this.currentState.getMember().setPersonalNumber(args[1]);
+            }
         }
-
-        if(args[1].length() != 0){
-            this.currentState.getMember().setPersonalNumber(args[1]);
+        else {
+            this.currentState.setMember(new Member(args[0], args[1]));
         }
         registerSavedState(this.currentState);
     }

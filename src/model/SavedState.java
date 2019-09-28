@@ -22,6 +22,9 @@ public class SavedState {
     }
 
     public Member getMember() {
+        if(member == null){
+            member = new Member("", "");
+        }
         return member;
     }
 
@@ -35,5 +38,9 @@ public class SavedState {
 
     public void setBoats(ArrayList<Boat> boats) {
         this.boats = boats;
+    }
+
+    public boolean hasMember(){
+        return member == null;
     }
 }
