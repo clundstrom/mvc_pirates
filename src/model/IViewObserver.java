@@ -1,11 +1,10 @@
 package model;
 
-import java.util.ArrayList;
-
 public interface IViewObserver {
 
-    void onMemberUpdated(String[] args);
+    void onMemberUpdated(Member member);
     void onMemberDeleted(String id);
-    void onBoatUpdated(String[] boat);
+    void onBoatCreated(Boat boat);
+    void onBoatDeleted(String name);
 
 }

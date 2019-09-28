@@ -15,6 +15,10 @@ public class Member {
         setId();
     }
 
+    public Member(){
+        setId();
+    }
+
     public String getName() {
         return name;
     }

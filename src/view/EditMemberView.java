@@ -1,6 +1,7 @@
 package view;
 
 import controller.RegisterController;
+import model.Member;
 
 
 /**
@@ -28,20 +29,22 @@ public class EditMemberView extends BaseView {
      */
     public void register() {
         super.clearConsole();
-        String[] info = new String[2];
         System.out.println("Press \'r\' to go back");
-        info[0] = requireInput("Please enter your name: ");
-        if (info[0].equals("r")){
+        String answer = requireInput("Please enter your name: ");
+        if (answer.equalsIgnoreCase("r")){
             return;
         }
         else{
-            info[1] = requireInput("Social security number: ");
+            Member member = new Member();
+            member.setName(answer);
+            member.setPersonalNumber(requireInput("Social security number: "));
+            notifyMemberChanged(member);
         }
-        notifyMemberChanged(info);
+
     }
 
     /**
-     * Change member view. Notifies controller.
+     * Change member view. Update LOCAL objects and Notifies controller.
      *
      * @return
      */
@@ -51,19 +54,15 @@ public class EditMemberView extends BaseView {
 
         String answer = requireInput("");
 
-        String[] changedMemberInfo = new String[2];
-        String[] changedBoatInfo = new String[3];
+        Member updatedMember = new Member();
         switch (answer) {
             case "1":
-                changedMemberInfo[0] = requireInput("Please enter your name: ");
-                changedMemberInfo[1] = "";
+                updatedMember.setName(requireInput("Please enter your name: "));
                 break;
             case "2":
-                changedMemberInfo[0] = "";
-                changedMemberInfo[1] = requireInput("Please enter your social security number: ");
+                updatedMember.setPersonalNumber(requireInput("Please enter your social security number: "));
                 break;
             case "3":
-
                 // Add boat
                 break;
             case "4":
@@ -77,7 +76,7 @@ public class EditMemberView extends BaseView {
                 break;
         }
 
-        notifyMemberChanged(changedMemberInfo);
+        notifyMemberChanged(updatedMember);
     }
 
     /**

@@ -2,6 +2,7 @@ package view;
 
 import controller.RegisterController;
 import model.IViewObserver;
+import model.Member;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -94,11 +95,11 @@ public abstract class BaseView {
     /**
      * Notifies any subscribers with provided information from the view.
      *
-     * @param info
+     * @param member
      */
-    protected void notifyMemberChanged(String[] info) {
+    protected void notifyMemberChanged(Member member) {
         for (IViewObserver sub : mSubscribers) {
-            sub.onMemberUpdated(info);
+            sub.onMemberUpdated(member);
         }
     }
 

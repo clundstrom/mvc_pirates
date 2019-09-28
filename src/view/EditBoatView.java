@@ -1,6 +1,7 @@
 package view;
 
 import controller.RegisterController;
+import model.Boat;
 import model.IViewObserver;
 
 public class EditBoatView extends MenuView {
@@ -16,11 +17,11 @@ public class EditBoatView extends MenuView {
     /**
      * Notifies any subscribers with provided information from the view.
      *
-     * @param boatInformation
+     * @param boat
      */
-    protected void notifyBoatSubscribers(String[] boatInformation) {
+    protected void notifyBoatSubscribers(Boat boat) {
         for (IViewObserver sub : mSubscribers) {
-            sub.onBoatUpdated(boatInformation);
+            sub.onBoatCreated(boat);
         }
     }
 

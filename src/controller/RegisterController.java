@@ -1,11 +1,9 @@
 package controller;
 
+import model.Boat;
 import model.IViewObserver;
 import model.Member;
 import model.SavedState;
-
-import java.util.NoSuchElementException;
-
 
 /**
  * Controller which handles CRUD operations on the
@@ -24,23 +22,22 @@ public class RegisterController extends BaseController implements IViewObserver 
     /**
      * Receives updates and registers member info with controller.
      *
-     * @param args
+     * @param updatedMember Member which is updated.
      */
     @Override
-    public void onMemberUpdated(String[] args) {
+    public void onMemberUpdated(Member updatedMember) {
         // Check if member exists
         if (currentState.hasMember()) {
-            if (args[0].length() != 0) {
-                this.currentState.getMember().setName(args[0]);
+            if (updatedMember.getName().length() != 0) {
+                this.currentState.getMember().setName(updatedMember.getName());
             }
 
-            if (args[1].length() != 0) {
-                this.currentState.getMember().setPersonalNumber(args[1]);
+            if (updatedMember.getPersonalNumber().length() != 0) {
+                this.currentState.getMember().setPersonalNumber(updatedMember.getPersonalNumber());
             }
         } else {
-            Member member = (new Member(args[0], args[1]));
-            this.currentState.setMember(new Member(args[0], args[1]));
-            System.out.println("Member successfully registered.\nPlease save your unique id in a secure location: " + member.getId());
+            this.currentState.setMember(updatedMember);
+            System.out.println("Member successfully registered.\nPlease save your unique id in a secure location: " + updatedMember.getId());
         }
         registerSavedState(this.currentState);
     }
@@ -48,15 +45,23 @@ public class RegisterController extends BaseController implements IViewObserver 
     @Override
     public void onMemberDeleted(String id) {
         removeFromInstanceState(getStateById(id));
+        System.out.println("Member successfully deleted.");
     }
 
     /**
      * Receives updates and registers boat info with controller.
      *
-     * @param boatInformation Boat.
+     * @param boat Boat.
      */
+
     @Override
-    public void onBoatUpdated(String[] boatInformation) {
+    public void onBoatCreated(Boat boat) {
+
+    }
+
+    @Override
+    public void onBoatDeleted(String name) {
+
     }
 
     /**
