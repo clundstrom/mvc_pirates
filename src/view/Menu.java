@@ -9,10 +9,10 @@ import java.util.Scanner;
 
 public class Menu {
 
-    private static final String ERR_INVALID_INPUT = "Invalid input";
-    Scanner sc;
-    ArrayList<IViewObserver> mSubscribers;
-    RegisterController controller;
+    private final String ERR_INVALID_INPUT = "Invalid input";
+    private Scanner sc;
+    private ArrayList<IViewObserver> mSubscribers;
+    private RegisterController controller;
 
     public Menu(RegisterController controller) {
         this.controller = controller;
@@ -22,6 +22,7 @@ public class Menu {
 
     /**
      * Adds a subscriber to the view.
+     *
      * @param subscriber Subscriber who listens to information from the View.
      */
     public void addSubscriber(IViewObserver subscriber) {
@@ -35,9 +36,11 @@ public class Menu {
             "4. Menu member.",
             "5. List members."};
     String[] changeMemberActions = {
-            "1. Name.",
-            "2. Social security number.",
-            "3. Back."
+            "1. Change name.",
+            "2. Change social security number.",
+            "3. Add boat.",
+            "4. Remove boat.",
+            "5. Back."
     };
 
 
@@ -73,25 +76,26 @@ public class Menu {
                     System.err.println(ERR_INVALID_INPUT);
                     break;
             }
-
         } catch (IOException e) {
             e.printStackTrace();
         }
 
     }
 
-    public String[] register() {
+    public void register() {
         clearConsole();
         String[] info = new String[2];
         System.out.println("Press \'r\' to go back");
         info[0] = requireInput("Please enter your name: ");
-        if (info[0].equals("r"))
+        if (info[0].equals("r")){
             presentation();
-        else
-            info[1] = requireInput("Social security number: ");
+        }
 
+        else{
+            info[1] = requireInput("Social security number: ");
+        }
         notifySubscribers(info);
-        return info;
+        changeMember();
     }
 
     public String requireInput(String question) {
@@ -100,9 +104,8 @@ public class Menu {
     }
 
 
-    public void promptMemberId(){
-        System.out.println("What is the member id? ");
-        if(controller.getLocalSaveState(sc.next())){
+    public void promptMemberId() {
+        if (controller.getLocalSaveState(requireInput("Please enter your member ID: "))) {
             changeMember();
         }
     }
@@ -113,25 +116,30 @@ public class Menu {
      * @return
      */
     public void changeMember() {
-        System.out.println("What would you like to change?\n");
+        System.out.println("Welcome! What would you like to do?");
         for (String s : changeMemberActions) {
             System.out.println(s);
         }
         String answer = requireInput("");
 
 
-        String[] newInfo = new String[2];
+        String[] changedMemberInfo = new String[2];
         switch (answer) {
             case "1":
-                newInfo[0] = requireInput("Please enter your name: ");
-                newInfo[1] = "";
+                changedMemberInfo[0] = requireInput("Please enter your name: ");
+                changedMemberInfo[1] = "";
                 break;
             case "2":
-                newInfo[0] = "";
-                newInfo[1] = requireInput("Please enter your social security number: ");
-
+                changedMemberInfo[0] = "";
+                changedMemberInfo[1] = requireInput("Please enter your social security number: ");
                 break;
             case "3":
+                // Add boat
+                break;
+            case "4":
+                // Remove boat
+                break;
+            case "5":
                 clearConsole();
                 presentation();
                 break;
@@ -140,12 +148,13 @@ public class Menu {
                 break;
         }
 
-        notifySubscribers(newInfo);
+        notifySubscribers(changedMemberInfo);
 
     }
 
     /**
      * Notifies any subscribers with provided information from the view.
+     *
      * @param info
      */
     private void notifySubscribers(String[] info) {

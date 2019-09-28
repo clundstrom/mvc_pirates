@@ -4,7 +4,6 @@ import java.util.Random;
 
 public class Member {
 
-    
     private String name;
     private String id = "";
     private String personalNumber = "";
@@ -38,8 +37,8 @@ public class Member {
 
     private void setId() {
         Random rand = new Random();
-        int idLenght = 6;
-        for(int i = 0; i < idLenght; i++) {
+        int maxIdLength = 6;
+        for(int i = 0; i < maxIdLength; i++) {
             id += Integer.toString(rand.nextInt(10));
         }
     }

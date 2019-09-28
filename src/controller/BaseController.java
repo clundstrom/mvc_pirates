@@ -102,12 +102,11 @@ public class BaseController {
     protected void addToInstanceState(SavedState state){
         if(savedInstanceState.contains(state)){
             savedInstanceState.updateState(state);
-            writeToDB();
         }
         else {
             savedInstanceState.addState(state);
-            writeToDB();
         }
+        writeToDB();
     }
 
     /**

@@ -42,7 +42,9 @@ public class RegisterController extends BaseController implements IViewObserver 
             }
         }
         else {
+            Member member = (new Member(args[0], args[1]));
             this.currentState.setMember(new Member(args[0], args[1]));
+            System.out.println("Member successfully registered.\nPlease save your unique id in a secure location: " + member.getId());
         }
         registerSavedState(this.currentState);
     }
@@ -54,7 +56,6 @@ public class RegisterController extends BaseController implements IViewObserver 
      */
     @Override
     public void onBoatUpdated(ArrayList<Boat> boats) {
-        this.currentState.setBoats(boats);
     }
 
     /**
