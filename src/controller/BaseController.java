@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.util.NoSuchElementException;
 
 /**
  * Class which handles communication with database.
@@ -128,7 +129,13 @@ public class BaseController {
      * @return A SavedState object.
      */
     protected SavedState getStateById(String id){
-       return this.savedInstanceState.getSavedStateById(id);
+       try{
+           return this.savedInstanceState.getSavedStateById(id);
+       }
+       catch (NoSuchElementException e){
+           System.out.println("Could not find an entry with id: " + id);
+       }
+       return null;
     }
 
 
