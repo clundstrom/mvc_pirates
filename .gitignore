@@ -3,4 +3,4 @@
 /out
 /.vscode/
 /.gradle/*
-/assets/*
+src/assets/*
