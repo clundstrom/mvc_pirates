@@ -5,6 +5,6 @@ import java.util.ArrayList;
 public interface IViewObserver {
 
     void onMemberUpdated(String[] args);
-    void onBoatUpdated(ArrayList<Boat> args);
+    void onBoatUpdated(String[] boat);
 
 }

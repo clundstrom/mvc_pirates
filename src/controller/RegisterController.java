@@ -52,10 +52,10 @@ public class RegisterController extends BaseController implements IViewObserver 
     /**
      * Receives updates and registers boat info with controller.
      *
-     * @param boats Boats.
+     * @param boatInformation Boat.
      */
     @Override
-    public void onBoatUpdated(ArrayList<Boat> boats) {
+    public void onBoatUpdated(String[] boatInformation) {
     }
 
     /**

@@ -1,6 +1,6 @@
 import controller.BaseController;
 import controller.RegisterController;
-import view.Menu;
+import view.MenuView;
 
 public class Program {
 
@@ -9,9 +9,9 @@ public class Program {
         BaseController bs = new BaseController();
         RegisterController registerController = new RegisterController();
 
-        Menu menu = new Menu(registerController);
+        MenuView menu = new MenuView(registerController);
         menu.addSubscriber(registerController);
-        menu.presentation();
+        menu.onViewInit();
     }
 
 }
