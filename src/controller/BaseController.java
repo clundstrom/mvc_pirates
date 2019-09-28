@@ -2,12 +2,11 @@ package controller;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
-import model.Member;
 import model.SavedInstanceState;
+import model.SavedState;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InvalidClassException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 
@@ -86,7 +85,7 @@ public class BaseController {
     /**
      * Function responsible for updating the database file.
      */
-    void setDatabaseEntry() {
+    private void writeToDB() {
         String formatted = new Gson().toJson(savedInstanceState);
         try {
             Files.writeString(this.dbFile.toPath(), formatted, StandardCharsets.UTF_8);
@@ -94,6 +93,33 @@ public class BaseController {
         catch (IOException e ){
             System.out.println("There was an error writing to the database.");
         }
+    }
+
+    protected void addToInstanceState(SavedState state){
+        if(!this.savedInstanceState.getSavedStates().contains(state)){
+            this.savedInstanceState.addState(state);
+            writeToDB();
+        }
+        else {
+            System.out.println("Cannot register duplicate states.");
+        }
+    }
+
+    protected void removeFromInstanceState(SavedState state){
+        if(this.savedInstanceState.getSavedStates().contains(state)){
+            this.savedInstanceState.removeState(state);
+        }
+    }
+
+
+    /**
+     * Returns a registry SavedState entry.
+     *
+     * @param id Unique member id.
+     * @return A SavedState object.
+     */
+    protected SavedState getStateById(String id){
+       return this.savedInstanceState.getSavedStateById(id);
     }
 
 

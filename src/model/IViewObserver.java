@@ -1,7 +1,10 @@
 package model;
 
+import java.util.ArrayList;
+
 public interface IViewObserver {
 
-    void onViewUpdated(String[] args);
+    void onMemberUpdated(String[] args);
+    void onBoatUpdated(ArrayList<Boat> args);
 
 }

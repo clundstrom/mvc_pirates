@@ -128,7 +128,7 @@ public class Menu {
 
     private void notifySubscribers(String[] info) {
         for(IViewObserver sub : mSubscribers){
-            sub.onViewUpdated(info);
+            sub.onMemberUpdated(info);
         }
     }
 
