@@ -29,10 +29,9 @@ public class EditMemberView extends BaseView {
         super.clearConsole();
         System.out.println("Press \'r\' to go back");
         String answer = requireInput("Please enter your name: ");
-        if (answer.equalsIgnoreCase("r")){
+        if (answer.equalsIgnoreCase("r")) {
             return;
-        }
-        else{
+        } else {
             Member member = new Member();
             member.setName(answer);
             member.setPersonalNumber(requireInput("Social security number: "));
@@ -47,11 +46,12 @@ public class EditMemberView extends BaseView {
      * @return
      */
     public void changeMember() {
-        promptMemberId();
-        presentActions(presentActions);
+        if (isMemberVerified()) {
+            presentActions(presentActions);
 
-        String answer = requireInput("");
+            String answer = requireInput("");
 
+<<<<<<< HEAD
         Member updatedMember = new Member();
         
         switch (answer) {
@@ -73,21 +73,40 @@ public class EditMemberView extends BaseView {
             default:
                 System.err.println(ERR_INVALID_INPUT);
                 break;
+=======
+            Member updatedMember = new Member();
+            switch (answer) {
+                case "1":
+                    updatedMember.setName(requireInput("Please enter your name: "));
+                    notifyMemberChanged(updatedMember);
+                    break;
+                case "2":
+                    updatedMember.setPersonalNumber(requireInput("Please enter your social security number: "));
+                    notifyMemberChanged(updatedMember);
+                    break;
+                case "3":
+                    // Add boat
+                    break;
+                case "4":
+                    // Remove boat
+                    break;
+                case "5":
+                    clearConsole();
+                    break;
+                default:
+                    System.err.println(ERR_INVALID_INPUT);
+                    break;
+            }
+>>>>>>> a6c274ab9083246b18585191966111fb3519e104
         }
-
-        notifyMemberChanged(updatedMember);
     }
 
     /**
      * Delete member view. Notifies controller.
      */
-    public void deleteMember(){
+    public void deleteMember() {
         String id = requireInput("Which member would you like to delete? Enter an id: ");
         notifyMemberDeleted(id);
     }
 
-    private void promptMemberId() {
-        if (controller.hasLocalSaveState(requireInput("Please enter your member ID: "))) {
-        }
-    }
 }

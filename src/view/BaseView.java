@@ -8,6 +8,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * BaseView to which provides the most basic functions and a template for inheriting classes.
+ */
 public abstract class BaseView {
 
     protected final String ERR_INVALID_INPUT = "Invalid input";
@@ -20,6 +23,9 @@ public abstract class BaseView {
         sc = new Scanner(System.in);
     }
 
+    /**
+     * Directs the user through the menu using their input.
+     */
     protected void getInputAction() {
         try {
             int key = System.in.read();
@@ -49,6 +55,10 @@ public abstract class BaseView {
         }
     }
 
+    /**
+     * @param question A question ask the user.
+     * @return The next input of User.
+     */
     protected String requireInput(String question) {
         System.out.print(question);
         return this.sc.next();
@@ -61,6 +71,9 @@ public abstract class BaseView {
     }
 
 
+    /**
+     * Function to be called in childobjects when the view initializes.
+     */
     public void onViewInit() {
     }
 
@@ -106,6 +119,19 @@ public abstract class BaseView {
     protected void notifyMemberDeleted(String id) {
         for (IViewObserver sub : mSubscribers) {
             sub.onMemberDeleted(id);
+        }
+    }
+
+    /**
+     * Asks the controller if a specified member state exists in the database.
+     * @return
+     */
+    protected boolean isMemberVerified() {
+        if (controller.hasIDSavedState(requireInput("Please enter your member ID: "))) {
+            return true;
+        }
+        else{
+            return false;
         }
     }
 }

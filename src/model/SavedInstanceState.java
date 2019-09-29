@@ -24,7 +24,7 @@ public class SavedInstanceState {
             savedStates.add(objectState);
         }
         else{
-            throw new IllegalArgumentException("Can not add duplicate objects."); // this never happen because of unique id's.
+            throw new IllegalArgumentException("Can not add duplicate instances."); // this never happen because of unique id's.
         }
     }
 
@@ -54,10 +54,19 @@ public class SavedInstanceState {
     }
 
 
+    /**
+     * Returns the list of currently saved states.
+     * @return
+     */
     public ArrayList<SavedState> getSavedStates() {
         return savedStates;
     }
 
+    /**
+     * Fetch state with id.
+     * @param id Unique ID of member.
+     * @return Current ID state.
+     */
     public SavedState getSavedStateById(String id){
         for(SavedState state: savedStates){
             if(state.getMember().getId().equalsIgnoreCase(id)){
