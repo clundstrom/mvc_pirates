@@ -114,11 +114,13 @@ public class BaseController {
      * Removes state object.
      * @param state
      */
-    protected void removeFromInstanceState(SavedState state){
+    protected boolean removeFromInstanceState(SavedState state){
         if(this.savedInstanceState.getSavedStates().contains(state)){
             this.savedInstanceState.removeState(state);
+            writeToDB();
+            return true;
         }
-        writeToDB();
+        return false;
     }
 
 

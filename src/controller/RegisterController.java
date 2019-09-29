@@ -44,8 +44,9 @@ public class RegisterController extends BaseController implements IViewObserver 
 
     @Override
     public void onMemberDeleted(String id) {
-        removeFromInstanceState(getStateById(id));
-        System.out.println("Member successfully deleted.");
+        if(removeFromInstanceState(getStateById(id))){
+            System.out.println("Member successfully deleted.");
+        }
     }
 
     /**
