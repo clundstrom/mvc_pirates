@@ -33,6 +33,9 @@ public class SavedState {
     }
 
     public ArrayList<Boat> getBoats() {
+        if(boats == null){
+            boats = new ArrayList<>();
+        }
         return boats;
     }
 
