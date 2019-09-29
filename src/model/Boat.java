@@ -30,5 +30,5 @@ public abstract class Boat {
     protected String modelName;
     protected String name;
 
-
+ 
 }

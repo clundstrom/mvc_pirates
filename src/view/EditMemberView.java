@@ -2,8 +2,6 @@ package view;
 
 import controller.RegisterController;
 import model.Member;
-
-
 /**
  * The view handles editing of members.
  */
@@ -55,6 +53,7 @@ public class EditMemberView extends BaseView {
         String answer = requireInput("");
 
         Member updatedMember = new Member();
+        
         switch (answer) {
             case "1":
                 updatedMember.setName(requireInput("Please enter your name: "));
@@ -63,7 +62,7 @@ public class EditMemberView extends BaseView {
                 updatedMember.setPersonalNumber(requireInput("Please enter your social security number: "));
                 break;
             case "3":
-                // Add boat
+                new EditBoatView(controller).addBoat();
                 break;
             case "4":
                 // Remove boat
