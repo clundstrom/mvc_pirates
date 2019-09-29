@@ -13,8 +13,8 @@ public class MenuView extends BaseView {
             "1. Register member.",
             "2. Change a member.",
             "3. Delete a member.",
-            "4. MenuView member.",
-            "5. List members."};
+            "4. List members.",
+            "5. Exit"};
 
 
     public MenuView(RegisterController controller) {
@@ -58,11 +58,14 @@ public class MenuView extends BaseView {
                 case '4':
                     break;
                 case '5':
+                    System.out.println("Exiting..");
+                    System.exit(0);
                     break;
                 default:
                     System.err.println(ERR_INVALID_INPUT);
                     break;
             }
+            onViewInit();
         } catch (IOException e) {
             e.printStackTrace();
         }

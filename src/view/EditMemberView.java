@@ -58,9 +58,11 @@ public class EditMemberView extends BaseView {
         switch (answer) {
             case "1":
                 updatedMember.setName(requireInput("Please enter your name: "));
+                notifyMemberChanged(updatedMember);
                 break;
             case "2":
                 updatedMember.setPersonalNumber(requireInput("Please enter your social security number: "));
+                notifyMemberChanged(updatedMember);
                 break;
             case "3":
                 // Add boat
@@ -75,8 +77,6 @@ public class EditMemberView extends BaseView {
                 System.err.println(ERR_INVALID_INPUT);
                 break;
         }
-
-        notifyMemberChanged(updatedMember);
     }
 
     /**

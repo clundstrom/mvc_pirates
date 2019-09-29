@@ -44,7 +44,7 @@ public class RegisterController extends BaseController implements IViewObserver 
 
     @Override
     public void onMemberDeleted(String id) {
-        if(removeFromInstanceState(getStateById(id))){
+        if (removeFromInstanceState(getStateById(id))) {
             System.out.println("Member successfully deleted.");
         }
     }
@@ -57,7 +57,12 @@ public class RegisterController extends BaseController implements IViewObserver 
 
     @Override
     public void onBoatCreated(Boat boat) {
-
+        if (currentState.getBoats().contains(boat)) {
+            System.out.println("Cannot add duplicate boats.");
+        } else {
+            currentState.getBoats().add(boat);
+        }
+        registerSavedState(currentState);
     }
 
     @Override
