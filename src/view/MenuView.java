@@ -13,8 +13,9 @@ public class MenuView extends BaseView {
             "1. Register member.",
             "2. Change a member.",
             "3. Delete a member.",
-            "4. List members.",
-            "5. Exit"};
+            "4. View member.",
+            "5. List members.",
+            "6. Exit"};
 
 
     public MenuView(RegisterController controller) {
@@ -56,8 +57,12 @@ public class MenuView extends BaseView {
                     new EditMemberView(controller).deleteMember();
                     break;
                 case '4':
+                    new MemberInfoView(controller).viewMember();
                     break;
                 case '5':
+
+                    break;
+                case '6':
                     System.out.println("Exiting..");
                     System.exit(0);
                     break;

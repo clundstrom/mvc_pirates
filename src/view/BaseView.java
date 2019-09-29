@@ -108,4 +108,14 @@ public abstract class BaseView {
             sub.onMemberDeleted(id);
         }
     }
+
+    protected boolean isMemberVerified() {
+        if (controller.hasIDSavedState(requireInput("Please enter your member ID: "))) {
+            return true;
+        }
+        else{
+            System.out.println("No member with that id found.");
+            return false;
+        }
+    }
 }
