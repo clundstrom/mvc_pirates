@@ -114,7 +114,6 @@ public abstract class BaseView {
             return true;
         }
         else{
-            System.out.println("No member with that id found.");
             return false;
         }
     }
