@@ -109,6 +109,10 @@ public class RegisterController extends BaseController implements IViewObserver 
         return currentState != null;
     }
 
+    /**
+     * Fetches the saved state's current member.
+     * @return
+     */
     public Member getMember(){
         if(currentState.getMember() == null){
             System.out.println("No member found.");
