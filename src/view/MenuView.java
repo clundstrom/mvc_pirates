@@ -1,6 +1,7 @@
 package view;
 
 import controller.RegisterController;
+
 import java.io.IOException;
 
 /**
@@ -51,13 +52,15 @@ public class MenuView extends BaseView {
                     new EditMemberView(controller).register();
                     break;
                 case '2':
-                    new EditMemberView(controller).changeMember();
+                    if (isMemberVerified())
+                        new EditMemberView(controller).changeMember();
                     break;
                 case '3':
                     new EditMemberView(controller).deleteMember();
                     break;
                 case '4':
-                    new MemberInfoView(controller).viewMember();
+                    if (isMemberVerified())
+                        new MemberInfoView(controller).viewMember();
                     break;
                 case '5':
 

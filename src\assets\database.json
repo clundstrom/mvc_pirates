@@ -1,1 +1,12 @@
-{"savedStates":[{"member":{"name":"sad","id":"697852","personalNumber":""},"boats":[{"length":123,"modelName":"1","name":"123"}]}]}
+{
+  "savedStates": [
+    {
+      "member": {
+        "name": "Lurr",
+        "id": "697852",
+        "personalNumber": ""
+      },
+      "boats": []
+    }
+  ]
+}

@@ -8,5 +8,5 @@ src/assets/*
 *.classpath
 /build
 ./idea
-./settings/
+/.settings/
 *.project
