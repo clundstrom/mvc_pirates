@@ -1,1 +1,32 @@
-{"savedStates":[{"member":{"name":"Marcus","id":"999192","personalNumber":"1234"}},{"member":{"name":"q","id":"871731","personalNumber":"r"}},{"member":{"name":"SecondChange","id":"654190","personalNumber":"1234"}}]}
+{
+  "savedStates": [
+    {
+      "member": {
+        "name": "Marcus",
+        "id": "999192",
+        "personalNumber": "1234"
+      },
+      "boats": [
+        {
+          "length": 3000,
+          "modelName": "Big",
+          "name": "Big"
+        }
+      ]
+    },
+    {
+      "member": {
+        "name": "q",
+        "id": "871731",
+        "personalNumber": "r"
+      }
+    },
+    {
+      "member": {
+        "name": "SecondChange",
+        "id": "654190",
+        "personalNumber": "1234"
+      }
+    }
+  ]
+}

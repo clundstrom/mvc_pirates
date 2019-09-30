@@ -5,3 +5,7 @@
 /.gradle/*
 src/assets/*
 /bin
+.*classpath
+/build
+./idea
+./settings/

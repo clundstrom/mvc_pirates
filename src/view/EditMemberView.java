@@ -65,7 +65,7 @@ public class EditMemberView extends BaseView {
                     new EditBoatView(controller).addBoat();
                     break;
                 case "4":
-                    // Remove boat
+                    new EditBoatView(controller).deleteBoat();
                     break;
                 case "5":
                     clearConsole();

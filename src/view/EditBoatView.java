@@ -1,69 +1,82 @@
 package view;
 
 import controller.RegisterController;
-import model.IViewObserver;
-import model.MotorBoat;
-import model.Boat;
+import model.*;
 
-public class EditBoatView extends MenuView {
+public class EditBoatView extends BaseView {
 
     private String[] presentActions = {
-        "1. MotorBoat",
-        "2. SailBoat",
-        "3. Kayak",
-        "4. Canoe",
-        "5. Other",
-        "6. back"
-};
+            "1. MotorBoat",
+            "2. SailBoat",
+            "3. Kayak",
+            "4. Canoe",
+            "5. Other",
+            "6. back"
+    };
 
     public EditBoatView(RegisterController controller) {
         super(controller);
+        addSubscriber(controller);
     }
 
-    public void registerMotorboat() {
-        System.out.println("Press \'r\' to go back");
-        String boatName = requireInput("Please enter name of boat: ");
-        if (boatName.equalsIgnoreCase("r")) {
-            return;
-        } else {
-            String boatModel = requireInput("Please enter boat modal: ");
-            int boatLength = Integer.parseInt(requireInput("Please enter boat length: "));
-            Boat boat = new MotorBoat(boatName, boatModel, boatLength);
-            notifyBoatSubscribers(boat);
-        }
+    public void deleteBoat(){
+        String answer = requireInput("Which boat would you like to delete?");
+        notifyBoatDeleted(answer);
     }
 
     public void addBoat() {
         super.clearConsole();
+        welcomeMessage("What typ of boat do you want to register: ");
         presentActions(presentActions);
-        String anwser = requireInput("\nWhat typ of boat do you want to register:");
+        String anwser = requireInput("");
 
-        switch(anwser) {
-            case"1":
-            registerMotorboat();
+        Boat boat;
+        String name;
+        String model;
+        int length;
+
+        switch (anwser) {
+            case "1":
+                name = requireInput("What is the name of the boat?: ");
+                model = requireInput("What model is it?: ");
+                length = Integer.parseInt(requireInput("How long is it? "));
+                boat = new MotorBoat(name, model, length);
+                notifyBoatChanged(boat);
                 break;
-            case"2":
-                //Add SailBoat
+            case "2":
+                name = requireInput("What is the name of the boat?: ");
+                model = requireInput("What model is it?: ");
+                length = Integer.parseInt(requireInput("How long is it? "));
+                boat = new SailBoat(name, model, length);
+                notifyBoatChanged(boat);
                 break;
-            case"3":
-                //Add Kayak
+            case "3":
+                name = requireInput("What is the name of the boat?: ");
+                model = requireInput("What model is it?: ");
+                length = Integer.parseInt(requireInput("How long is it? "));
+                boat = new Kayak(name, model, length);
+                notifyBoatChanged(boat);
                 break;
-            case"4":
-                //Add Canoe
+            case "4":
+                name = requireInput("What is the name of the boat?: ");
+                model = requireInput("What model is it?: ");
+                length = Integer.parseInt(requireInput("How long is it? "));
+                boat = new Canoe(name, model, length);
+                notifyBoatChanged(boat);
                 break;
-            case"5":
-                //Add Other
-            case"6":
-                super.presentActions(presentActions);
-                break;       
+            case "5":
+                name = requireInput("What is the name of the boat?: ");
+                model = requireInput("What model is it?: ");
+                length = Integer.parseInt(requireInput("How long is it? "));
+                boat = new Other(name, model, length);
+                notifyBoatChanged(boat);
+            case "6":
+                break;
+            default:
+                addBoat();
+                break;
         }
-
-        
     }
-
-
-
-
 
 
     /**
@@ -71,12 +84,17 @@ public class EditBoatView extends MenuView {
      *
      * @param boat
      */
-    protected void notifyBoatSubscribers(Boat boat) {
+    protected void notifyBoatChanged(Boat boat) {
         for (IViewObserver sub : mSubscribers) {
             sub.onBoatCreated(boat);
         }
     }
 
+    protected void notifyBoatDeleted(String name){
+        for (IViewObserver sub : mSubscribers) {
+            sub.onBoatDeleted(name);
+        }
+    }
 
 
 }

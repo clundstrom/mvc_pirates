@@ -75,15 +75,11 @@ public abstract class BaseView {
      * Function to be called in childobjects when the view initializes.
      */
     public void onViewInit() {
-    }
-
-    ;
+    };
 
     protected void welcomeMessage(String message) {
         System.out.println(message);
-    }
-
-    ;
+    };
 
     protected void presentActions(String[] presentActions) {
         if (presentActions != null) {
@@ -127,11 +123,6 @@ public abstract class BaseView {
      * @return
      */
     protected boolean isMemberVerified() {
-        if (controller.hasIDSavedState(requireInput("Please enter your member ID: "))) {
-            return true;
-        }
-        else{
-            return false;
-        }
+        return controller.hasIDSavedState(requireInput("Please enter your member ID: "));
     }
 }

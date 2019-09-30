@@ -23,7 +23,7 @@ public class BaseController {
 
     public BaseController() {
         dbFile = new File(DB_PATH);
-        verifyDatabase();
+        verifyDatabaseExist();
         fetchDatabase();
     }
 
@@ -57,7 +57,7 @@ public class BaseController {
     /**
      * Creates a database json file if none exist.
      */
-    private void verifyDatabase() {
+    private void verifyDatabaseExist() {
         try {
             if (!databaseExists()) {
                 dbFile = new File(DB_PATH);
@@ -77,10 +77,7 @@ public class BaseController {
      * @return boolean
      */
     private boolean databaseExists() {
-        if (dbFile != null && dbFile.exists())
-            return true;
-        else
-            return false;
+        return dbFile != null && dbFile.exists();
     }
 
     /**
