@@ -20,6 +20,21 @@
           "name": "aa"
         }
       ]
+    },
+    {
+      "member": {
+        "name": "theKid",
+        "id": "863737",
+        "personalNumber": "999"
+      },
+      "boats": [
+        {
+          "type": "Other",
+          "length": 269,
+          "modelName": "Ship",
+          "name": "Titanic"
+        }
+      ]
     }
   ]
 }
