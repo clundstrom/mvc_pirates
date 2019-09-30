@@ -5,7 +5,8 @@
 /.gradle/*
 src/assets/*
 /bin
-.*classpath
+*.classpath
 /build
 ./idea
 ./settings/
+*.project

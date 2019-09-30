@@ -1,6 +1,7 @@
 package view;
 
 import controller.RegisterController;
+import model.Boat;
 
 public class ListBoatView extends BaseView {
     public ListBoatView(RegisterController controller) {
@@ -8,6 +9,8 @@ public class ListBoatView extends BaseView {
     }
 
     public void listBoats(){
-
+        for(int i=0; i < controller.getBoats().size(); i++){
+            System.out.println(i + controller.getBoats().get(i).getName());
+        }
     }
 }

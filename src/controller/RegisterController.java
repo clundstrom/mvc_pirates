@@ -6,6 +6,7 @@ import model.Member;
 import model.SavedState;
 
 import java.sql.SQLOutput;
+import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
 /**
@@ -88,6 +89,7 @@ public class RegisterController extends BaseController implements IViewObserver 
             }
         }
         registerSavedState(currentState);
+        System.out.println("Boat successfully deleted.");
     }
 
     /**
@@ -114,10 +116,17 @@ public class RegisterController extends BaseController implements IViewObserver 
      * @return
      */
     public Member getMember(){
-        if(currentState.getMember() == null){
+        if(!currentState.hasMember()){
             System.out.println("No member found.");
             return null;
         }
         return currentState.getMember();
+    }
+
+    public ArrayList<Boat> getBoats(){
+        if(currentState.hasBoats()){
+            return currentState.getBoats();
+        }
+        throw new NoSuchElementException("There was an error while retrieving your boats.");
     }
 }

@@ -19,6 +19,8 @@ public class SavedState {
     }
 
     public SavedState() {
+        member = new Member();
+        boats = new ArrayList<>();
     }
 
     public Member getMember() {

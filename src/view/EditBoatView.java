@@ -20,8 +20,19 @@ public class EditBoatView extends BaseView {
     }
 
     public void deleteBoat(){
-        String answer = requireInput("Which boat would you like to delete?");
-        notifyBoatDeleted(answer);
+        welcomeMessage("Which boat would you like to delete? ");
+        new ListBoatView(controller).listBoats();
+        String answer = requireInput("");
+        int index = Integer.parseInt(answer);
+
+        if(controller.getBoats().get(index) != null){
+            notifyBoatDeleted(controller.getBoats().get(index).getName());
+        }
+        else {
+            System.out.println("Invalid range.");
+        }
+
+
     }
 
     public void addBoat() {

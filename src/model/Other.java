@@ -8,6 +8,8 @@ public class Other extends Boat {
         super.modelName = model;
     }
 
+    public Other(){}
+
     @Override
     public int getLength() {
         return super.getLength();

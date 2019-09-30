@@ -1,6 +1,8 @@
 package model;
 
-public abstract class Boat {
+public class Boat {
+
+    public Boat(){}
 
     public int getLength() {
         return length;
