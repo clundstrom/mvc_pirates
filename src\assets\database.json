@@ -1,0 +1,25 @@
+{
+  "savedStates": [
+    {
+      "member": {
+        "name": "123",
+        "id": "024469",
+        "personalNumber": "123"
+      },
+      "boats": [
+        {
+          "type": "SailBoat",
+          "length": 11,
+          "modelName": "asd",
+          "name": "asd"
+        },
+        {
+          "type": "Canoe",
+          "length": 444,
+          "modelName": "asd",
+          "name": "aa"
+        }
+      ]
+    }
+  ]
+}

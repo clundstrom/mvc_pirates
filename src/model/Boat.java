@@ -2,6 +2,8 @@ package model;
 
 public abstract class Boat {
 
+    public Boat(){}
+
     public int getLength() {
         return length;
     }
@@ -30,5 +32,5 @@ public abstract class Boat {
     protected String modelName;
     protected String name;
 
-
+ 
 }

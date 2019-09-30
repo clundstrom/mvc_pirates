@@ -8,6 +8,7 @@ public class SailBoat extends Boat{
         super.modelName = model;
     }
 
+    public SailBoat(){}
     @Override
     public int getLength() {
         return super.getLength();

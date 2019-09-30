@@ -3,18 +3,21 @@ package view;
 import controller.RegisterController;
 import model.Member;
 
-
 /**
  * The view handles editing of members.
  */
 public class EditMemberView extends BaseView {
+
+
+    private boolean verified = false;
 
     private String[] presentActions = {
             "1. Change name.",
             "2. Change social security number.",
             "3. Add boat.",
             "4. Remove boat.",
-            "5. Back."
+            "5. Update boat",
+            "6. Back."
     };
 
 
@@ -31,10 +34,9 @@ public class EditMemberView extends BaseView {
         super.clearConsole();
         System.out.println("Press \'r\' to go back");
         String answer = requireInput("Please enter your name: ");
-        if (answer.equalsIgnoreCase("r")){
+        if (answer.equalsIgnoreCase("r")) {
             return;
-        }
-        else{
+        } else {
             Member member = new Member();
             member.setName(answer);
             member.setPersonalNumber(requireInput("Social security number: "));
@@ -49,7 +51,6 @@ public class EditMemberView extends BaseView {
      * @return
      */
     public void changeMember() {
-        promptMemberId();
         presentActions(presentActions);
 
         String answer = requireInput("");
@@ -58,37 +59,39 @@ public class EditMemberView extends BaseView {
         switch (answer) {
             case "1":
                 updatedMember.setName(requireInput("Please enter your name: "));
+                updatedMember.setPersonalNumber("");
+                notifyMemberChanged(updatedMember);
                 break;
             case "2":
+                updatedMember.setName("");
                 updatedMember.setPersonalNumber(requireInput("Please enter your social security number: "));
+                notifyMemberChanged(updatedMember);
                 break;
             case "3":
-                // Add boat
+                new EditBoatView(controller).addBoat();
                 break;
             case "4":
-                // Remove boat
+                new EditBoatView(controller).deleteBoat();
                 break;
-            case "5":
+            case"5":
+                new EditBoatView(controller).updateBoat();
+                break;
+            case "6":
                 clearConsole();
-                break;
+                return;
             default:
                 System.err.println(ERR_INVALID_INPUT);
                 break;
         }
-
-        notifyMemberChanged(updatedMember);
+        changeMember();
     }
 
     /**
      * Delete member view. Notifies controller.
      */
-    public void deleteMember(){
+    public void deleteMember() {
         String id = requireInput("Which member would you like to delete? Enter an id: ");
         notifyMemberDeleted(id);
     }
 
-    private void promptMemberId() {
-        if (controller.hasLocalSaveState(requireInput("Please enter your member ID: "))) {
-        }
-    }
 }

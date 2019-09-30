@@ -9,6 +9,8 @@ public class Kayak extends Boat {
         super.modelName = model;
     }
 
+    public Kayak(){}
+
     @Override
     public int getLength() {
         return super.getLength();

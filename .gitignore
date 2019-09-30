@@ -4,3 +4,10 @@
 /.vscode/
 /.gradle/*
 src/assets/*
+/bin
+*.classpath
+/build
+./idea
+/.settings/
+*.project
+.gradle

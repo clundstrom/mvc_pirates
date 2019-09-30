@@ -1,14 +1,15 @@
 package controller;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
-import model.SavedInstanceState;
-import model.SavedState;
+import model.*;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
 /**
@@ -23,7 +24,7 @@ public class BaseController {
 
     public BaseController() {
         dbFile = new File(DB_PATH);
-        verifyDatabase();
+        verifyDatabaseExist();
         fetchDatabase();
     }
 
@@ -35,7 +36,8 @@ public class BaseController {
         try {
             String formattedString = Files.readString(dbFile.toPath());
             if (!formattedString.isEmpty()) {
-                savedInstanceState = new Gson().fromJson(formattedString, SavedInstanceState.class);
+                Gson gson = getTypeAdapter();
+                savedInstanceState = gson.fromJson(formattedString, SavedInstanceState.class);
             }
             else{
                 savedInstanceState = new SavedInstanceState();
@@ -57,7 +59,7 @@ public class BaseController {
     /**
      * Creates a database json file if none exist.
      */
-    private void verifyDatabase() {
+    private void verifyDatabaseExist() {
         try {
             if (!databaseExists()) {
                 dbFile = new File(DB_PATH);
@@ -77,17 +79,15 @@ public class BaseController {
      * @return boolean
      */
     private boolean databaseExists() {
-        if (dbFile != null && dbFile.exists())
-            return true;
-        else
-            return false;
+        return dbFile != null && dbFile.exists();
     }
 
     /**
      * Function responsible for updating the database file.
      */
     private void writeToDB() {
-        String formatted = new Gson().toJson(savedInstanceState);
+        Gson gson = getTypeAdapter();
+        String formatted = gson.toJson(savedInstanceState);
         try {
             Files.writeString(this.dbFile.toPath(), formatted, StandardCharsets.UTF_8);
         }
@@ -114,11 +114,13 @@ public class BaseController {
      * Removes state object.
      * @param state
      */
-    protected void removeFromInstanceState(SavedState state){
+    protected boolean removeFromInstanceState(SavedState state){
         if(this.savedInstanceState.getSavedStates().contains(state)){
             this.savedInstanceState.removeState(state);
+            writeToDB();
+            return true;
         }
-        writeToDB();
+        return false;
     }
 
 
@@ -136,6 +138,27 @@ public class BaseController {
            System.out.println("Could not find an entry with id: " + id);
        }
        return null;
+    }
+
+    protected ArrayList<SavedState> getStates(){
+        return savedInstanceState.getSavedStates();
+    }
+
+
+    /**
+     * Credits: https://www.novatec-gmbh.de/en/blog/gson-object-hierarchies/
+     *
+     * @return
+     */
+    private Gson getTypeAdapter(){
+        RuntimeTypeAdapterFactory<Boat> vehicleAdapterFactory = RuntimeTypeAdapterFactory.of(Boat.class, "type")
+                .registerSubtype(Canoe.class, "Canoe")
+                .registerSubtype(Kayak.class, "Kayak")
+                .registerSubtype(MotorBoat.class, "MotorBoat")
+                .registerSubtype(Other.class, "Other")
+                .registerSubtype(SailBoat.class, "SailBoat");
+
+        return new GsonBuilder().setPrettyPrinting().registerTypeAdapterFactory(vehicleAdapterFactory).create();
     }
 
 

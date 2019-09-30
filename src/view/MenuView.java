@@ -1,6 +1,7 @@
 package view;
 
 import controller.RegisterController;
+
 import java.io.IOException;
 
 /**
@@ -13,8 +14,9 @@ public class MenuView extends BaseView {
             "1. Register member.",
             "2. Change a member.",
             "3. Delete a member.",
-            "4. MenuView member.",
-            "5. List members."};
+            "4. View member.",
+            "5. Compact list members.",
+            "6. Exit"};
 
 
     public MenuView(RegisterController controller) {
@@ -41,29 +43,38 @@ public class MenuView extends BaseView {
     @Override
     protected void getInputAction() {
         try {
-            int key = System.in.read();
+            String key = sc.next();
             switch (key) {
-                case 'q':
+                case "q":
                     System.out.println("Exited..");
                     break;
-                case '1':
+                case "1":
                     new EditMemberView(controller).register();
                     break;
-                case '2':
-                    new EditMemberView(controller).changeMember();
+                case "2":
+                    if (isMemberVerified())
+                        new EditMemberView(controller).changeMember();
                     break;
-                case '3':
+                case "3":
                     new EditMemberView(controller).deleteMember();
                     break;
-                case '4':
+                case "4":
+                    if (isMemberVerified())
+                        new MemberInfoView(controller).viewMember();
                     break;
-                case '5':
+                case "5":
+                    new CompactView(controller).compactViewList();
+                    break;
+                case "6":
+                    System.out.println("Exiting..");
+                    System.exit(0);
                     break;
                 default:
                     System.err.println(ERR_INVALID_INPUT);
                     break;
             }
-        } catch (IOException e) {
+            onViewInit();
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

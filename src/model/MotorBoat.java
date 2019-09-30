@@ -9,6 +9,8 @@ public class MotorBoat extends Boat {
         super.modelName = model;
     }
 
+    public MotorBoat(){}
+
     @Override
     public int getLength() {
         return super.getLength();

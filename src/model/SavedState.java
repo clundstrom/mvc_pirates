@@ -19,6 +19,8 @@ public class SavedState {
     }
 
     public SavedState() {
+        member = new Member();
+        boats = new ArrayList<>();
     }
 
     public Member getMember() {
@@ -33,6 +35,9 @@ public class SavedState {
     }
 
     public ArrayList<Boat> getBoats() {
+        if(boats == null){
+            boats = new ArrayList<>();
+        }
         return boats;
     }
 
