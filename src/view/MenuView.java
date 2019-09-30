@@ -15,7 +15,7 @@ public class MenuView extends BaseView {
             "2. Change a member.",
             "3. Delete a member.",
             "4. View member.",
-            "5. List members.",
+            "5. Compact list members.",
             "6. Exit"};
 
 
@@ -63,7 +63,7 @@ public class MenuView extends BaseView {
                         new MemberInfoView(controller).viewMember();
                     break;
                 case '5':
-
+                    new CompactView(controller).compactViewList();
                     break;
                 case '6':
                     System.out.println("Exiting..");

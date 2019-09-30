@@ -1,7 +1,7 @@
 package view;
 
 import controller.RegisterController;
-import model.Boat;
+
 
 public class ListBoatView extends BaseView {
     public ListBoatView(RegisterController controller) {

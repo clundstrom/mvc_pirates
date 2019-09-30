@@ -75,4 +75,11 @@ public class SavedInstanceState {
         }
         throw new NoSuchElementException("Entry not found.");
     }
+
+    public SavedState getStates() {
+        for(SavedState state : savedStates) {
+            return state;
+        }
+        throw new NullPointerException("No members in your club");
+    }
 }
