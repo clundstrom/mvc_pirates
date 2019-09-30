@@ -1,6 +1,7 @@
 package controller;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 import model.SavedInstanceState;
 import model.SavedState;
@@ -85,7 +86,8 @@ public class BaseController {
      * Function responsible for updating the database file.
      */
     private void writeToDB() {
-        String formatted = new Gson().toJson(savedInstanceState);
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        String formatted = gson.toJson(savedInstanceState);
         try {
             Files.writeString(this.dbFile.toPath(), formatted, StandardCharsets.UTF_8);
         }
