@@ -78,7 +78,7 @@ public class RegisterController extends BaseController implements IViewObserver 
     /**
      * Receives deletion notification and calls BaseController for removal.
      *
-     * @param name Name of boat.
+     * @param index Index of boat.
      */
     @Override
     public void onBoatDeleted(int index) {
@@ -141,5 +141,9 @@ public class RegisterController extends BaseController implements IViewObserver 
             return currentState.getBoats();
         }
         throw new NoSuchElementException("There was an error while retrieving your boats.");
+    }
+
+    public ArrayList<SavedState> getStates(){
+        return super.getStates();
     }
 }

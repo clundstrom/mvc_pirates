@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
 /**
@@ -135,5 +136,9 @@ public class BaseController {
            System.out.println("Could not find an entry with id: " + id);
        }
        return null;
+    }
+
+    protected ArrayList<SavedState> getStates(){
+        return savedInstanceState.getSavedStates();
     }
 }
