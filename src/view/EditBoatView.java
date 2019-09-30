@@ -17,22 +17,19 @@ public class EditBoatView extends BaseView {
     public EditBoatView(RegisterController controller) {
         super(controller);
         addSubscriber(controller);
+
     }
 
-    public void deleteBoat(){
-        welcomeMessage("Which boat would you like to delete? ");
-        new ListBoatView(controller).listBoats();
-        String answer = requireInput("");
-        int index = Integer.parseInt(answer);
-
-        if(controller.getBoats().get(index) != null){
-            notifyBoatDeleted(controller.getBoats().get(index).getName());
+    public void deleteBoat() {
+        if (!controller.getBoats().isEmpty()) {
+            welcomeMessage("Which boat would you like to delete? ");
+            new ListBoatView(controller).listBoats();
+            String answer = requireInput("");
+            int index = Integer.parseInt(answer);
+            notifyBoatDeleted(index);
+        } else {
+            System.out.println("You have no boats registered.");
         }
-        else {
-            System.out.println("Invalid range.");
-        }
-
-
     }
 
     public void addBoat() {
@@ -101,9 +98,9 @@ public class EditBoatView extends BaseView {
         }
     }
 
-    protected void notifyBoatDeleted(String name){
+    protected void notifyBoatDeleted(int index) {
         for (IViewObserver sub : mSubscribers) {
-            sub.onBoatDeleted(name);
+            sub.onBoatDeleted(index);
         }
     }
 

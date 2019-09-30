@@ -81,15 +81,15 @@ public class RegisterController extends BaseController implements IViewObserver 
      * @param name Name of boat.
      */
     @Override
-    public void onBoatDeleted(String name) {
-        for (Boat boat : currentState.getBoats()){
-            if (boat.getName().equalsIgnoreCase(name)){
-                int index = currentState.getBoats().indexOf(boat);
-                currentState.getBoats().remove(index);
-            }
+    public void onBoatDeleted(int index) {
+        if(index < currentState.getBoats().size()){
+            currentState.getBoats().remove(index);
+            registerSavedState(currentState);
+            System.out.println("Boat successfully deleted.");
         }
-        registerSavedState(currentState);
-        System.out.println("Boat successfully deleted.");
+        else {
+            System.out.println("Invalid index.");
+        }
     }
 
     /**

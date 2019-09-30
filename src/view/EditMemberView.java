@@ -2,6 +2,7 @@ package view;
 
 import controller.RegisterController;
 import model.Member;
+
 /**
  * The view handles editing of members.
  */
@@ -19,6 +20,9 @@ public class EditMemberView extends BaseView {
     public EditMemberView(RegisterController controller) {
         super(controller);
         super.addSubscriber(controller);
+        if (!isMemberVerified()) {
+            return;
+        }
     }
 
 
@@ -46,35 +50,34 @@ public class EditMemberView extends BaseView {
      * @return
      */
     public void changeMember() {
-        if (isMemberVerified()) {
-            presentActions(presentActions);
+        presentActions(presentActions);
 
-            String answer = requireInput("");
+        String answer = requireInput("");
 
-            Member updatedMember = new Member();
-            switch (answer) {
-                case "1":
-                    updatedMember.setName(requireInput("Please enter your name: "));
-                    notifyMemberChanged(updatedMember);
-                    break;
-                case "2":
-                    updatedMember.setPersonalNumber(requireInput("Please enter your social security number: "));
-                    notifyMemberChanged(updatedMember);
-                    break;
-                case "3":
-                    new EditBoatView(controller).addBoat();
-                    break;
-                case "4":
-                    new EditBoatView(controller).deleteBoat();
-                    break;
-                case "5":
-                    clearConsole();
-                    break;
-                default:
-                    System.err.println(ERR_INVALID_INPUT);
-                    break;
-            }
+        Member updatedMember = new Member();
+        switch (answer) {
+            case "1":
+                updatedMember.setName(requireInput("Please enter your name: "));
+                notifyMemberChanged(updatedMember);
+                break;
+            case "2":
+                updatedMember.setPersonalNumber(requireInput("Please enter your social security number: "));
+                notifyMemberChanged(updatedMember);
+                break;
+            case "3":
+                new EditBoatView(controller).addBoat();
+                break;
+            case "4":
+                new EditBoatView(controller).deleteBoat();
+                break;
+            case "5":
+                clearConsole();
+                return;
+            default:
+                System.err.println(ERR_INVALID_INPUT);
+                break;
         }
+        changeMember();
     }
 
     /**
