@@ -14,6 +14,13 @@ public class EditBoatView extends BaseView {
             "6. back"
     };
 
+    private String[] presentChangeBoatActions = {
+        "1. Boat name",
+        "2. Boat model",
+        "3. Boat length",
+        "4. back"
+};
+
     public EditBoatView(RegisterController controller) {
         super(controller);
         addSubscriber(controller);
@@ -27,6 +34,39 @@ public class EditBoatView extends BaseView {
             String answer = requireInput("");
             int index = Integer.parseInt(answer);
             notifyBoatDeleted(index);
+        } else {
+            System.out.println("You have no boats registered.");
+        }
+    }
+
+    public void updateBoat(){
+        if (!controller.getBoats().isEmpty()) {
+            welcomeMessage("\nWhich boat would you like to Update? ");
+            new ListBoatView(controller).listBoats();
+            int index = Integer.parseInt(requireInput(""));
+            welcomeMessage("\nWhat do you like to change:");
+            presentActions(presentChangeBoatActions);
+            String answer = requireInput("");
+
+            switch(answer){
+                case"1":
+                    String changeName = requireInput("Enter new name: ");
+                    controller.getBoats().get(index).setName(changeName);
+                    notifyBoatUpdated(index);
+                    break;
+                case"2":
+                    String changeModel = requireInput("Enter new model:");
+                    controller.getBoats().get(index).setModelName(changeModel);
+                    notifyBoatUpdated(index);
+                    break;
+                case"3":
+                    int changeLength = Integer.parseInt(requireInput("Enter new length"));
+                    controller.getBoats().get(index).setLength(changeLength);
+                    notifyBoatUpdated(index);  
+                    break;
+                case"4":
+                    break; 
+            }
         } else {
             System.out.println("You have no boats registered.");
         }
@@ -101,6 +141,12 @@ public class EditBoatView extends BaseView {
     protected void notifyBoatDeleted(int index) {
         for (IViewObserver sub : mSubscribers) {
             sub.onBoatDeleted(index);
+        }
+    }
+
+    protected void notifyBoatUpdated(int index) {
+        for (IViewObserver sub : mSubscribers) {
+            sub.onBoatUpdate(index);
         }
     }
 

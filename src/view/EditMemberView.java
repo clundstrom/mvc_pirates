@@ -13,7 +13,8 @@ public class EditMemberView extends BaseView {
             "2. Change social security number.",
             "3. Add boat.",
             "4. Remove boat.",
-            "5. Back."
+            "5. Update boat",
+            "6. Back."
     };
 
 
@@ -70,7 +71,10 @@ public class EditMemberView extends BaseView {
             case "4":
                 new EditBoatView(controller).deleteBoat();
                 break;
-            case "5":
+            case"5":
+                new EditBoatView(controller).updateBoat();
+                break;
+            case "6":
                 clearConsole();
                 return;
             default:

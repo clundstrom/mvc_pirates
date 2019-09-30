@@ -4,7 +4,8 @@ public interface IViewObserver {
 
     void onMemberUpdated(Member member);
     void onMemberDeleted(String id);
-    void onBoatCreated(Boat boat);
+    void onBoatUpdate(int index);
     void onBoatDeleted(int index);
+    void onBoatCreated(Boat boat);
 
 }

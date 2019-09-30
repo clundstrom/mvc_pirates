@@ -4,7 +4,7 @@ import view.MenuView;
 
 public class Program {
 
-
+    
     public static void main(String[] args) {
         BaseController bs = new BaseController();
         RegisterController registerController = new RegisterController();
