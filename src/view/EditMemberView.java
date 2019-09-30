@@ -59,9 +59,11 @@ public class EditMemberView extends BaseView {
         switch (answer) {
             case "1":
                 updatedMember.setName(requireInput("Please enter your name: "));
+                updatedMember.setPersonalNumber("");
                 notifyMemberChanged(updatedMember);
                 break;
             case "2":
+                updatedMember.setName("");
                 updatedMember.setPersonalNumber(requireInput("Please enter your social security number: "));
                 notifyMemberChanged(updatedMember);
                 break;

@@ -1,1 +1,42 @@
-{"savedStates":[{"member":{"name":"Henrik","id":"023750","personalNumber":"47327"},"boats":[{"length":12,"modelName":"rowboat","name":"sunrise"}]},{"member":{"name":"Hej","id":"162611","personalNumber":"3473"},"boats":[]},{"member":{"name":"asdasd","id":"417383","personalNumber":"asdQQc"},"boats":[]}]}
+{
+  "savedStates": [
+    {
+      "member": {
+        "name": "Hejsan",
+        "id": "023750",
+        "personalNumber": "123"
+      },
+      "boats": [
+        {
+          "length": 12,
+          "modelName": "rowboat",
+          "name": "sunrise"
+        }
+      ]
+    },
+    {
+      "member": {
+        "name": "Hej",
+        "id": "162611",
+        "personalNumber": "3473"
+      },
+      "boats": []
+    },
+    {
+      "member": {
+        "name": "asdasd",
+        "id": "417383",
+        "personalNumber": "asdQQc"
+      },
+      "boats": []
+    },
+    {
+      "member": {
+        "name": "Test",
+        "id": "507017",
+        "personalNumber": ""
+      },
+      "boats": []
+    }
+  ]
+}

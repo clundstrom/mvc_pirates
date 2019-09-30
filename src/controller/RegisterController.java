@@ -33,11 +33,11 @@ public class RegisterController extends BaseController implements IViewObserver 
         // Check if member exists
         if (currentState.hasMember()) {
             // The updated
-            if (updatedMember.getName() != null) {
+            if (!updatedMember.getName().isEmpty()) {
                 this.currentState.getMember().setName(updatedMember.getName());
             }
 
-            if (updatedMember.getPersonalNumber() != null) {
+            if (!updatedMember.getPersonalNumber().isEmpty()) {
                 this.currentState.getMember().setPersonalNumber(updatedMember.getPersonalNumber());
             }
         } else {
