@@ -2,6 +2,7 @@ package view;
 
 import controller.RegisterController;
 import model.IViewObserver;
+import model.MotorBoat;
 import model.Boat;
 
 public class EditBoatView extends MenuView {
@@ -19,14 +20,27 @@ public class EditBoatView extends MenuView {
         super(controller);
     }
 
-    public void addBoat(){
+    public void registerMotorboat() {
+        System.out.println("Press \'r\' to go back");
+        String boatName = requireInput("Please enter name of boat: ");
+        if (boatName.equalsIgnoreCase("r")) {
+            return;
+        } else {
+            String boatModel = requireInput("Please enter boat modal: ");
+            int boatLength = Integer.parseInt(requireInput("Please enter boat length: "));
+            Boat boat = new MotorBoat(boatName, boatModel, boatLength);
+            notifyBoatSubscribers(boat);
+        }
+    }
+
+    public void addBoat() {
         super.clearConsole();
         presentActions(presentActions);
-        String anwser = requireInput("\nWhat typ of boat do you want to register: ");
+        String anwser = requireInput("\nWhat typ of boat do you want to register:");
 
-        switch(anwser){
+        switch(anwser) {
             case"1":
-                //Add motorBoat
+            registerMotorboat();
                 break;
             case"2":
                 //Add SailBoat

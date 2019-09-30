@@ -51,29 +51,6 @@ public class EditMemberView extends BaseView {
 
             String answer = requireInput("");
 
-<<<<<<< HEAD
-        Member updatedMember = new Member();
-        
-        switch (answer) {
-            case "1":
-                updatedMember.setName(requireInput("Please enter your name: "));
-                break;
-            case "2":
-                updatedMember.setPersonalNumber(requireInput("Please enter your social security number: "));
-                break;
-            case "3":
-                new EditBoatView(controller).addBoat();
-                break;
-            case "4":
-                // Remove boat
-                break;
-            case "5":
-                clearConsole();
-                break;
-            default:
-                System.err.println(ERR_INVALID_INPUT);
-                break;
-=======
             Member updatedMember = new Member();
             switch (answer) {
                 case "1":
@@ -85,7 +62,7 @@ public class EditMemberView extends BaseView {
                     notifyMemberChanged(updatedMember);
                     break;
                 case "3":
-                    // Add boat
+                    new EditBoatView(controller).addBoat();
                     break;
                 case "4":
                     // Remove boat
@@ -97,7 +74,6 @@ public class EditMemberView extends BaseView {
                     System.err.println(ERR_INVALID_INPUT);
                     break;
             }
->>>>>>> a6c274ab9083246b18585191966111fb3519e104
         }
     }
 
