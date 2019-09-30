@@ -3,8 +3,7 @@ package controller;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
-import model.SavedInstanceState;
-import model.SavedState;
+import model.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -37,7 +36,8 @@ public class BaseController {
         try {
             String formattedString = Files.readString(dbFile.toPath());
             if (!formattedString.isEmpty()) {
-                savedInstanceState = new Gson().fromJson(formattedString, SavedInstanceState.class);
+                Gson gson = getTypeAdapter();
+                savedInstanceState = gson.fromJson(formattedString, SavedInstanceState.class);
             }
             else{
                 savedInstanceState = new SavedInstanceState();
@@ -86,7 +86,7 @@ public class BaseController {
      * Function responsible for updating the database file.
      */
     private void writeToDB() {
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        Gson gson = getTypeAdapter();
         String formatted = gson.toJson(savedInstanceState);
         try {
             Files.writeString(this.dbFile.toPath(), formatted, StandardCharsets.UTF_8);
@@ -143,4 +143,23 @@ public class BaseController {
     protected ArrayList<SavedState> getStates(){
         return savedInstanceState.getSavedStates();
     }
+
+
+    /**
+     * Credits: https://www.novatec-gmbh.de/en/blog/gson-object-hierarchies/
+     *
+     * @return
+     */
+    private Gson getTypeAdapter(){
+        RuntimeTypeAdapterFactory<Boat> vehicleAdapterFactory = RuntimeTypeAdapterFactory.of(Boat.class, "type")
+                .registerSubtype(Canoe.class, "Canoe")
+                .registerSubtype(Kayak.class, "Kayak")
+                .registerSubtype(MotorBoat.class, "MotorBoat")
+                .registerSubtype(Other.class, "Other")
+                .registerSubtype(SailBoat.class, "SailBoat");
+
+        return new GsonBuilder().setPrettyPrinting().registerTypeAdapterFactory(vehicleAdapterFactory).create();
+    }
+
+
 }

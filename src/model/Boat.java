@@ -1,6 +1,6 @@
 package model;
 
-public class Boat {
+public abstract class Boat {
 
     public Boat(){}
 

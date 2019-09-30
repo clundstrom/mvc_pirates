@@ -2,49 +2,24 @@
   "savedStates": [
     {
       "member": {
-        "name": "Hejsan",
-        "id": "023750",
+        "name": "123",
+        "id": "024469",
         "personalNumber": "123"
       },
       "boats": [
         {
-          "length": 12,
-          "modelName": "rowboat",
-          "name": "sunrise"
+          "type": "SailBoat",
+          "length": 11,
+          "modelName": "asd",
+          "name": "asd"
+        },
+        {
+          "type": "Canoe",
+          "length": 444,
+          "modelName": "asd",
+          "name": "aa"
         }
       ]
-    },
-    {
-      "member": {
-        "name": "Hej",
-        "id": "162611",
-        "personalNumber": "3473"
-      },
-      "boats": []
-    },
-    {
-      "member": {
-        "name": "asdasd",
-        "id": "417383",
-        "personalNumber": "asdQQc"
-      },
-      "boats": []
-    },
-    {
-      "member": {
-        "name": "Test",
-        "id": "507017",
-        "personalNumber": ""
-      },
-      "boats": []
-    },
-    {
-      "member": {
-        "name": "123",
-        "id": "728070",
-        "personalNumber": "aa"
-      },
-      "boats": []
     }
   ]
 }
