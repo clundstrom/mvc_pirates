@@ -64,7 +64,7 @@ public abstract class BaseView {
      */
     protected String requireInput(String question) {
         System.out.print(question);
-        return this.sc.next();
+        return this.sc.nextLine();
     }
 
     protected static void clearConsole() {

@@ -14,6 +14,22 @@
           "name": "Wasa1"
         }
       ]
+    },
+    {
+      "member": {
+        "name": "ööö",
+        "id": "208923",
+        "personalNumber": "öööö"
+      },
+      "boats": []
+    },
+    {
+      "member": {
+        "name": "Christoffer Lundström",
+        "id": "572898",
+        "personalNumber": "200"
+      },
+      "boats": []
     }
   ]
 }
