@@ -1,7 +1,7 @@
 import controller.BaseController;
 import controller.RegisterController;
 import view.MenuView;
-
+import controller.BaseController;
 import java.io.File;
 
 public class Program {
