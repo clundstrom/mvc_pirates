@@ -2,7 +2,6 @@ package view;
 
 import controller.RegisterController;
 
-import java.io.IOException;
 
 /**
  * The view which handles the main menu.

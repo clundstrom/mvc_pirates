@@ -2,7 +2,7 @@
   "savedStates": [
     {
       "member": {
-        "name": "123",
+        "name": "Krille",
         "id": "024469",
         "personalNumber": "123"
       },
@@ -11,13 +11,13 @@
           "type": "SailBoat",
           "length": 11,
           "modelName": "asd",
-          "name": "asd"
+          "name": "HellBoy"
         },
         {
           "type": "Canoe",
           "length": 444,
           "modelName": "asd",
-          "name": "aa"
+          "name": "SnowFlake"
         }
       ]
     },
@@ -35,6 +35,22 @@
           "name": "Titanic"
         }
       ]
+    },
+    {
+      "member": {
+        "name": "Tobbe",
+        "id": "687702",
+        "personalNumber": "666"
+      },
+      "boats": []
+    },
+    {
+      "member": {
+        "name": "Helena",
+        "id": "270697",
+        "personalNumber": "12345"
+      },
+      "boats": []
     }
   ]
 }

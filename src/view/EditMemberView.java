@@ -9,8 +9,6 @@ import model.Member;
 public class EditMemberView extends BaseView {
 
 
-    private boolean verified = false;
-
     private String[] presentActions = {
             "1. Change name.",
             "2. Change social security number.",

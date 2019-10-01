@@ -5,7 +5,6 @@ import model.IViewObserver;
 import model.Member;
 import model.SavedState;
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
