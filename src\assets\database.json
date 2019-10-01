@@ -25,9 +25,17 @@
     },
     {
       "member": {
-        "name": "Christoffer Lundström",
+        "name": "Christoffer Abra",
         "id": "572898",
-        "personalNumber": "200"
+        "personalNumber": "222"
+      },
+      "boats": []
+    },
+    {
+      "member": {
+        "name": "asdas",
+        "id": "128073",
+        "personalNumber": "asdsd"
       },
       "boats": []
     }

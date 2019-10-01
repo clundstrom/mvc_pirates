@@ -64,6 +64,7 @@ public abstract class BaseView {
      */
     protected String requireInput(String question) {
         System.out.print(question);
+        sc = new Scanner(System.in);
         return this.sc.nextLine();
     }
 
