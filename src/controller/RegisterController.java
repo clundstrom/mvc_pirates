@@ -41,6 +41,9 @@ public class RegisterController extends BaseController implements IViewObserver 
      */
     @Override
     public void onMemberUpdated(Member updatedMember) {
+        if(this.currentState == null){
+            currentState = new SavedState();
+        }
         // Check if member exists
         if (currentState.hasMember()) {
             // The updated

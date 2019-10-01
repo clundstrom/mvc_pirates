@@ -75,6 +75,14 @@
         "personalNumber": "2123232323"
       },
       "boats": []
+    },
+    {
+      "member": {
+        "name": "hejsan",
+        "id": "906508",
+        "personalNumber": "123"
+      },
+      "boats": []
     }
   ]
 }

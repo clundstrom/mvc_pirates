@@ -26,11 +26,11 @@ public class VerboseView extends BaseView {
 
     private void listBoats(RegisterController controller, int index){
         for(int j=0; j < controller.getStates().get(index).getBoats().size(); j++){
-            System.out.println("Boat number: " + (j + 1));
-            System.out.println("    Boat Type: " +  controller.getStates().get(index).getBoats().get(j).getClass().getSimpleName());
-            System.out.println("    Boat name: " +  controller.getStates().get(index).getBoats().get(j).getName());
-            System.out.println("    Boat model: " +  controller.getStates().get(index).getBoats().get(j).getModelName());
-            System.out.println("    Boat length: " +  controller.getStates().get(index).getBoats().get(j).getLength());
+            System.out.println("    Boat number: " + (j + 1));
+            System.out.println("        Boat Type: " +  controller.getStates().get(index).getBoats().get(j).getClass().getSimpleName());
+            System.out.println("        Boat name: " +  controller.getStates().get(index).getBoats().get(j).getName());
+            System.out.println("        Boat model: " +  controller.getStates().get(index).getBoats().get(j).getModelName());
+            System.out.println("        Boat length: " +  controller.getStates().get(index).getBoats().get(j).getLength());
 
         }
     }
