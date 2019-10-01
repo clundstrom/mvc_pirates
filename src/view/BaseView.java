@@ -122,6 +122,12 @@ public abstract class BaseView {
         }
     }
 
+    protected void notifyMemberCreated(Member member){
+        for (IViewObserver sub : mSubscribers) {
+            sub.onMemberCreated(member);
+        }
+    }
+
     /**
      * Asks the controller if a specified member state exists in the database.
      * @return
