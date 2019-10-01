@@ -27,6 +27,9 @@ public class EditBoatView extends BaseView {
 
     }
 
+    /**
+     * Provides a list from which the user can choose to delete a boat.
+     */
     public void deleteBoat() {
         if (!controller.getBoats().isEmpty()) {
             welcomeMessage("Which boat would you like to delete? ");
@@ -39,6 +42,9 @@ public class EditBoatView extends BaseView {
         }
     }
 
+    /**
+     * Updates a boat chosen from a list.
+     */
     public void updateBoat(){
         if (!controller.getBoats().isEmpty()) {
             welcomeMessage("\nWhich boat would you like to Update? ");
@@ -72,18 +78,22 @@ public class EditBoatView extends BaseView {
         }
     }
 
-    public void addBoat() {
+    /**
+     * Creates a local boat which is updated with information and sent to controller
+     * for registration.
+     * @param boat
+     */
+    public void addBoat(Boat boat) {
         super.clearConsole();
         welcomeMessage("What typ of boat do you want to register: ");
         presentActions(presentActions);
-        String anwser = requireInput("");
+        String answer = requireInput("");
 
-        Boat boat;
         String name;
         String model;
         int length;
 
-        switch (anwser) {
+        switch (answer) {
             case "1":
                 name = requireInput("What is the name of the boat?: ");
                 model = requireInput("What model is it?: ");
@@ -121,7 +131,7 @@ public class EditBoatView extends BaseView {
             case "6":
                 break;
             default:
-                addBoat();
+                addBoat(new Other());
                 break;
         }
     }

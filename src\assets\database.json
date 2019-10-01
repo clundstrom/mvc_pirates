@@ -67,6 +67,14 @@
         "personalNumber": "123"
       },
       "boats": []
+    },
+    {
+      "member": {
+        "name": "asdasdasd",
+        "id": "079769",
+        "personalNumber": "2123232323"
+      },
+      "boats": []
     }
   ]
 }
