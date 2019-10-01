@@ -2,6 +2,7 @@ package view;
 
 import controller.RegisterController;
 import model.Member;
+import model.Other;
 
 /**
  * The view handles editing of members.
@@ -48,12 +49,12 @@ public class EditMemberView extends BaseView {
      *
      * @return
      */
-    public void changeMember() {
+    public void changeMember(Member updatedmember) {
         presentActions(presentActions);
 
         String answer = requireInput("");
 
-        Member updatedMember = new Member();
+        Member updatedMember = updatedmember;
         switch (answer) {
             case "1":
                 updatedMember.setName(requireInput("Please enter your name: "));
@@ -66,7 +67,7 @@ public class EditMemberView extends BaseView {
                 notifyMemberChanged(updatedMember);
                 break;
             case "3":
-                new EditBoatView(controller).addBoat();
+                new EditBoatView(controller).addBoat(new Other());
                 break;
             case "4":
                 new EditBoatView(controller).deleteBoat();
@@ -81,7 +82,7 @@ public class EditMemberView extends BaseView {
                 System.err.println(ERR_INVALID_INPUT);
                 break;
         }
-        changeMember();
+        changeMember(new Member());
     }
 
     /**

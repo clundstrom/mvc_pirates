@@ -46,7 +46,7 @@ public class SavedState {
     }
 
     public boolean hasMember(){
-        return member != null;
+        return member.getName() != null;
     }
 
     public boolean hasBoats(){

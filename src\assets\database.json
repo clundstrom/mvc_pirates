@@ -38,19 +38,65 @@
     },
     {
       "member": {
+<<<<<<< HEAD
         "name": "Tobbe",
         "id": "687702",
         "personalNumber": "666"
+=======
+        "name": "asdasd",
+        "id": "155376",
+        "personalNumber": "asdasd"
+>>>>>>> 231e6201b016d9d4ffcbbb1843314bc88892cb07
       },
       "boats": []
     },
     {
       "member": {
+<<<<<<< HEAD
         "name": "Helena",
         "id": "270697",
         "personalNumber": "12345"
       },
       "boats": []
+=======
+        "name": "asd",
+        "id": "930468",
+        "personalNumber": "dddd"
+      },
+      "boats": []
+    },
+    {
+      "member": {
+        "name": "Hejsan",
+        "id": "363845",
+        "personalNumber": "12345"
+      },
+      "boats": []
+    },
+    {
+      "member": {
+        "name": "Abc123",
+        "id": "663036",
+        "personalNumber": "123"
+      },
+      "boats": []
+    },
+    {
+      "member": {
+        "name": "asdasdasd",
+        "id": "079769",
+        "personalNumber": "2123232323"
+      },
+      "boats": []
+    },
+    {
+      "member": {
+        "name": "hejsan",
+        "id": "906508",
+        "personalNumber": "123"
+      },
+      "boats": []
+>>>>>>> 231e6201b016d9d4ffcbbb1843314bc88892cb07
     }
   ]
 }

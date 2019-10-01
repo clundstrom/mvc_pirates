@@ -24,30 +24,33 @@ public abstract class BaseView {
     }
 
     /**
-     * Directs the user through the menu using their input.
+     * @param controller A controller is needed for the base view to handle Registration and navigation.
+     * @param subscribers A list of subscribers can be supplied to the BaseView at instantiation.
+     */
+    public BaseView(RegisterController controller, ArrayList<IViewObserver> subscribers){
+        mSubscribers = subscribers;
+    }
+
+    /**
+     * Extendable input that directs the user through the menu using their input.
      */
     protected void getInputAction() {
         try {
             int key = System.in.read();
             switch (key) {
                 case 'q':
-                    System.out.println("Exited..");
                     break;
                 case '1':
-                    new EditMemberView(controller).register();
                     break;
                 case '2':
-                    new EditMemberView(controller).changeMember();
                     break;
                 case '3':
-                    // exit
                     break;
                 case '4':
                     break;
                 case '5':
                     break;
                 default:
-                    System.err.println(ERR_INVALID_INPUT);
                     break;
             }
         } catch (IOException e) {
