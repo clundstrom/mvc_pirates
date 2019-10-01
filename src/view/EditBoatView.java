@@ -110,35 +110,35 @@ public class EditBoatView extends BaseView {
                 case "1":
                     name = requireInput("What is the name of the boat?: ");
                     model = requireInput("What model is it?: ");
-                    length = Integer.parseInt(requireInput("How long is it? "));
+                    length = Integer.parseInt(requireInput("How long is it (m)? "));
                     boat = new MotorBoat(name, model, length);
                     notifyBoatChanged(boat);
                     break;
                 case "2":
                     name = requireInput("What is the name of the boat?: ");
                     model = requireInput("What model is it?: ");
-                    length = Integer.parseInt(requireInput("How long is it? "));
+                    length = Integer.parseInt(requireInput("How long is it? (m) "));
                     boat = new SailBoat(name, model, length);
                     notifyBoatChanged(boat);
                     break;
                 case "3":
                     name = requireInput("What is the name of the boat?: ");
                     model = requireInput("What model is it?: ");
-                    length = Integer.parseInt(requireInput("How long is it? "));
+                    length = Integer.parseInt(requireInput("How long is it? (m) "));
                     boat = new Kayak(name, model, length);
                     notifyBoatChanged(boat);
                     break;
                 case "4":
                     name = requireInput("What is the name of the boat?: ");
                     model = requireInput("What model is it?: ");
-                    length = Integer.parseInt(requireInput("How long is it? "));
+                    length = Integer.parseInt(requireInput("How long is it? (m) "));
                     boat = new Canoe(name, model, length);
                     notifyBoatChanged(boat);
                     break;
                 case "5":
                     name = requireInput("What is the name of the boat?: ");
                     model = requireInput("What model is it?: ");
-                    length = Integer.parseInt(requireInput("How long is it? "));
+                    length = Integer.parseInt(requireInput("How long is it? (m) "));
                     boat = new Other(name, model, length);
                     notifyBoatChanged(boat);
                 case "6":

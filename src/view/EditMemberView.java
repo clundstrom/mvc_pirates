@@ -39,7 +39,7 @@ public class EditMemberView extends BaseView {
             Member member = new Member();
             member.setName(answer);
             member.setPersonalNumber(requireInput("Social security number: "));
-            notifyMemberChanged(member);
+            notifyMemberCreated(member);
         }
 
     }

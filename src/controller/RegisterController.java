@@ -40,12 +40,8 @@ public class RegisterController extends BaseController implements IViewObserver 
      */
     @Override
     public void onMemberUpdated(Member updatedMember) {
-        if(this.currentState == null){
-            currentState = new SavedState();
-        }
         // Check if member exists
         if (currentState.hasMember()) {
-            // The updated
             if (!updatedMember.getName().isEmpty()) {
                 this.currentState.getMember().setName(updatedMember.getName());
             }
@@ -53,11 +49,18 @@ public class RegisterController extends BaseController implements IViewObserver 
             if (!updatedMember.getPersonalNumber().isEmpty()) {
                 this.currentState.getMember().setPersonalNumber(updatedMember.getPersonalNumber());
             }
-        } else {
-            this.currentState.setMember(updatedMember);
-            System.out.println("Member successfully registered.\nPlease save your unique id in a secure location: " + updatedMember.getId());
+            registerSavedState(this.currentState);
+            System.out.println("Profile updated.");
         }
-        registerSavedState(this.currentState);
+
+    }
+
+    @Override
+    public void onMemberCreated(Member member) {
+        currentState = new SavedState();
+        currentState.setMember(member);
+        registerSavedState(currentState);
+        System.out.println("Member successfully registered.\nPlease save your unique id in a secure location: " + member.getId());
     }
 
 

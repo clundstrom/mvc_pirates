@@ -16,3 +16,4 @@ src/assets/*
 gradlew
 gradlew.bat
 .DS_Store
+database.json
