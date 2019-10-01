@@ -17,7 +17,7 @@ import java.util.NoSuchElementException;
  */
 public class BaseController {
 
-    private final String DB_PATH = "src\\assets\\database.json";
+    private final String DB_PATH = "database.json";
     private File dbFile;
     private SavedInstanceState savedInstanceState;
 
