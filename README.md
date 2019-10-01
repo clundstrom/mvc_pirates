@@ -2,6 +2,8 @@
 
 This project simulates a registry adhering to the Model-view-controller pattern.
 
+By Christoffer Lundström, Marcus Johansson and Arbnor Qavolli
+
 ### Running the build
 
 Unzip project.
