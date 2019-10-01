@@ -1,5 +1,5 @@
 # The Jolly Pirates 
---
+
 This project simulates a registry adhering to the Model-view-controller pattern.
 
 ### Running the build
@@ -28,7 +28,7 @@ To compile the project:
 
 In build.gradle add:
 
-```json
+```
 dependencies {
     implementation "com.google.code.gson:gson:2.8.5"
 }
