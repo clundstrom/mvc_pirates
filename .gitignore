@@ -15,3 +15,4 @@ src/assets/*
 *.DS_STORE
 gradlew
 gradlew.bat
+.DS_Store
