@@ -1,0 +1,30 @@
+@startuml createMember
+!define DARKBLUE
+!includeurl https://raw.githubusercontent.com/Drakemor/RedDress-PlantUML/master/style.puml
+actor User
+activate User
+User -> MenuView :  getInputAction()
+activate MenuView
+MenuView -> EditMenuView  : register()
+deactivate MenuView
+activate EditMenuView
+EditMenuView --> User : requireInput()
+User -> EditMenuView : enter(name, PersonalNumber)
+EditMenuView -> Member : create(name, personalNumber)
+EditMenuView -> RegisterController : notifyMemberChanged(member)
+deactivate EditMenuView
+activate RegisterController
+RegisterController -> BaseController : onMemberUpdated(updateMember)
+activate BaseController
+BaseController -> SavedInstanceState : addToInstanceState(member)
+activate SavedInstanceState
+SavedInstanceState -> SavedState : setMember(member)
+deactivate SavedInstanceState
+database JSON
+BaseController -> JSON : writeDB(currentState)
+deactivate BaseController
+RegisterController -> Member : getId()
+RegisterController -> User : showId()
+deactivate RegisterController
+
+@enduml

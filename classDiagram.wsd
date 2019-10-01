@@ -75,8 +75,8 @@ package controller {
         - String DB_PATH
         - File dbFile
         - SavedInstanceState savedInstanceState
-        - void fetchDatabase()
-        - void writeToDB()
+        - void fetchDatabase(Gson gson)
+        - void writeToDB(Gson gsonObj)
     }
     class RegisterController {
         - SavedState currentState

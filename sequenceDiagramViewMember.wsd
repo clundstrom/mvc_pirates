@@ -1,0 +1,23 @@
+@startuml sequenceDiagramViewMember
+!define DARKBLUE
+!includeurl https://raw.githubusercontent.com/Drakemor/RedDress-PlantUML/master/style.puml
+actor User
+activate User
+User -> MenuView : getinputAction()
+activate MenuView
+RegisterController --> User : requireInput(uniqueID)
+User -> MenuView : send(id)
+MenuView -> RegisterController : isMemberverified(id)
+alt verified = true
+    MenuView -> MemberInfoView : viewMember(id)
+    deactivate MenuView
+    activate MemberInfoView
+    RegisterController -> SavedState : getMember(id)
+    SavedState -> MemberInfoView : return member
+    MemberInfoView -> User : showInfo() 
+    deactivate MemberInfoView
+else verified = false
+    MenuView -> User : member not verified
+
+end
+@enduml
