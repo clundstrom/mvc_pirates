@@ -35,6 +35,38 @@
           "name": "Titanic"
         }
       ]
+    },
+    {
+      "member": {
+        "name": "asdasd",
+        "id": "155376",
+        "personalNumber": "asdasd"
+      },
+      "boats": []
+    },
+    {
+      "member": {
+        "name": "asd",
+        "id": "930468",
+        "personalNumber": "dddd"
+      },
+      "boats": []
+    },
+    {
+      "member": {
+        "name": "Hejsan",
+        "id": "363845",
+        "personalNumber": "12345"
+      },
+      "boats": []
+    },
+    {
+      "member": {
+        "name": "Abc123",
+        "id": "663036",
+        "personalNumber": "123"
+      },
+      "boats": []
     }
   ]
 }

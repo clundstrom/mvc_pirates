@@ -18,8 +18,19 @@ public class RegisterController extends BaseController implements IViewObserver 
 
     private SavedState currentState;
 
+    /**
+     * Default Constructor.
+     */
     public RegisterController() {
         currentState = new SavedState();
+    }
+
+    /**
+     * Provides the ability to register a controller with a custom saved state.
+     * @param savedState
+     */
+    public RegisterController(SavedState savedState) {
+        currentState = savedState;
     }
 
 
@@ -82,24 +93,27 @@ public class RegisterController extends BaseController implements IViewObserver 
      */
     @Override
     public void onBoatDeleted(int index) {
-        if(index < currentState.getBoats().size()){
+        if (index < currentState.getBoats().size()) {
             currentState.getBoats().remove(index);
             registerSavedState(currentState);
             System.out.println("Boat successfully deleted.");
-        }
-        else {
+        } else {
             System.out.println("Invalid index.");
         }
     }
 
+
+    /**
+     * Updates corresponding boat.
+     * @param index Index of boat to update.
+     */
     @Override
     public void onBoatUpdate(int index) {
-        if(index < currentState.getBoats().size()){
+        if (index < currentState.getBoats().size()) {
             currentState.getBoats();
             registerSavedState(currentState);
             System.out.println("Boat successfully updated.");
-        }
-        else {
+        } else {
             System.out.println("Invalid index.");
         }
 
@@ -126,24 +140,25 @@ public class RegisterController extends BaseController implements IViewObserver 
 
     /**
      * Fetches the saved state's current member.
+     *
      * @return
      */
-    public Member getMember(){
-        if(!currentState.hasMember()){
+    public Member getMember() {
+        if (!currentState.hasMember()) {
             System.out.println("No member found.");
             return null;
         }
         return currentState.getMember();
     }
 
-    public ArrayList<Boat> getBoats(){
-        if(currentState.hasBoats()){
+    public ArrayList<Boat> getBoats() {
+        if (currentState.hasBoats()) {
             return currentState.getBoats();
         }
         throw new NoSuchElementException("There was an error while retrieving your boats.");
     }
 
-    public ArrayList<SavedState> getStates(){
+    public ArrayList<SavedState> getStates() {
         return super.getStates();
     }
 }
