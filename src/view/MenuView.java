@@ -27,7 +27,7 @@ public class MenuView extends BaseView {
 
     @Override
     public void onViewInit() {
-        welcomeMessage("\nWelcome to the Jolly Pirates.\n\nWhat would you like to do? (press q to exit)");
+        welcomeMessage("\nWelcome to the Jolly Pirates.\n\nWhat would you like to do?");
         presentActions(presentActions);
         getInputAction();
     }
@@ -47,9 +47,6 @@ public class MenuView extends BaseView {
         try {
             String key = sc.next();
             switch (key) {
-                case "q":
-                    System.out.println("Exited..");
-                    break;
                 case "1":
                     new EditMemberView(controller).register();
                     break;
