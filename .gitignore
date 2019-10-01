@@ -1,8 +1,9 @@
 /.idea
 *.iml
-/out
+/out/production/*
 /.vscode/
 /.gradle/*
+/gradle/*
 src/assets/*
 /bin
 *.classpath
@@ -11,3 +12,7 @@ src/assets/*
 /.settings/
 *.project
 .gradle
+*.DS_STORE
+gradlew
+gradlew.bat
+.DS_Store

@@ -1,8 +1,8 @@
 package view;
 
 import controller.RegisterController;
+import model.Member;
 
-import java.io.IOException;
 
 /**
  * The view which handles the main menu.
@@ -16,7 +16,9 @@ public class MenuView extends BaseView {
             "3. Delete a member.",
             "4. View member.",
             "5. Compact list members.",
-            "6. Exit"};
+            "6. Verbose list members",
+            "7. Exit"        
+        };
 
 
     public MenuView(RegisterController controller) {
@@ -25,7 +27,7 @@ public class MenuView extends BaseView {
 
     @Override
     public void onViewInit() {
-        welcomeMessage("Welcome to the Jolly Pirates.\n\nWhat would you like to do? (press q to exit)");
+        welcomeMessage("\nWelcome to the Jolly Pirates.\n\nWhat would you like to do?");
         presentActions(presentActions);
         getInputAction();
     }
@@ -45,15 +47,12 @@ public class MenuView extends BaseView {
         try {
             String key = sc.next();
             switch (key) {
-                case "q":
-                    System.out.println("Exited..");
-                    break;
                 case "1":
                     new EditMemberView(controller).register();
                     break;
                 case "2":
                     if (isMemberVerified())
-                        new EditMemberView(controller).changeMember();
+                        new EditMemberView(controller).changeMember(new Member());
                     break;
                 case "3":
                     new EditMemberView(controller).deleteMember();
@@ -66,6 +65,9 @@ public class MenuView extends BaseView {
                     new CompactView(controller).compactViewList();
                     break;
                 case "6":
+                    new VerboseView(controller).verboseViewList();
+                    break;
+                case "7":
                     System.out.println("Exiting..");
                     System.exit(0);
                     break;

@@ -7,7 +7,6 @@ import model.*;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
@@ -18,25 +17,36 @@ import java.util.NoSuchElementException;
  */
 public class BaseController {
 
-    private final String DB_PATH = "src\\assets\\database.json";
+    private final String DB_PATH = "database.json";
     private File dbFile;
     private SavedInstanceState savedInstanceState;
 
     public BaseController() {
         dbFile = new File(DB_PATH);
-        verifyDatabaseExist();
-        fetchDatabase();
+        verifyDatabaseExist(dbFile);
+        fetchDatabase(new Gson());
     }
 
+    /**
+     * @param file Custom database file.
+     * @param state Supply a custom SavedInstanceState.
+     */
+    public BaseController(File file, SavedInstanceState state) {
+        this.savedInstanceState = state;
+        this.dbFile = file;
+        verifyDatabaseExist(dbFile);
+        fetchDatabase(new Gson());
+    }
 
     /**
      * Reads the database into the SavedInstanceState.
+     * @param gson Uses Gson for serializing
      */
-    private void fetchDatabase() {
+    private void fetchDatabase(Gson gson) {
         try {
             String formattedString = Files.readString(dbFile.toPath());
             if (!formattedString.isEmpty()) {
-                Gson gson = getTypeAdapter();
+                gson = getTypeAdapter(RuntimeTypeAdapterFactory.of(Boat.class, "type"));
                 savedInstanceState = gson.fromJson(formattedString, SavedInstanceState.class);
             }
             else{
@@ -57,13 +67,14 @@ public class BaseController {
 
 
     /**
-     * Creates a database json file if none exist.
+     * Verifies that the database exists in file.
+     * @param file File to examine.
      */
-    private void verifyDatabaseExist() {
+    private void verifyDatabaseExist(File file) {
         try {
             if (!databaseExists()) {
-                dbFile = new File(DB_PATH);
-                dbFile.createNewFile();
+                file = new File(DB_PATH);
+                file.createNewFile();
             }
         } catch (IOException e) {
             System.out.println("There was an error generating the database.");
@@ -85,11 +96,11 @@ public class BaseController {
     /**
      * Function responsible for updating the database file.
      */
-    private void writeToDB() {
-        Gson gson = getTypeAdapter();
-        String formatted = gson.toJson(savedInstanceState);
+    private void writeToDB(Gson gsonObj) {
+        gsonObj = getTypeAdapter(RuntimeTypeAdapterFactory.of(Boat.class, "type"));
+        String formatted = gsonObj.toJson(savedInstanceState);
         try {
-            Files.writeString(this.dbFile.toPath(), formatted, StandardCharsets.UTF_8);
+            Files.writeString(this.dbFile.toPath(), formatted);
         }
         catch (IOException e ){
             System.out.println("There was an error writing to the database.");
@@ -107,7 +118,7 @@ public class BaseController {
         else {
             savedInstanceState.addState(state);
         }
-        writeToDB();
+        writeToDB(new Gson());
     }
 
     /**
@@ -117,7 +128,7 @@ public class BaseController {
     protected boolean removeFromInstanceState(SavedState state){
         if(this.savedInstanceState.getSavedStates().contains(state)){
             this.savedInstanceState.removeState(state);
-            writeToDB();
+            writeToDB(new Gson());
             return true;
         }
         return false;
@@ -148,10 +159,13 @@ public class BaseController {
     /**
      * Credits: https://www.novatec-gmbh.de/en/blog/gson-object-hierarchies/
      *
+     * Provides a JSON formatter with a type adapter
+     * so that each Subtype of Boat can be correctly serialized.
+     *
      * @return
      */
-    private Gson getTypeAdapter(){
-        RuntimeTypeAdapterFactory<Boat> vehicleAdapterFactory = RuntimeTypeAdapterFactory.of(Boat.class, "type")
+    private Gson getTypeAdapter(RuntimeTypeAdapterFactory<Boat> vehicleAdapterFactory){
+        RuntimeTypeAdapterFactory<Boat> factory = vehicleAdapterFactory
                 .registerSubtype(Canoe.class, "Canoe")
                 .registerSubtype(Kayak.class, "Kayak")
                 .registerSubtype(MotorBoat.class, "MotorBoat")

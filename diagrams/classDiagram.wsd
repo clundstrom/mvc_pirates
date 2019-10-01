@@ -1,0 +1,164 @@
+@startuml PiratesClassDiagram
+!define DARKBLUE
+!includeurl https://raw.githubusercontent.com/Drakemor/RedDress-PlantUML/master/style.puml
+
+package "model"{
+    
+    interface IViewObserver
+
+    class Member {
+        - String name
+        - String id
+        - String personalNumber
+        + getName()
+        + getPersonalNumber()
+        + getId()
+        - void setId()
+    }
+
+    class RuntimeTypAdapterFactory {
+        - Class<?> baseType
+        - String typeFieldName
+    }
+        class SavedInstanceState {
+
+    }
+
+    class SavedState {
+        - ArrayList<SavedState> savedStates∏
+    }
+
+    abstract Boat 
+
+    class MotorBoat {
+        + getName()
+        + getModel()
+        + getLength()
+    }
+
+    class Canoe {
+        + getName()
+        + getModel()
+        + getLength()
+    }
+
+    class SailBoat {
+        + getName()
+        + getModel()
+        + getLength()
+    }
+
+    class Kayak {
+        + getName()
+        + getModel()
+        + getLength()
+    }
+
+    class Other {
+        + getName()
+        + getModel()
+        + getLength()
+    }
+
+
+
+    Boat <|-- MotorBoat
+    Boat <|-- Canoe
+    Boat <|-- SailBoat
+    Boat <|-- Kayak
+    Boat <|-- Other
+
+    }
+
+package controller {
+    class BaseController {
+        - String DB_PATH
+        - File dbFile
+        - SavedInstanceState savedInstanceState
+        - void fetchDatabase(Gson gson)
+        - void writeToDB(Gson gsonObj)
+    }
+    class RegisterController {
+        - SavedState currentState
+        + void onMemberUpdated(Member updatedMember)
+        + onMemberDeleted(String id)
+        + onBoatCreated(Boat boat)
+        + registerSavedState(SavedState state)
+        + getMember()
+        + getBoats()
+        + getStates()
+    }
+
+    IViewObserver <|.. RegisterController
+    BaseController <|-- RegisterController
+    Boat <.. RegisterController
+    Member <.. RegisterController
+    SavedState <.. RegisterController
+    model <... BaseController
+}
+
+package view {
+    abstract BaseView {
+        ~ ArrayList<IViewObserver> mSubscribers
+        ~ RegisterController controller
+        ~ getInputAction()
+        ~ clearConsole()
+        + addSubscriber(IViewObserver subscriber)
+        + notifyMemberChanged(Member member)
+        + notifyMemberDeleted(String id)
+    }
+
+    class CompactView {
+        + compactViewList()
+    }
+
+    class EditBoatView {
+        - String[] presentActions
+        - String[] presentChangeBoatActions
+        + updateBoat()
+        + deleteBoat()
+        + addBoat()
+    }
+
+    class EditMemberView {
+        - String[] presentActions
+        + register()
+        + changeMember()
+        + deleteMember()
+    }
+
+    class ListBoatView {
+        + listBoats()
+    }
+
+    class MemberInfoView {
+        + viewMember()
+    }
+
+    class MenuView {
+        - String[] presentActions
+        ~ onViewInit()
+        ~ welcomeMessage(String message)
+        ~ getInputAction()
+    }
+
+    class VerboseView {
+        - istBoats(RegisterController controller, int index)
+    }
+
+     
+    MenuView <|-- BaseView
+    CompactView <|-- BaseView
+    EditBoatView <|-- BaseView
+    EditMemberView <|-- BaseView
+    ListBoatView <|-- BaseView
+    MemberInfoView <|-- BaseView
+    VerboseView <|-- BaseView
+    IViewObserver <|.. BaseView
+    RegisterController <... BaseView
+    Member <... BaseView
+    RegisterController <... CompactView
+
+}
+@enduml
+
