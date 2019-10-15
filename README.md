@@ -8,7 +8,8 @@ By Christoffer Lundström, Marcus Johansson and Arbnor Qavolli
 
 Unzip project.
 
-from the command-line run:
+1. CD into mvc_pirates_jar directory. A file called mvc_pirates.jar should be located there.
+2. From the command-line run:
 
 ```
 java -jar mvc_pirates.jar
@@ -16,13 +17,14 @@ java -jar mvc_pirates.jar
 
 database.json will be generated in the same folder.
 
-### Dependencies
+
+### Compilation
+
+##### Dependencies
 
 * [GSON 2.8.5](https://github.com/google/gson)
 
 * [Java 11.01](https://www.oracle.com/technetwork/java/javase/downloads/jdk11-downloads-5066655.html)
-
-### Compilation
 
 To compile the project:
  
