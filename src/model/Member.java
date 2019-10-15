@@ -39,6 +39,9 @@ public class Member {
         this.personalNumber = personalNumber;
     }
 
+    /**
+     * Sets a 6 digit random id for memeber 
+     */
     private void setId() {
         Random rand = new Random();
         int maxIdLength = 6;
