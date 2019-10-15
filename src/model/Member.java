@@ -40,7 +40,7 @@ public class Member {
     }
 
     /**
-     * Sets a 6 digit random id for memeber 
+     * Sets a 6 digit random id for member
      */
     private void setId() {
         Random rand = new Random();

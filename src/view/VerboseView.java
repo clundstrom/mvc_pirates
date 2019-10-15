@@ -8,6 +8,10 @@ public class VerboseView extends BaseView {
         super(controller);
     }
 
+
+    /**
+     * Responsible for printing detailed information about each member.
+     */
     public void verboseViewList() {
         if(controller.getStates().size() < 1){
             System.out.println("No entries found.");
@@ -24,6 +28,12 @@ public class VerboseView extends BaseView {
         }
     }
 
+    /**
+     *  Prints out a list of boats.
+     *
+     * @param controller Controller which is used to fetch the current boats from the correct state.
+     * @param index index of SavedState.
+     */
     private void listBoats(RegisterController controller, int index){
         for(int j=0; j < controller.getStates().get(index).getBoats().size(); j++){
             System.out.println("    Boat number: " + (j + 1));

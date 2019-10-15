@@ -45,7 +45,7 @@ public class EditMemberView extends BaseView {
     }
 
     /**
-     * Change member view. Update LOCAL objects and Notifies controller.
+     * Change member view. Updates a local object and Notifies controller.
      *
      * @return
      */

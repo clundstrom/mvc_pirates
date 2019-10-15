@@ -160,7 +160,7 @@ public class BaseController {
      * Credits: https://www.novatec-gmbh.de/en/blog/gson-object-hierarchies/
      *
      * Provides a JSON formatter with a type adapter
-     * so that each Subtype of Boat can be correctly serialized.
+     * so that each Subtype of Boat can be correctly serialized and de-serialized.
      *
      * @return
      */

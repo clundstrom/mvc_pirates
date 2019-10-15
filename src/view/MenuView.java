@@ -25,6 +25,7 @@ public class MenuView extends BaseView {
         super(controller);
     }
 
+
     @Override
     public void onViewInit() {
         welcomeMessage("\nWelcome to the Jolly Pirates.\n\nWhat would you like to do?");
@@ -41,6 +42,7 @@ public class MenuView extends BaseView {
     protected void presentActions(String[] actions) {
         super.presentActions(actions);
     }
+
 
     @Override
     protected void getInputAction() {

@@ -19,6 +19,11 @@ public class SavedInstanceState {
         this.savedStates = new ArrayList<>();
     }
 
+    /**
+     * Adds a state to the current instance.
+     *
+     * @param objectState
+     */
     public void addState(SavedState objectState){
         if(!savedStates.contains(objectState)){
             savedStates.add(objectState);
@@ -44,6 +49,10 @@ public class SavedInstanceState {
 
     }
 
+    /**
+     * Removes provided state from SavedInstanceState.
+     * @param objectState
+     */
     public void removeState(SavedState objectState){
         if(savedStates.contains(objectState)){
             savedStates.remove(objectState);
@@ -74,12 +83,5 @@ public class SavedInstanceState {
             }
         }
         throw new NoSuchElementException("Entry not found.");
-    }
-
-    public SavedState getStates() {
-        for(SavedState state : savedStates) {
-            return state;
-        }
-        throw new NullPointerException("No members in your club");
     }
 }

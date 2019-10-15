@@ -32,7 +32,7 @@ public abstract class BaseView {
     }
 
     /**
-     * Extendable input that directs the user through the menu using their input.
+     * Overrideble behavior of getInputAction and provides navigation options for the user.
      */
     protected void getInputAction() {
         try {
@@ -68,6 +68,9 @@ public abstract class BaseView {
         return this.sc.nextLine();
     }
 
+    /**
+     * Clears the console.
+     */
     protected static void clearConsole() {
         for (int i = 0; i < 20; i++) {
             System.out.println("\n\n");

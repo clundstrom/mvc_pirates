@@ -9,6 +9,9 @@ public class MemberInfoView extends BaseView {
         super(controller);
     }
 
+    /**
+     * Prints specific member information.
+     */
     public void viewMember() {
         clearConsole();
         System.out.println("ID: " + controller.getMember().getId());

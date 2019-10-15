@@ -17,15 +17,12 @@ public class RegisterController extends BaseController implements IViewObserver 
 
     private SavedState currentState;
 
-    /**
-     * Default Constructor.
-     */
     public RegisterController() {
         currentState = new SavedState();
     }
 
     /**
-     * Provides the ability to register a controller with a custom saved state.
+     * Provides the ability to initialize a controller with a custom saved state.
      * @param savedState
      */
     public RegisterController(SavedState savedState) {
@@ -144,9 +141,8 @@ public class RegisterController extends BaseController implements IViewObserver 
     }
 
     /**
-     * Fetches the saved state's current member.
      *
-     * @return
+     * @return saved Returns saved state's current member.
      */
     public Member getMember() {
         if (!currentState.hasMember()) {
@@ -156,6 +152,9 @@ public class RegisterController extends BaseController implements IViewObserver 
         return currentState.getMember();
     }
 
+    /**
+     * @return Returns boats of current state.
+     */
     public ArrayList<Boat> getBoats() {
         if (currentState.hasBoats()) {
             return currentState.getBoats();
