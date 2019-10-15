@@ -173,7 +173,7 @@ public class EditBoatView extends BaseView {
 
     protected void notifyBoatUpdated(int index) {
         for (IViewObserver sub : mSubscribers) {
-            sub.onBoatUpdate(index);
+            sub.onBoatUpdated(index);
         }
     }
 

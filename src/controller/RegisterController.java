@@ -110,7 +110,7 @@ public class RegisterController extends BaseController implements IViewObserver 
      * @param index Index of boat to update.
      */
     @Override
-    public void onBoatUpdate(int index) {
+    public void onBoatUpdated(int index) {
         if (index < currentState.getBoats().size()) {
             currentState.getBoats();
             registerSavedState(currentState);
