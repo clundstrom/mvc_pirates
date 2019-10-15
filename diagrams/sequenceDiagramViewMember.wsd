@@ -2,22 +2,37 @@
 !define DARKBLUE
 !includeurl https://raw.githubusercontent.com/Drakemor/RedDress-PlantUML/master/style.puml
 actor User
-activate User
+
 User -> MenuView : getinputAction()
 activate MenuView
-RegisterController --> User : requireInput(uniqueID)
-User -> MenuView : send(id)
-MenuView -> RegisterController : isMemberverified(id)
-alt verified = true
-    MenuView -> MemberInfoView : viewMember(id)
+MenuView -> BaseView : isMemberVerified()
+activate BaseView
+User <- BaseView : RequireInput()
+User --> BaseView  : input
+BaseView -> RegisterController : hasIdSavedState(input)
+deactivate BaseView
+activate RegisterController
+RegisterController --> MenuView : verification
+
+alt member is Verified
+    MenuView -> MemberInfoView : ViewMember()
     deactivate MenuView
     activate MemberInfoView
-    RegisterController -> SavedState : getMember(id)
-    SavedState -> MemberInfoView : return member
-    MemberInfoView -> User : showInfo() 
+    MemberInfoView -> RegisterController : getMember()
+    
+    
+    RegisterController -> SavedState : getMember()
+    activate SavedState
+    SavedState --> RegisterController : member
+    deactivate SavedState
+    RegisterController --> MemberInfoView : member
+    deactivate RegisterController
+    MemberInfoView -> User : show info
     deactivate MemberInfoView
-else verified = false
-    MenuView -> User : member not verified
 
+else verified = false
+    activate RegisterController
+    RegisterController -> User : Show error
+    deactivate RegisterController
 end
 @enduml
