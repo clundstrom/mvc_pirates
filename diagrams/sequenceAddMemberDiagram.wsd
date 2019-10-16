@@ -20,9 +20,9 @@ deactivate Member
 EditMemberView -> BaseView : notifyMemberCreated()
 deactivate EditMemberView
 activate BaseView
-loop for sub in subscribers
-    BaseView -> BaseView : sub.onMemberCreated(member) 
-end
+
+BaseView ->o RegisterController : IViewObserver.onMemberCreated(member)
+
 deactivate BaseView
 RegisterController -> SavedState : setMember(member)
 activate RegisterController
