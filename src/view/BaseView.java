@@ -114,14 +114,16 @@ public abstract class BaseView {
      * @return
      */
     protected boolean isMemberVerified() {
-        return controller.hasMemberId(requireInput("Please enter your member ID: "));
-    }
 
-    public void errorMessage() {
-        System.out.println("An error occured");
-    }
+        String input = requireInput("Please enter your member ID: ");
 
-    public void idNotFound(String id) {
-        System.out.println("Could not find an entry with id: " + id);
+        boolean verification = controller.hasMemberId(input);
+
+        if(!verification){
+            System.out.println("Could not find a member with ID: " + input);
+            return false;
+        }
+
+        return true;
     }
 }

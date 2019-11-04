@@ -4,6 +4,7 @@ import model.Boat;
 import model.BoatClubMember;
 import model.Member;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
@@ -55,10 +56,14 @@ public class RegisterController extends BaseController {
      * @param id Id of a member.
      */
     public boolean onMemberDeleted(String id) {
-        if (removeFromRegistry(getMemberById(id))) {
-            return true;
+        try {
+            if (removeFromRegistry(getMemberById(id))) {
+                return true;
+            }
+            return false;
+        } catch (Exception e) {
+            return false;
         }
-        return false;
     }
 
     /**
@@ -100,8 +105,7 @@ public class RegisterController extends BaseController {
     public boolean onBoatUpdated(int index) {
         if (index < currentMember.getBoats().size()) {
             currentMember.getBoats();
-            saveBoatClubMember(currentMember);
-            return true;
+            return saveBoatClubMember(currentMember);
         } else {
             return false;
         }
@@ -111,8 +115,13 @@ public class RegisterController extends BaseController {
     /**
      * Registers the current state with the base controller.
      */
-    public void saveBoatClubMember(BoatClubMember state) {
-        addToRegistry(state);
+    public boolean saveBoatClubMember(BoatClubMember state) {
+        try {
+            addToRegistry(state);
+            return true;
+        } catch (IOException e) {
+            return false;
+        }
     }
 
     /**
@@ -148,6 +157,6 @@ public class RegisterController extends BaseController {
     }
 
     public ArrayList<BoatClubMember> getRegistry() {
-        return super.getRegistry();
+        return getRegistry();
     }
 }
