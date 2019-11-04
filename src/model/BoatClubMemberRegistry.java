@@ -24,7 +24,7 @@ public class BoatClubMemberRegistry {
      *
      * @param objectState
      */
-    public void addToRegistry(BoatClubMember objectState){
+    public void add(BoatClubMember objectState){
         if(!boatClubMembers.contains(objectState)){
             boatClubMembers.add(objectState);
         }
@@ -41,7 +41,7 @@ public class BoatClubMemberRegistry {
      * Overwrites Object in InstanceState.
      * @param objectState State to overwrite with.
      */
-    public void updateRegistry(BoatClubMember objectState){
+    public void update(BoatClubMember objectState){
         if(boatClubMembers.contains(objectState)){
             int index = boatClubMembers.indexOf(objectState);
             boatClubMembers.set(index, objectState);
@@ -53,7 +53,7 @@ public class BoatClubMemberRegistry {
      * Removes provided state from BoatClubMemberRegistry.
      * @param objectState
      */
-    public void removeFromRegistry(BoatClubMember objectState){
+    public void remove(BoatClubMember objectState){
         if(boatClubMembers.contains(objectState)){
             boatClubMembers.remove(objectState);
         }

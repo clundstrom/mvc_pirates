@@ -55,7 +55,7 @@ public class RegisterController extends BaseController {
      * @param id Id of a member.
      */
     public boolean onMemberDeleted(String id) {
-        if (removeFromInstanceState(getMemberById(id))) {
+        if (removeFromRegistry(getMemberById(id))) {
             return true;
         }
         return false;

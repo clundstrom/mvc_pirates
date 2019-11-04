@@ -113,10 +113,10 @@ public class BaseController {
      */
     protected void addToRegistry(BoatClubMember state){
         if(boatClubMemberRegistry.contains(state)){
-            boatClubMemberRegistry.updateRegistry(state);
+            boatClubMemberRegistry.update(state);
         }
         else {
-            boatClubMemberRegistry.addToRegistry(state);
+            boatClubMemberRegistry.add(state);
         }
         writeToDB(new Gson());
     }
@@ -125,9 +125,9 @@ public class BaseController {
      * Removes state object.
      * @param state
      */
-    protected boolean removeFromInstanceState(BoatClubMember state){
+    protected boolean removeFromRegistry(BoatClubMember state){
         if(this.boatClubMemberRegistry.getBoatClubMembers().contains(state)){
-            this.boatClubMemberRegistry.removeFromRegistry(state);
+            this.boatClubMemberRegistry.remove(state);
             writeToDB(new Gson());
             return true;
         }
