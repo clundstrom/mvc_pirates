@@ -1,6 +1,5 @@
 package model;
 
-import java.util.Random;
 
 public class Member {
 
@@ -12,11 +11,9 @@ public class Member {
     public Member(String nm, String persNum) {
         name = nm;
         personalNumber = persNum;
-        setId();
     }
 
     public Member(){
-        setId();
     }
 
     public String getName() {
@@ -42,12 +39,8 @@ public class Member {
     /**
      * Sets a 6 digit random id for member
      */
-    private void setId() {
-        Random rand = new Random();
-        int maxIdLength = 6;
-        for(int i = 0; i < maxIdLength; i++) {
-            id += Integer.toString(rand.nextInt(10));
-        }
+    public void setId(String uniqueId) {
+        id = uniqueId;
     }
 }
 

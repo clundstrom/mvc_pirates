@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
+import java.util.Random;
 
 /**
  * Class which handles communication with database.
@@ -175,5 +176,23 @@ public class BaseController {
         return new GsonBuilder().setPrettyPrinting().registerTypeAdapterFactory(vehicleAdapterFactory).create();
     }
 
+    protected String createId() {
+        Random rand = new Random();
+        int maxIdLength = 6;
+        String uniqueId = "";
+        for(int i = 0; i < maxIdLength; i++) {
+            uniqueId += Integer.toString(rand.nextInt(10));
+        }
+        return uniqueId;
+    }
+
+//    public String isUnique(){
+//        while(true){
+//            String temp = uniqueId();
+//            if(!has(temp)){
+//                return temp;
+//                break;
+//            }
+//
 
 }

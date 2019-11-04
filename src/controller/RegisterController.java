@@ -21,16 +21,6 @@ public class RegisterController extends BaseController {
     }
 
     /**
-     * Provides the ability to initialize a controller with a custom saved state.
-     *
-     * @param boatClubMember
-     */
-    public RegisterController(BoatClubMember boatClubMember) {
-        currentMember = boatClubMember;
-    }
-
-
-    /**
      * Receives updates and registers member info with controller.
      *
      * @param updatedMember Member which is updated.
@@ -54,6 +44,8 @@ public class RegisterController extends BaseController {
     public boolean onMemberCreated(Member member) {
         currentMember = new BoatClubMember();
         currentMember.setMember(member);
+
+
         registerSavedState(currentMember);
         return true;
     }
@@ -155,6 +147,15 @@ public class RegisterController extends BaseController {
             return currentMember.getBoats();
         }
         throw new NoSuchElementException("There was an error while retrieving your boats.");
+    }
+
+    public String uniqueId() {
+        while (true) {
+            String temp = createId();
+            if (!hasMemberId(temp)) {
+                return temp;
+            }
+        }
     }
 
     public ArrayList<BoatClubMember> getRegistry() {

@@ -37,6 +37,7 @@ public class EditMemberView extends BaseView {
             Member member = new Member();
             member.setName(answer);
             member.setPersonalNumber(requireInput("Social security number: "));
+            member.setId(controller.uniqueId());
             isMemberCreated(member);
         }
 
