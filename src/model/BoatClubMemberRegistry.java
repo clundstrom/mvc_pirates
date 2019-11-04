@@ -15,7 +15,7 @@ public class BoatClubMemberRegistry {
     private ArrayList<BoatClubMember> boatClubMembers;
 
 
-    public BoatClubMemberRegistry(){
+    public BoatClubMemberRegistry() {
         this.boatClubMembers = new ArrayList<>();
     }
 
@@ -24,47 +24,37 @@ public class BoatClubMemberRegistry {
      *
      * @param objectState
      */
-    public void add(BoatClubMember objectState){
-        if(!boatClubMembers.contains(objectState)){
-            boatClubMembers.add(objectState);
-        }
-        else{
-            throw new IllegalArgumentException("Can not add duplicate instances.");
-        }
+    public void add(BoatClubMember objectState) {
+        boatClubMembers.add(objectState);
     }
 
-    public boolean contains(BoatClubMember objectState){
+    public boolean contains(BoatClubMember objectState) {
         return boatClubMembers.contains(objectState);
     }
 
     /**
      * Overwrites Object in InstanceState.
+     *
      * @param objectState State to overwrite with.
      */
-    public void update(BoatClubMember objectState){
-        if(boatClubMembers.contains(objectState)){
-            int index = boatClubMembers.indexOf(objectState);
-            boatClubMembers.set(index, objectState);
-        }
-
+    public void update(BoatClubMember objectState) {
+        int index = boatClubMembers.indexOf(objectState);
+        boatClubMembers.set(index, objectState);
     }
 
     /**
      * Removes provided state from BoatClubMemberRegistry.
+     *
      * @param objectState
      */
-    public void remove(BoatClubMember objectState){
-        if(boatClubMembers.contains(objectState)){
-            boatClubMembers.remove(objectState);
-        }
-        else {
-            throw new NoSuchElementException("Entry not found.");
-        }
+    public void remove(BoatClubMember objectState) {
+        boatClubMembers.remove(objectState);
     }
 
 
     /**
      * Returns the list of currently saved states.
+     *
      * @return
      */
     public ArrayList<BoatClubMember> getBoatClubMembers() {
@@ -73,15 +63,25 @@ public class BoatClubMemberRegistry {
 
     /**
      * Fetch BoatClubMember by id.
+     *
      * @param id Unique ID of member.
      * @return Current ID state.
      */
-    public BoatClubMember getMemberById(String id){
-        for(BoatClubMember state: boatClubMembers){
-            if(state.getMember().getId().equalsIgnoreCase(id)){
+    public BoatClubMember getMemberById(String id) {
+        for (BoatClubMember state : boatClubMembers) {
+            if (state.getMember().getId().equalsIgnoreCase(id)) {
                 return state;
             }
         }
         throw new NoSuchElementException("Entry not found.");
+    }
+
+    public boolean hasMemberById(String id) {
+        for (BoatClubMember member : boatClubMembers) {
+            if (member.getMember().getId().equalsIgnoreCase(id)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

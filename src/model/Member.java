@@ -42,12 +42,15 @@ public class Member {
     /**
      * Sets a 6 digit random id for member
      */
-    private void setId() {
+    public void setId() {
         Random rand = new Random();
         int maxIdLength = 6;
+        String temp = "";
         for(int i = 0; i < maxIdLength; i++) {
-            id += Integer.toString(rand.nextInt(10));
+            temp += Integer.toString(rand.nextInt(10));
+
         }
+        this.id = temp;
     }
 }
 
