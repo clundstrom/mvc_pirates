@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 import model.*;
+import view.BaseView;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,6 +21,7 @@ public class BaseController {
     private final String DB_PATH = "database.json";
     private File dbFile;
     private BoatClubMemberRegistry boatClubMemberRegistry;
+    private BaseView view;
 
     public BaseController() {
         dbFile = new File(DB_PATH);
@@ -55,13 +57,13 @@ public class BaseController {
 
         }
         catch (JsonSyntaxException syntax){
-            System.out.println("Database file is corrupt. Check syntax or delete file.");
+            view.errorMessage();
         }
         catch (IOException e) {
-            System.out.println("There was an error reading the database.");
+            view.errorMessage();
         }
         catch (Exception e ){
-            System.out.println("There was an error.");
+            view.errorMessage();
         }
     }
 
@@ -73,13 +75,13 @@ public class BaseController {
     private void verifyDatabaseExist(File file) {
         try {
             if (!databaseExists()) {
-                file = new File(DB_PATH);
+                file = new File(DB_PATH); 
                 file.createNewFile();
             }
         } catch (IOException e) {
-            System.out.println("There was an error generating the database.");
+            view.errorMessage();
         } catch (Exception e) {
-            System.out.println("There was an error.");
+            view.errorMessage();
         }
     }
 
@@ -103,7 +105,7 @@ public class BaseController {
             Files.writeString(this.dbFile.toPath(), formatted);
         }
         catch (IOException e ){
-            System.out.println("There was an error writing to the database.");
+            view.errorMessage();
         }
     }
 
@@ -146,7 +148,7 @@ public class BaseController {
            return this.boatClubMemberRegistry.getMemberById(id);
        }
        catch (NoSuchElementException e){
-           System.out.println("Could not find an entry with id: " + id);
+           view.idNotFound(id);
        }
        return null;
     }
@@ -172,7 +174,7 @@ public class BaseController {
                 .registerSubtype(Other.class, "Other")
                 .registerSubtype(SailBoat.class, "SailBoat");
 
-        return new GsonBuilder().setPrettyPrinting().registerTypeAdapterFactory(vehicleAdapterFactory).create();
+        return new GsonBuilder().setPrettyPrinting().registerTypeAdapterFactory(factory).create();
     }
 
 
