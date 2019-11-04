@@ -8,7 +8,7 @@ import java.util.NoSuchElementException;
  * This class will represent the final object which is
  * serialized and saved to the database.
  * <p>
- * It carries all currently Saved States.
+ * It carries all currently saved BoatClubMembers.
  */
 public class BoatClubMemberRegistry {
 
@@ -20,16 +20,16 @@ public class BoatClubMemberRegistry {
     }
 
     /**
-     * Adds a state to the current instance.
+     * Adds a BoatClubMember to the current instance.
      *
      * @param objectState
      */
-    public void addState(BoatClubMember objectState){
+    public void addToRegistry(BoatClubMember objectState){
         if(!boatClubMembers.contains(objectState)){
             boatClubMembers.add(objectState);
         }
         else{
-            throw new IllegalArgumentException("Can not add duplicate instances."); // this never happen because of unique id's.
+            throw new IllegalArgumentException("Can not add duplicate instances.");
         }
     }
 
@@ -41,7 +41,7 @@ public class BoatClubMemberRegistry {
      * Overwrites Object in InstanceState.
      * @param objectState State to overwrite with.
      */
-    public void updateState(BoatClubMember objectState){
+    public void updateRegistry(BoatClubMember objectState){
         if(boatClubMembers.contains(objectState)){
             int index = boatClubMembers.indexOf(objectState);
             boatClubMembers.set(index, objectState);
@@ -53,7 +53,7 @@ public class BoatClubMemberRegistry {
      * Removes provided state from BoatClubMemberRegistry.
      * @param objectState
      */
-    public void removeState(BoatClubMember objectState){
+    public void removeFromRegistry(BoatClubMember objectState){
         if(boatClubMembers.contains(objectState)){
             boatClubMembers.remove(objectState);
         }
@@ -72,11 +72,11 @@ public class BoatClubMemberRegistry {
     }
 
     /**
-     * Fetch state with id.
+     * Fetch BoatClubMember by id.
      * @param id Unique ID of member.
      * @return Current ID state.
      */
-    public BoatClubMember getSavedStateById(String id){
+    public BoatClubMember getMemberById(String id){
         for(BoatClubMember state: boatClubMembers){
             if(state.getMember().getId().equalsIgnoreCase(id)){
                 return state;

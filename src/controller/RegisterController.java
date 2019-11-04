@@ -21,16 +21,6 @@ public class RegisterController extends BaseController {
     }
 
     /**
-     * Provides the ability to initialize a controller with a custom saved state.
-     *
-     * @param boatClubMember
-     */
-    public RegisterController(BoatClubMember boatClubMember) {
-        currentMember = boatClubMember;
-    }
-
-
-    /**
      * Receives updates and registers member info with controller.
      *
      * @param updatedMember Member which is updated.
@@ -45,7 +35,7 @@ public class RegisterController extends BaseController {
             if (!updatedMember.getPersonalNumber().isEmpty()) {
                 this.currentMember.getMember().setPersonalNumber(updatedMember.getPersonalNumber());
             }
-            registerSavedState(this.currentMember);
+            saveBoatClubMember(this.currentMember);
             return true;
         }
         return false;
@@ -54,7 +44,7 @@ public class RegisterController extends BaseController {
     public boolean onMemberCreated(Member member) {
         currentMember = new BoatClubMember();
         currentMember.setMember(member);
-        registerSavedState(currentMember);
+        saveBoatClubMember(currentMember);
         return true;
     }
 
@@ -82,7 +72,7 @@ public class RegisterController extends BaseController {
         } else {
             currentMember.getBoats().add(boat);
         }
-        registerSavedState(currentMember);
+        saveBoatClubMember(currentMember);
         return true;
     }
 
@@ -94,7 +84,7 @@ public class RegisterController extends BaseController {
     public boolean onBoatDeleted(int index) {
         if (index < currentMember.getBoats().size()) {
             currentMember.getBoats().remove(index);
-            registerSavedState(currentMember);
+            saveBoatClubMember(currentMember);
             return true;
         } else {
             return false;
@@ -110,7 +100,7 @@ public class RegisterController extends BaseController {
     public boolean onBoatUpdated(int index) {
         if (index < currentMember.getBoats().size()) {
             currentMember.getBoats();
-            registerSavedState(currentMember);
+            saveBoatClubMember(currentMember);
             return true;
         } else {
             return false;
@@ -121,8 +111,8 @@ public class RegisterController extends BaseController {
     /**
      * Registers the current state with the base controller.
      */
-    public void registerSavedState(BoatClubMember state) {
-        super.addToRegistry(state);
+    public void saveBoatClubMember(BoatClubMember state) {
+        addToRegistry(state);
     }
 
     /**
@@ -132,7 +122,7 @@ public class RegisterController extends BaseController {
      * @return True/false
      */
     public boolean hasMemberId(String id) {
-        this.currentMember = super.getMemberById(id);
+        this.currentMember = getMemberById(id);
 
         return currentMember != null;
     }

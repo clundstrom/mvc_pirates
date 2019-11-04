@@ -113,10 +113,10 @@ public class BaseController {
      */
     protected void addToRegistry(BoatClubMember state){
         if(boatClubMemberRegistry.contains(state)){
-            boatClubMemberRegistry.updateState(state);
+            boatClubMemberRegistry.updateRegistry(state);
         }
         else {
-            boatClubMemberRegistry.addState(state);
+            boatClubMemberRegistry.addToRegistry(state);
         }
         writeToDB(new Gson());
     }
@@ -127,7 +127,7 @@ public class BaseController {
      */
     protected boolean removeFromInstanceState(BoatClubMember state){
         if(this.boatClubMemberRegistry.getBoatClubMembers().contains(state)){
-            this.boatClubMemberRegistry.removeState(state);
+            this.boatClubMemberRegistry.removeFromRegistry(state);
             writeToDB(new Gson());
             return true;
         }
@@ -136,14 +136,14 @@ public class BaseController {
 
 
     /**
-     * Returns a registry BoatClubMember entry.
+     * Returns a BoatClubMember entry.
      *
      * @param id Unique member id.
      * @return A BoatClubMember object.
      */
     protected BoatClubMember getMemberById(String id){
        try{
-           return this.boatClubMemberRegistry.getSavedStateById(id);
+           return this.boatClubMemberRegistry.getMemberById(id);
        }
        catch (NoSuchElementException e){
            System.out.println("Could not find an entry with id: " + id);
