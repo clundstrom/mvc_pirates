@@ -111,7 +111,7 @@ public class BaseController {
      * Adds or overwrites state depending on previous entries.
      * @param state
      */
-    protected void addToInstanceState(BoatClubMember state){
+    protected void addToRegistry(BoatClubMember state){
         if(boatClubMemberRegistry.contains(state)){
             boatClubMemberRegistry.updateState(state);
         }
@@ -141,7 +141,7 @@ public class BaseController {
      * @param id Unique member id.
      * @return A BoatClubMember object.
      */
-    protected BoatClubMember getStateById(String id){
+    protected BoatClubMember getMemberById(String id){
        try{
            return this.boatClubMemberRegistry.getSavedStateById(id);
        }
@@ -151,7 +151,7 @@ public class BaseController {
        return null;
     }
 
-    protected ArrayList<BoatClubMember> getStates(){
+    protected ArrayList<BoatClubMember> getRegistry(){
         return boatClubMemberRegistry.getBoatClubMembers();
     }
 

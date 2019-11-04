@@ -9,5 +9,5 @@ public class Canoe extends Boat {
     }
 
     public Canoe(){}
-    
+
 }

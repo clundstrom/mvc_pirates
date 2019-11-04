@@ -14,10 +14,10 @@ import java.util.NoSuchElementException;
 public class RegisterController extends BaseController {
 
 
-    private BoatClubMember currentState;
+    private BoatClubMember currentMember;
 
     public RegisterController() {
-        currentState = new BoatClubMember();
+        currentMember = new BoatClubMember();
     }
 
     /**
@@ -26,7 +26,7 @@ public class RegisterController extends BaseController {
      * @param boatClubMember
      */
     public RegisterController(BoatClubMember boatClubMember) {
-        currentState = boatClubMember;
+        currentMember = boatClubMember;
     }
 
 
@@ -37,24 +37,24 @@ public class RegisterController extends BaseController {
      */
     public boolean onMemberUpdated(Member updatedMember) {
         // Check if member exists
-        if (currentState.hasMember()) {
+        if (currentMember.hasMember()) {
             if (!updatedMember.getName().isEmpty()) {
-                this.currentState.getMember().setName(updatedMember.getName());
+                this.currentMember.getMember().setName(updatedMember.getName());
             }
 
             if (!updatedMember.getPersonalNumber().isEmpty()) {
-                this.currentState.getMember().setPersonalNumber(updatedMember.getPersonalNumber());
+                this.currentMember.getMember().setPersonalNumber(updatedMember.getPersonalNumber());
             }
-            registerSavedState(this.currentState);
+            registerSavedState(this.currentMember);
             return true;
         }
         return false;
     }
 
     public boolean onMemberCreated(Member member) {
-        currentState = new BoatClubMember();
-        currentState.setMember(member);
-        registerSavedState(currentState);
+        currentMember = new BoatClubMember();
+        currentMember.setMember(member);
+        registerSavedState(currentMember);
         return true;
     }
 
@@ -65,7 +65,7 @@ public class RegisterController extends BaseController {
      * @param id Id of a member.
      */
     public boolean onMemberDeleted(String id) {
-        if (removeFromInstanceState(getStateById(id))) {
+        if (removeFromInstanceState(getMemberById(id))) {
             return true;
         }
         return false;
@@ -77,12 +77,12 @@ public class RegisterController extends BaseController {
      * @param boat Boat.
      */
     public boolean onBoatCreated(Boat boat) {
-        if (currentState.getBoats().contains(boat)) {
+        if (currentMember.getBoats().contains(boat)) {
             return false;
         } else {
-            currentState.getBoats().add(boat);
+            currentMember.getBoats().add(boat);
         }
-        registerSavedState(currentState);
+        registerSavedState(currentMember);
         return true;
     }
 
@@ -92,9 +92,9 @@ public class RegisterController extends BaseController {
      * @param index Index of boat.
      */
     public boolean onBoatDeleted(int index) {
-        if (index < currentState.getBoats().size()) {
-            currentState.getBoats().remove(index);
-            registerSavedState(currentState);
+        if (index < currentMember.getBoats().size()) {
+            currentMember.getBoats().remove(index);
+            registerSavedState(currentMember);
             return true;
         } else {
             return false;
@@ -108,9 +108,9 @@ public class RegisterController extends BaseController {
      * @param index Index of boat to update.
      */
     public boolean onBoatUpdated(int index) {
-        if (index < currentState.getBoats().size()) {
-            currentState.getBoats();
-            registerSavedState(currentState);
+        if (index < currentMember.getBoats().size()) {
+            currentMember.getBoats();
+            registerSavedState(currentMember);
             return true;
         } else {
             return false;
@@ -122,7 +122,7 @@ public class RegisterController extends BaseController {
      * Registers the current state with the base controller.
      */
     public void registerSavedState(BoatClubMember state) {
-        super.addToInstanceState(state);
+        super.addToRegistry(state);
     }
 
     /**
@@ -131,18 +131,18 @@ public class RegisterController extends BaseController {
      * @param id Member id.
      * @return True/false
      */
-    public boolean hasIDSavedState(String id) {
-        this.currentState = super.getStateById(id);
+    public boolean hasMemberId(String id) {
+        this.currentMember = super.getMemberById(id);
 
-        return currentState != null;
+        return currentMember != null;
     }
 
     /**
      * @return saved Returns saved state's current member.
      */
     public Member getMember() {
-        if (currentState.hasMember()) {
-            return currentState.getMember();
+        if (currentMember.hasMember()) {
+            return currentMember.getMember();
         }
         throw new NullPointerException("No member found");
     }
@@ -151,13 +151,13 @@ public class RegisterController extends BaseController {
      * @return Returns boats of current state.
      */
     public ArrayList<Boat> getBoats() {
-        if (currentState.hasBoats()) {
-            return currentState.getBoats();
+        if (currentMember.hasBoats()) {
+            return currentMember.getBoats();
         }
         throw new NoSuchElementException("There was an error while retrieving your boats.");
     }
 
-    public ArrayList<BoatClubMember> getStates() {
-        return super.getStates();
+    public ArrayList<BoatClubMember> getRegistry() {
+        return super.getRegistry();
     }
 }

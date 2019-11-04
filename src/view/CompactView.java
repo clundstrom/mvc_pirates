@@ -9,16 +9,16 @@ public class CompactView extends BaseView {
     }
 
     public void compactViewList() {
-        if(controller.getStates().size() < 1){
+        if(controller.getRegistry().size() < 1){
             System.out.println("No entries found.");
         }
         else {
             clearConsole();
-            for(int i = 0; i < controller.getStates().size(); i++ ) {
+            for(int i = 0; i < controller.getRegistry().size(); i++ ) {
                 System.out.println("Member number: " + (i + 1));
-                System.out.println("    Name: " + controller.getStates().get(i).getMember().getName());
-                System.out.println("    Id: " + controller.getStates().get(i).getMember().getId());
-                System.out.println("    Number of boats: " + controller.getStates().get(i).getBoats().size());
+                System.out.println("    Name: " + controller.getRegistry().get(i).getMember().getName());
+                System.out.println("    Id: " + controller.getRegistry().get(i).getMember().getId());
+                System.out.println("    Number of boats: " + controller.getRegistry().get(i).getBoats().size());
             }
         }
     }

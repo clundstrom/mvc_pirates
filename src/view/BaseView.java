@@ -114,6 +114,6 @@ public abstract class BaseView {
      * @return
      */
     protected boolean isMemberVerified() {
-        return controller.hasIDSavedState(requireInput("Please enter your member ID: "));
+        return controller.hasMemberId(requireInput("Please enter your member ID: "));
     }
 }
