@@ -117,9 +117,7 @@ public abstract class BaseView {
 
         String input = requireInput("Please enter your member ID: ");
 
-        boolean verification = controller.hasMemberId(input);
-
-        if(!verification){
+        if(!controller.hasMemberId(input)){
             System.out.println("Could not find a member with ID: " + input);
             return false;
         }
