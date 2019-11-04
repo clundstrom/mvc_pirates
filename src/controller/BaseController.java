@@ -160,7 +160,7 @@ public class BaseController {
      */
     private Gson getTypeAdapter(RuntimeTypeAdapterFactory<Boat> vehicleAdapterFactory) {
         RuntimeTypeAdapterFactory<Boat> factory = vehicleAdapterFactory
-                .registerSubtype(Boat.class, "Canoe")
+                .registerSubtype(Canoe.class, "Canoe")
                 .registerSubtype(Kayak.class, "Kayak")
                 .registerSubtype(MotorBoat.class, "MotorBoat")
                 .registerSubtype(Other.class, "Other")

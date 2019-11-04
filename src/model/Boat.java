@@ -14,7 +14,6 @@ public abstract class Boat {
 
     public Boat(){}
 
-
     public int getLength() {
         return length;
     }

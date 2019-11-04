@@ -4,11 +4,8 @@ public class Kayak extends Boat {
 
 
     public Kayak(String name, String model, int boatLength) {
-        super.length = boatLength;
-        super.name = name;
-        super.modelName = model;
+        super(name, model, boatLength);
     }
 
     public Kayak(){}
-
 }

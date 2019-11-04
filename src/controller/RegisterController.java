@@ -157,6 +157,6 @@ public class RegisterController extends BaseController {
     }
 
     public ArrayList<BoatClubMember> getRegistry() {
-        return getRegistry();
+        return super.getRegistry();
     }
 }
