@@ -23,8 +23,6 @@ public class EditBoatView extends BaseView {
 
     public EditBoatView(RegisterController controller) {
         super(controller);
-        addSubscriber(controller);
-
     }
 
     /**
@@ -160,21 +158,27 @@ public class EditBoatView extends BaseView {
      * @param boat
      */
     protected void notifyBoatChanged(Boat boat) {
-        for (IViewObserver sub : mSubscribers) {
-            sub.onBoatCreated(boat);
+        if(!controller.onBoatCreated(boat)){
+            System.out.println("Cannot add duplicate boats.");
         }
     }
 
     protected void notifyBoatDeleted(int index) {
-        for (IViewObserver sub : mSubscribers) {
-            sub.onBoatDeleted(index);
-        }
+            if(controller.onBoatDeleted(index)){
+                System.out.println("Boat successfully deleted.");
+            }
+            else{
+                System.out.println("Invalid index.");
+            }
     }
 
     protected void notifyBoatUpdated(int index) {
-        for (IViewObserver sub : mSubscribers) {
-            sub.onBoatUpdated(index);
-        }
+            if(controller.onBoatUpdated(index)){
+                System.out.println("Boat successfully updated.");
+            }
+            else {
+                System.out.println("Invalid index.");
+            }
     }
 
 

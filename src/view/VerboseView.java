@@ -32,7 +32,7 @@ public class VerboseView extends BaseView {
      *  Prints out a list of boats.
      *
      * @param controller Controller which is used to fetch the current boats from the correct state.
-     * @param index index of SavedState.
+     * @param index index of BoatClubMember.
      */
     private void listBoats(RegisterController controller, int index){
         for(int j=0; j < controller.getStates().get(index).getBoats().size(); j++){

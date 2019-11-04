@@ -7,18 +7,12 @@ import java.util.ArrayList;
  * Object to represent a the current state of a Member and its boats.
  *
  */
-public class SavedState {
+public class BoatClubMember {
 
     private Member member;
     private ArrayList<Boat> boats;
 
-
-    public SavedState(Member member, ArrayList<Boat> boats) {
-        this.member = member;
-        this.boats = boats;
-    }
-
-    public SavedState() {
+    public BoatClubMember() {
         member = new Member();
         boats = new ArrayList<>();
     }
@@ -39,10 +33,6 @@ public class SavedState {
             boats = new ArrayList<>();
         }
         return boats;
-    }
-
-    public void setBoats(ArrayList<Boat> boats) {
-        this.boats = boats;
     }
 
     public boolean hasMember(){

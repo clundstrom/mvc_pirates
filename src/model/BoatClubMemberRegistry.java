@@ -10,13 +10,13 @@ import java.util.NoSuchElementException;
  * <p>
  * It carries all currently Saved States.
  */
-public class SavedInstanceState {
+public class BoatClubMemberRegistry {
 
-    private ArrayList<SavedState> savedStates;
+    private ArrayList<BoatClubMember> boatClubMembers;
 
 
-    public SavedInstanceState(){
-        this.savedStates = new ArrayList<>();
+    public BoatClubMemberRegistry(){
+        this.boatClubMembers = new ArrayList<>();
     }
 
     /**
@@ -24,38 +24,38 @@ public class SavedInstanceState {
      *
      * @param objectState
      */
-    public void addState(SavedState objectState){
-        if(!savedStates.contains(objectState)){
-            savedStates.add(objectState);
+    public void addState(BoatClubMember objectState){
+        if(!boatClubMembers.contains(objectState)){
+            boatClubMembers.add(objectState);
         }
         else{
             throw new IllegalArgumentException("Can not add duplicate instances."); // this never happen because of unique id's.
         }
     }
 
-    public boolean contains(SavedState objectState){
-        return savedStates.contains(objectState);
+    public boolean contains(BoatClubMember objectState){
+        return boatClubMembers.contains(objectState);
     }
 
     /**
      * Overwrites Object in InstanceState.
      * @param objectState State to overwrite with.
      */
-    public void updateState(SavedState objectState){
-        if(savedStates.contains(objectState)){
-            int index = savedStates.indexOf(objectState);
-            savedStates.set(index, objectState);
+    public void updateState(BoatClubMember objectState){
+        if(boatClubMembers.contains(objectState)){
+            int index = boatClubMembers.indexOf(objectState);
+            boatClubMembers.set(index, objectState);
         }
 
     }
 
     /**
-     * Removes provided state from SavedInstanceState.
+     * Removes provided state from BoatClubMemberRegistry.
      * @param objectState
      */
-    public void removeState(SavedState objectState){
-        if(savedStates.contains(objectState)){
-            savedStates.remove(objectState);
+    public void removeState(BoatClubMember objectState){
+        if(boatClubMembers.contains(objectState)){
+            boatClubMembers.remove(objectState);
         }
         else {
             throw new NoSuchElementException("Entry not found.");
@@ -67,8 +67,8 @@ public class SavedInstanceState {
      * Returns the list of currently saved states.
      * @return
      */
-    public ArrayList<SavedState> getSavedStates() {
-        return savedStates;
+    public ArrayList<BoatClubMember> getBoatClubMembers() {
+        return boatClubMembers;
     }
 
     /**
@@ -76,8 +76,8 @@ public class SavedInstanceState {
      * @param id Unique ID of member.
      * @return Current ID state.
      */
-    public SavedState getSavedStateById(String id){
-        for(SavedState state: savedStates){
+    public BoatClubMember getSavedStateById(String id){
+        for(BoatClubMember state: boatClubMembers){
             if(state.getMember().getId().equalsIgnoreCase(id)){
                 return state;
             }

@@ -1,11 +1,9 @@
 package view;
 
 import controller.RegisterController;
-import model.IViewObserver;
 import model.Member;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -15,7 +13,6 @@ public abstract class BaseView {
 
     protected final String ERR_INVALID_INPUT = "Invalid input";
     protected Scanner sc;
-    protected ArrayList<IViewObserver> mSubscribers;
     protected RegisterController controller;
 
     public BaseView(RegisterController controller) {
@@ -23,13 +20,6 @@ public abstract class BaseView {
         sc = new Scanner(System.in);
     }
 
-    /**
-     * @param controller A controller is needed for the base view to handle Registration and navigation.
-     * @param subscribers A list of subscribers can be supplied to the BaseView at instantiation.
-     */
-    public BaseView(RegisterController controller, ArrayList<IViewObserver> subscribers){
-        mSubscribers = subscribers;
-    }
 
     /**
      * Overrideble behavior of getInputAction and provides navigation options for the user.
@@ -97,37 +87,25 @@ public abstract class BaseView {
     }
 
     /**
-     * Adds a subscriber to the view.
-     *
-     * @param subscriber Subscriber who listens to information from the View.
-     */
-    public void addSubscriber(IViewObserver subscriber) {
-        if (mSubscribers == null) {
-            mSubscribers = new ArrayList<>();
-        }
-        mSubscribers.add(subscriber);
-    }
-
-    /**
      * Notifies any subscribers with provided information from the view.
      *
      * @param member
      */
-    protected void notifyMemberChanged(Member member) {
-        for (IViewObserver sub : mSubscribers) {
-            sub.onMemberUpdated(member);
+    protected void isMemberChanged(Member member) {
+        if(controller.onMemberUpdated(member)){
+            System.out.println("Profile updated.");
         }
     }
 
-    protected void notifyMemberDeleted(String id) {
-        for (IViewObserver sub : mSubscribers) {
-            sub.onMemberDeleted(id);
+    protected void isMemberDeleted(String id) {
+        if(controller.onMemberDeleted(id)){
+            System.out.println("Member successfully deleted.");
         }
     }
 
-    protected void notifyMemberCreated(Member member){
-        for (IViewObserver sub : mSubscribers) {
-            sub.onMemberCreated(member);
+    protected void isMemberCreated(Member member){
+        if(controller.onMemberCreated(member)){
+            System.out.println("Member successfully registered.\nPlease save your unique id in a secure location: " + member.getId());
         }
     }
 

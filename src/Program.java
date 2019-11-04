@@ -11,7 +11,6 @@ public class Program {
         RegisterController registerController = new RegisterController();
 
         MenuView menu = new MenuView(registerController);
-        menu.addSubscriber(registerController);
         menu.onViewInit();
     }
 

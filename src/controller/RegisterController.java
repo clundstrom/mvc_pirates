@@ -1,9 +1,8 @@
 package controller;
 
 import model.Boat;
-import model.IViewObserver;
+import model.BoatClubMember;
 import model.Member;
-import model.SavedState;
 
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
@@ -12,21 +11,22 @@ import java.util.NoSuchElementException;
  * Controller which handles CRUD operations on the
  * registry of Members and Boats.
  */
-public class RegisterController extends BaseController implements IViewObserver {
+public class RegisterController extends BaseController {
 
 
-    private SavedState currentState;
+    private BoatClubMember currentState;
 
     public RegisterController() {
-        currentState = new SavedState();
+        currentState = new BoatClubMember();
     }
 
     /**
      * Provides the ability to initialize a controller with a custom saved state.
-     * @param savedState
+     *
+     * @param boatClubMember
      */
-    public RegisterController(SavedState savedState) {
-        currentState = savedState;
+    public RegisterController(BoatClubMember boatClubMember) {
+        currentState = boatClubMember;
     }
 
 
@@ -35,8 +35,7 @@ public class RegisterController extends BaseController implements IViewObserver 
      *
      * @param updatedMember Member which is updated.
      */
-    @Override
-    public void onMemberUpdated(Member updatedMember) {
+    public boolean onMemberUpdated(Member updatedMember) {
         // Check if member exists
         if (currentState.hasMember()) {
             if (!updatedMember.getName().isEmpty()) {
@@ -47,17 +46,16 @@ public class RegisterController extends BaseController implements IViewObserver 
                 this.currentState.getMember().setPersonalNumber(updatedMember.getPersonalNumber());
             }
             registerSavedState(this.currentState);
-            System.out.println("Profile updated.");
+            return true;
         }
-
+        return false;
     }
 
-    @Override
-    public void onMemberCreated(Member member) {
-        currentState = new SavedState();
+    public boolean onMemberCreated(Member member) {
+        currentState = new BoatClubMember();
         currentState.setMember(member);
         registerSavedState(currentState);
-        System.out.println("Member successfully registered.\nPlease save your unique id in a secure location: " + member.getId());
+        return true;
     }
 
 
@@ -66,11 +64,11 @@ public class RegisterController extends BaseController implements IViewObserver 
      *
      * @param id Id of a member.
      */
-    @Override
-    public void onMemberDeleted(String id) {
+    public boolean onMemberDeleted(String id) {
         if (removeFromInstanceState(getStateById(id))) {
-            System.out.println("Member successfully deleted.");
+            return true;
         }
+        return false;
     }
 
     /**
@@ -78,14 +76,14 @@ public class RegisterController extends BaseController implements IViewObserver 
      *
      * @param boat Boat.
      */
-    @Override
-    public void onBoatCreated(Boat boat) {
+    public boolean onBoatCreated(Boat boat) {
         if (currentState.getBoats().contains(boat)) {
-            System.out.println("Cannot add duplicate boats.");
+            return false;
         } else {
             currentState.getBoats().add(boat);
         }
         registerSavedState(currentState);
+        return true;
     }
 
     /**
@@ -93,30 +91,29 @@ public class RegisterController extends BaseController implements IViewObserver 
      *
      * @param index Index of boat.
      */
-    @Override
-    public void onBoatDeleted(int index) {
+    public boolean onBoatDeleted(int index) {
         if (index < currentState.getBoats().size()) {
             currentState.getBoats().remove(index);
             registerSavedState(currentState);
-            System.out.println("Boat successfully deleted.");
+            return true;
         } else {
-            System.out.println("Invalid index.");
+            return false;
         }
     }
 
 
     /**
      * Updates corresponding boat.
+     *
      * @param index Index of boat to update.
      */
-    @Override
-    public void onBoatUpdated(int index) {
+    public boolean onBoatUpdated(int index) {
         if (index < currentState.getBoats().size()) {
             currentState.getBoats();
             registerSavedState(currentState);
-            System.out.println("Boat successfully updated.");
+            return true;
         } else {
-            System.out.println("Invalid index.");
+            return false;
         }
 
     }
@@ -124,7 +121,7 @@ public class RegisterController extends BaseController implements IViewObserver 
     /**
      * Registers the current state with the base controller.
      */
-    public void registerSavedState(SavedState state) {
+    public void registerSavedState(BoatClubMember state) {
         super.addToInstanceState(state);
     }
 
@@ -141,7 +138,6 @@ public class RegisterController extends BaseController implements IViewObserver 
     }
 
     /**
-     *
      * @return saved Returns saved state's current member.
      */
     public Member getMember() {
@@ -161,7 +157,7 @@ public class RegisterController extends BaseController implements IViewObserver 
         throw new NoSuchElementException("There was an error while retrieving your boats.");
     }
 
-    public ArrayList<SavedState> getStates() {
+    public ArrayList<BoatClubMember> getStates() {
         return super.getStates();
     }
 }

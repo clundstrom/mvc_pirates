@@ -22,9 +22,7 @@ public class EditMemberView extends BaseView {
 
     public EditMemberView(RegisterController controller) {
         super(controller);
-        super.addSubscriber(controller);
     }
-
 
     /**
      * Register member view. Notifies controller with new information.
@@ -39,7 +37,7 @@ public class EditMemberView extends BaseView {
             Member member = new Member();
             member.setName(answer);
             member.setPersonalNumber(requireInput("Social security number: "));
-            notifyMemberCreated(member);
+            isMemberCreated(member);
         }
 
     }
@@ -59,12 +57,12 @@ public class EditMemberView extends BaseView {
             case "1":
                 updatedMember.setName(requireInput("Please enter your name: "));
                 updatedMember.setPersonalNumber("");
-                notifyMemberChanged(updatedMember);
+                isMemberChanged(updatedMember);
                 break;
             case "2":
                 updatedMember.setName("");
                 updatedMember.setPersonalNumber(requireInput("Please enter your social security number: "));
-                notifyMemberChanged(updatedMember);
+                isMemberChanged(updatedMember);
                 break;
             case "3":
                 new EditBoatView(controller).addBoat(new Other());
@@ -90,7 +88,7 @@ public class EditMemberView extends BaseView {
      */
     public void deleteMember() {
         String id = requireInput("Which member would you like to delete? Enter an id: ");
-        notifyMemberDeleted(id);
+        isMemberDeleted(id);
     }
 
 }

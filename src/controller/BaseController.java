@@ -13,13 +13,13 @@ import java.util.NoSuchElementException;
 
 /**
  * Class which handles communication with database.
- * Handles serialization of SavedInstanceState.
+ * Handles serialization of BoatClubMemberRegistry.
  */
 public class BaseController {
 
     private final String DB_PATH = "database.json";
     private File dbFile;
-    private SavedInstanceState savedInstanceState;
+    private BoatClubMemberRegistry boatClubMemberRegistry;
 
     public BaseController() {
         dbFile = new File(DB_PATH);
@@ -29,17 +29,17 @@ public class BaseController {
 
     /**
      * @param file Custom database file.
-     * @param state Supply a custom SavedInstanceState.
+     * @param state Supply a custom BoatClubMemberRegistry.
      */
-    public BaseController(File file, SavedInstanceState state) {
-        this.savedInstanceState = state;
+    public BaseController(File file, BoatClubMemberRegistry state) {
+        this.boatClubMemberRegistry = state;
         this.dbFile = file;
         verifyDatabaseExist(dbFile);
         fetchDatabase(new Gson());
     }
 
     /**
-     * Reads the database into the SavedInstanceState.
+     * Reads the database into the BoatClubMemberRegistry.
      * @param gson Uses Gson for serializing
      */
     private void fetchDatabase(Gson gson) {
@@ -47,10 +47,10 @@ public class BaseController {
             String formattedString = Files.readString(dbFile.toPath());
             if (!formattedString.isEmpty()) {
                 gson = getTypeAdapter(RuntimeTypeAdapterFactory.of(Boat.class, "type"));
-                savedInstanceState = gson.fromJson(formattedString, SavedInstanceState.class);
+                boatClubMemberRegistry = gson.fromJson(formattedString, BoatClubMemberRegistry.class);
             }
             else{
-                savedInstanceState = new SavedInstanceState();
+                boatClubMemberRegistry = new BoatClubMemberRegistry();
             }
 
         }
@@ -98,7 +98,7 @@ public class BaseController {
      */
     private void writeToDB(Gson gsonObj) {
         gsonObj = getTypeAdapter(RuntimeTypeAdapterFactory.of(Boat.class, "type"));
-        String formatted = gsonObj.toJson(savedInstanceState);
+        String formatted = gsonObj.toJson(boatClubMemberRegistry);
         try {
             Files.writeString(this.dbFile.toPath(), formatted);
         }
@@ -111,12 +111,12 @@ public class BaseController {
      * Adds or overwrites state depending on previous entries.
      * @param state
      */
-    protected void addToInstanceState(SavedState state){
-        if(savedInstanceState.contains(state)){
-            savedInstanceState.updateState(state);
+    protected void addToInstanceState(BoatClubMember state){
+        if(boatClubMemberRegistry.contains(state)){
+            boatClubMemberRegistry.updateState(state);
         }
         else {
-            savedInstanceState.addState(state);
+            boatClubMemberRegistry.addState(state);
         }
         writeToDB(new Gson());
     }
@@ -125,9 +125,9 @@ public class BaseController {
      * Removes state object.
      * @param state
      */
-    protected boolean removeFromInstanceState(SavedState state){
-        if(this.savedInstanceState.getSavedStates().contains(state)){
-            this.savedInstanceState.removeState(state);
+    protected boolean removeFromInstanceState(BoatClubMember state){
+        if(this.boatClubMemberRegistry.getBoatClubMembers().contains(state)){
+            this.boatClubMemberRegistry.removeState(state);
             writeToDB(new Gson());
             return true;
         }
@@ -136,14 +136,14 @@ public class BaseController {
 
 
     /**
-     * Returns a registry SavedState entry.
+     * Returns a registry BoatClubMember entry.
      *
      * @param id Unique member id.
-     * @return A SavedState object.
+     * @return A BoatClubMember object.
      */
-    protected SavedState getStateById(String id){
+    protected BoatClubMember getStateById(String id){
        try{
-           return this.savedInstanceState.getSavedStateById(id);
+           return this.boatClubMemberRegistry.getSavedStateById(id);
        }
        catch (NoSuchElementException e){
            System.out.println("Could not find an entry with id: " + id);
@@ -151,8 +151,8 @@ public class BaseController {
        return null;
     }
 
-    protected ArrayList<SavedState> getStates(){
-        return savedInstanceState.getSavedStates();
+    protected ArrayList<BoatClubMember> getStates(){
+        return boatClubMemberRegistry.getBoatClubMembers();
     }
 
 
@@ -166,7 +166,7 @@ public class BaseController {
      */
     private Gson getTypeAdapter(RuntimeTypeAdapterFactory<Boat> vehicleAdapterFactory){
         RuntimeTypeAdapterFactory<Boat> factory = vehicleAdapterFactory
-                .registerSubtype(Canoe.class, "Canoe")
+                .registerSubtype(Boat.class, "Canoe")
                 .registerSubtype(Kayak.class, "Kayak")
                 .registerSubtype(MotorBoat.class, "MotorBoat")
                 .registerSubtype(Other.class, "Other")

@@ -2,7 +2,18 @@ package model;
 
 public abstract class Boat {
 
+    protected int length;
+    protected String modelName;
+    protected String name;
+
+    public Boat(String name, String model, int boatLength){
+        this.name = name;
+        this.modelName = model;
+        this.length = boatLength;
+    }
+
     public Boat(){}
+
 
     public int getLength() {
         return length;
@@ -28,9 +39,7 @@ public abstract class Boat {
         this.name = name;
     }
 
-    protected int length;
-    protected String modelName;
-    protected String name;
+
 
  
 }
