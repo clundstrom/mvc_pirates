@@ -2,7 +2,6 @@ package view;
 
 import controller.RegisterController;
 import model.Member;
-import model.Other;
 
 /**
  * The view handles editing of members.
@@ -65,7 +64,7 @@ public class EditMemberView extends BaseView {
                 isMemberChanged(updatedMember);
                 break;
             case "3":
-                new EditBoatView(controller).addBoat(new Other());
+                new EditBoatView(controller).addBoat();
                 break;
             case "4":
                 new EditBoatView(controller).deleteBoat();

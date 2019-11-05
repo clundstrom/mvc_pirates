@@ -1,7 +1,12 @@
 package view;
 
 import controller.RegisterController;
-import model.*;
+import model.SailBoat;
+import model.MotorBoat;
+import model.Canoe;
+import model.Kayak;
+import model.Other;
+import model.Boat;
 
 public class EditBoatView extends BaseView {
 
@@ -91,14 +96,15 @@ public class EditBoatView extends BaseView {
     /**
      * Creates a local boat which is updated with information and sent to controller
      * for registration.
-     * @param boat
+     * @param
      */
-    public void addBoat(Boat boat) {
+    public void addBoat() {
         super.clearConsole();
         welcomeMessage("What typ of boat do you want to register: ");
         presentActions(presentActions);
 
         try{
+            Boat boat = new Other();
             String answer = requireInput("");
             String name;
             String model;
@@ -142,7 +148,7 @@ public class EditBoatView extends BaseView {
                 case "6":
                     break;
                 default:
-                    addBoat(new Other());
+                    addBoat();
                     break;
             }
         }
