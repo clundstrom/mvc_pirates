@@ -36,7 +36,7 @@ public class EditBoatView extends BaseView {
     public void deleteBoat() {
         if (!controller.getBoats().isEmpty()) {
             welcomeMessage("Which boat would you like to delete? ");
-            new ListBoatView(controller).listBoats();
+            listBoats();
             String answer = requireInput("");
             try{
                 int index = Integer.parseInt(answer);
@@ -57,7 +57,7 @@ public class EditBoatView extends BaseView {
     public void updateBoat(){
         if (!controller.getBoats().isEmpty()) {
             welcomeMessage("\nWhich boat would you like to Update? ");
-            new ListBoatView(controller).listBoats();
+            listBoats();
 
             try{
                 int index = Integer.parseInt(requireInput(""));
@@ -187,5 +187,10 @@ public class EditBoatView extends BaseView {
             }
     }
 
+    public void listBoats(){
+        for(int i=0; i < controller.getBoats().size(); i++){
+            System.out.println(i + ". " +  controller.getBoats().get(i).getName());
+        }
+    }
 
 }
