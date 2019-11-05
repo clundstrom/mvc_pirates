@@ -26,7 +26,7 @@ public class EditMemberView extends BaseView {
      * Register member view. Notifies controller with new information.
      */
     public void register() {
-        super.clearConsole();
+        clearConsole();
         System.out.println("Press \'r\' to go back");
         String answer = requireInput("Please enter your name: ");
         if (answer.equalsIgnoreCase("r")) {
@@ -45,12 +45,12 @@ public class EditMemberView extends BaseView {
      *
      * @return
      */
-    public void changeMember(Member updatedmember) {
+    public void changeMember() {
         presentActions(presentActions);
 
         String answer = requireInput("");
+        Member updatedMember = new Member();
 
-        Member updatedMember = updatedmember;
         switch (answer) {
             case "1":
                 updatedMember.setName(requireInput("Please enter your name: "));
@@ -78,7 +78,7 @@ public class EditMemberView extends BaseView {
                 System.err.println(ERR_INVALID_INPUT);
                 break;
         }
-        changeMember(new Member());
+        changeMember();
     }
 
     /**
@@ -98,6 +98,29 @@ public class EditMemberView extends BaseView {
         System.out.println("Name: " + controller.getMember().getName());
         System.out.println("Social security number: " + controller.getMember().getPersonalNumber());
 
+    }
+
+    /**
+     * Notifies any subscribers with provided information from the view.
+     *
+     * @param member
+     */
+    private void isMemberChanged(Member member) {
+        if(controller.onMemberUpdated(member)){
+            System.out.println("Profile updated.");
+        }
+    }
+
+    private void isMemberDeleted(String id) {
+        if(controller.onMemberDeleted(id)){
+            System.out.println("Member successfully deleted.");
+        }
+    }
+
+    private void isMemberCreated(Member member){
+        if(controller.onMemberCreated(member)){
+            System.out.println("Member successfully registered.\nPlease save your unique id in a secure location: " + member.getId());
+        }
     }
 
 }

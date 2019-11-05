@@ -1,8 +1,6 @@
 package view;
 
 import controller.RegisterController;
-import model.Member;
-
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -67,12 +65,10 @@ public abstract class BaseView {
         }
     }
 
-
     /**
      * Function to be called in childobjects when the view initializes.
      */
-    public void onViewInit() {
-    };
+    public void onViewInit() {};
 
     protected void welcomeMessage(String message) {
         System.out.println(message);
@@ -87,31 +83,8 @@ public abstract class BaseView {
     }
 
     /**
-     * Notifies any subscribers with provided information from the view.
-     *
-     * @param member
-     */
-    protected void isMemberChanged(Member member) {
-        if(controller.onMemberUpdated(member)){
-            System.out.println("Profile updated.");
-        }
-    }
-
-    protected void isMemberDeleted(String id) {
-        if(controller.onMemberDeleted(id)){
-            System.out.println("Member successfully deleted.");
-        }
-    }
-
-    protected void isMemberCreated(Member member){
-        if(controller.onMemberCreated(member)){
-            System.out.println("Member successfully registered.\nPlease save your unique id in a secure location: " + member.getId());
-        }
-    }
-
-    /**
      * Asks the controller if a specified member state exists in the database.
-     * @return
+     * @return  True/false
      */
     protected boolean isMemberVerified() {
 

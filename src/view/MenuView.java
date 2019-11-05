@@ -1,7 +1,6 @@
 package view;
 
 import controller.RegisterController;
-import model.Member;
 
 
 /**
@@ -54,7 +53,7 @@ public class MenuView extends BaseView {
                     break;
                 case "2":
                     if (isMemberVerified())
-                        new EditMemberView(controller).changeMember(new Member());
+                        new EditMemberView(controller).changeMember();
                     break;
                 case "3":
                     new EditMemberView(controller).deleteMember();
