@@ -104,7 +104,7 @@ public class EditBoatView extends BaseView {
         presentActions(presentActions);
 
         try{
-            Boat boat = new Other();
+            Boat boat;
             String answer = requireInput("");
             String name;
             String model;
