@@ -35,7 +35,7 @@ public class EditBoatView extends BaseView {
             String answer = requireInput("");
             try{
                 int index = Integer.parseInt(answer);
-                notifyBoatDeleted(index);
+                isBoatDeleted(index);
             }
             catch (NumberFormatException e){
                 System.out.println("Invalid input.");
@@ -64,17 +64,17 @@ public class EditBoatView extends BaseView {
                     case"1":
                         String changeName = requireInput("Enter new name: ");
                         controller.getBoats().get(index).setName(changeName);
-                        notifyBoatUpdated(index);
+                        isBoatUpdated(index);
                         break;
                     case"2":
                         String changeModel = requireInput("Enter new model: ");
                         controller.getBoats().get(index).setModelName(changeModel);
-                        notifyBoatUpdated(index);
+                        isBoatUpdated(index);
                         break;
                     case"3":
                         int changeLength = Integer.parseInt(requireInput("Enter new length: "));
                         controller.getBoats().get(index).setLength(changeLength);
-                        notifyBoatUpdated(index);
+                        isBoatUpdated(index);
                         break;
                     case"4":
                         break;
@@ -110,35 +110,35 @@ public class EditBoatView extends BaseView {
                     model = requireInput("What model is it?: ");
                     length = Integer.parseInt(requireInput("How long is it (m)? "));
                     boat = new MotorBoat(name, model, length);
-                    notifyBoatChanged(boat);
+                    isBoatChanged(boat);
                     break;
                 case "2":
                     name = requireInput("What is the name of the boat?: ");
                     model = requireInput("What model is it?: ");
                     length = Integer.parseInt(requireInput("How long is it? (m) "));
                     boat = new SailBoat(name, model, length);
-                    notifyBoatChanged(boat);
+                    isBoatChanged(boat);
                     break;
                 case "3":
                     name = requireInput("What is the name of the boat?: ");
                     model = requireInput("What model is it?: ");
                     length = Integer.parseInt(requireInput("How long is it? (m) "));
                     boat = new Kayak(name, model, length);
-                    notifyBoatChanged(boat);
+                    isBoatChanged(boat);
                     break;
                 case "4":
                     name = requireInput("What is the name of the boat?: ");
                     model = requireInput("What model is it?: ");
                     length = Integer.parseInt(requireInput("How long is it? (m) "));
                     boat = new Canoe(name, model, length);
-                    notifyBoatChanged(boat);
+                    isBoatChanged(boat);
                     break;
                 case "5":
                     name = requireInput("What is the name of the boat?: ");
                     model = requireInput("What model is it?: ");
                     length = Integer.parseInt(requireInput("How long is it? (m) "));
                     boat = new Other(name, model, length);
-                    notifyBoatChanged(boat);
+                    isBoatChanged(boat);
                 case "6":
                     break;
                 default:
@@ -157,13 +157,13 @@ public class EditBoatView extends BaseView {
      *
      * @param boat
      */
-    protected void notifyBoatChanged(Boat boat) {
+    protected void isBoatChanged(Boat boat) {
         if(!controller.onBoatCreated(boat)){
             System.out.println("Cannot add duplicate boats.");
         }
     }
 
-    protected void notifyBoatDeleted(int index) {
+    protected void isBoatDeleted(int index) {
             if(controller.onBoatDeleted(index)){
                 System.out.println("Boat successfully deleted.");
             }
@@ -172,7 +172,7 @@ public class EditBoatView extends BaseView {
             }
     }
 
-    protected void notifyBoatUpdated(int index) {
+    protected void isBoatUpdated(int index) {
             if(controller.onBoatUpdated(index)){
                 System.out.println("Boat successfully updated.");
             }

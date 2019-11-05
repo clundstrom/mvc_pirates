@@ -21,13 +21,8 @@ public class BaseController {
 
     public BaseController() {
         dbFile = new File(DB_PATH);
-        try {
-            verifyDatabaseExist(dbFile);
-            fetchDatabase(new Gson());
-        }
-        catch (Exception e){
-            // Do nothing.
-        }
+        verifyDatabaseExist(dbFile);
+        fetchDatabase(new Gson());
     }
 
     /**
@@ -41,8 +36,8 @@ public class BaseController {
             this.dbFile = file;
             verifyDatabaseExist(dbFile);
             fetchDatabase(new Gson());
-        }
-        catch (Exception e){
+
+        } catch (Exception e) {
             // Do nothing.
         }
 
@@ -53,15 +48,19 @@ public class BaseController {
      *
      * @param gson Uses Gson for serializing
      */
-    private void fetchDatabase(Gson gson) throws IOException {
-        String formattedString = Files.readString(dbFile.toPath());
-        if (!formattedString.isEmpty()) {
-            gson = getTypeAdapter(RuntimeTypeAdapterFactory.of(Boat.class, "type"));
-            boatClubMemberRegistry = gson.fromJson(formattedString, BoatClubMemberRegistry.class);
-        } else {
-            boatClubMemberRegistry = new BoatClubMemberRegistry();
+    private void fetchDatabase(Gson gson) {
+        try {
+            String formattedString = Files.readString(dbFile.toPath());
+            if (!formattedString.isEmpty()) {
+                gson = getTypeAdapter(RuntimeTypeAdapterFactory.of(Boat.class, "type"));
+                boatClubMemberRegistry = gson.fromJson(formattedString, BoatClubMemberRegistry.class);
+            } else {
+                boatClubMemberRegistry = new BoatClubMemberRegistry();
+            }
         }
-
+        catch (IOException e ){
+            e.printStackTrace();
+        }
     }
 
 
@@ -70,11 +69,17 @@ public class BaseController {
      *
      * @param file File to examine.
      */
-    private void verifyDatabaseExist(File file) throws IOException {
-        if (!databaseExists()) {
-            file = new File(DB_PATH);
-            file.createNewFile();
+    private void verifyDatabaseExist(File file){
+        try {
+            if (!databaseExists()) {
+                file = new File(DB_PATH);
+                file.createNewFile();
+            }
         }
+        catch (IOException e ){
+            e.printStackTrace();
+        }
+
     }
 
 
@@ -90,11 +95,16 @@ public class BaseController {
     /**
      * Function responsible for updating the database file.
      */
-    private void writeToDB(Gson gsonObj) throws IOException {
-        gsonObj = getTypeAdapter(RuntimeTypeAdapterFactory.of(Boat.class, "type"));
-        String formatted = gsonObj.toJson(boatClubMemberRegistry);
-        Files.writeString(this.dbFile.toPath(), formatted);
+    private void writeToDB(Gson gsonObj){
+        try {
+            gsonObj = getTypeAdapter(RuntimeTypeAdapterFactory.of(Boat.class, "type"));
+            String formatted = gsonObj.toJson(boatClubMemberRegistry);
+            Files.writeString(this.dbFile.toPath(), formatted);
+        }
 
+        catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -120,7 +130,7 @@ public class BaseController {
      *
      * @param state
      */
-    protected boolean removeFromRegistry(BoatClubMember state) throws IOException {
+    protected boolean removeFromRegistry(BoatClubMember state) {
         if (this.boatClubMemberRegistry.getBoatClubMembers().contains(state)) {
             this.boatClubMemberRegistry.remove(state);
             writeToDB(new Gson());
@@ -139,8 +149,7 @@ public class BaseController {
     protected BoatClubMember getMemberById(String id) {
         try {
             return this.boatClubMemberRegistry.getMemberById(id);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             return null;
         }
     }

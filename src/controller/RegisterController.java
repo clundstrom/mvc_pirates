@@ -42,11 +42,16 @@ public class RegisterController extends BaseController {
         return false;
     }
 
+
+    /**
+     * Receives creation notification and calls BaseController for adding.
+     * @param member Member to be registered.
+     * @return True/false
+     */
     public boolean onMemberCreated(Member member) {
         currentMember = new BoatClubMember();
         currentMember.setMember(member);
-        saveBoatClubMember(currentMember);
-        return true;
+        return saveBoatClubMember(currentMember);
     }
 
 
@@ -77,8 +82,7 @@ public class RegisterController extends BaseController {
         } else {
             currentMember.getBoats().add(boat);
         }
-        saveBoatClubMember(currentMember);
-        return true;
+        return saveBoatClubMember(currentMember);
     }
 
     /**
@@ -89,8 +93,7 @@ public class RegisterController extends BaseController {
     public boolean onBoatDeleted(int index) {
         if (index < currentMember.getBoats().size()) {
             currentMember.getBoats().remove(index);
-            saveBoatClubMember(currentMember);
-            return true;
+            return saveBoatClubMember(currentMember);
         } else {
             return false;
         }
@@ -113,7 +116,7 @@ public class RegisterController extends BaseController {
     }
 
     /**
-     * Registers the current state with the base controller.
+     * Registers the current member with the base controller.
      */
     public boolean saveBoatClubMember(BoatClubMember state) {
         try {
@@ -125,7 +128,7 @@ public class RegisterController extends BaseController {
     }
 
     /**
-     * Queries DB for Saved State. Sets local state if found and returns true.
+     * Queries DB for Member. Sets local member if found and returns true.
      *
      * @param id Member id.
      * @return True/false
@@ -137,7 +140,7 @@ public class RegisterController extends BaseController {
     }
 
     /**
-     * @return saved Returns saved state's current member.
+     * @return saved Returns current member.
      */
     public Member getMember() {
         if (currentMember.hasMember()) {
@@ -147,7 +150,7 @@ public class RegisterController extends BaseController {
     }
 
     /**
-     * @return Returns boats of current state.
+     * @return Returns boats of current Member.
      */
     public ArrayList<Boat> getBoats() {
         if (currentMember.hasBoats()) {
