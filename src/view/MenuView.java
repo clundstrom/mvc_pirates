@@ -61,7 +61,7 @@ public class MenuView extends BaseView {
                     break;
                 case "4":
                     if (isMemberVerified())
-                        new MemberInfoView(controller).viewMember();
+                        new EditMemberView(controller).viewMember();
                     break;
                 case "5":
                     new CompactView(controller).compactViewList();
