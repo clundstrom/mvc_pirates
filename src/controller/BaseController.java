@@ -110,17 +110,17 @@ public class BaseController {
     /**
      * Adds or overwrites state depending on previous entries.
      *
-     * @param state
+     * @param currentMember
      */
-    protected void addToRegistry(BoatClubMember state) throws IOException {
-        if (boatClubMemberRegistry.contains(state)) {
-            boatClubMemberRegistry.update(state);
+    protected void addToRegistry(BoatClubMember currentMember) throws IOException {
+        if (boatClubMemberRegistry.contains(currentMember)) {
+            boatClubMemberRegistry.update(currentMember);
         } else {
-            while (boatClubMemberRegistry.hasMemberById(state.getMember().getId())) {
-                state.getMember().setId();
+            while (boatClubMemberRegistry.hasMemberById(currentMember.getMember().getId())) {
+                currentMember.getMember().setId();
             }
 
-            boatClubMemberRegistry.add(state);
+            boatClubMemberRegistry.add(currentMember);
         }
         writeToDB(new Gson());
     }

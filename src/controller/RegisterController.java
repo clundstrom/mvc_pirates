@@ -118,9 +118,9 @@ public class RegisterController extends BaseController {
     /**
      * Registers the current member with the base controller.
      */
-    public boolean saveBoatClubMember(BoatClubMember state) {
+    public boolean saveBoatClubMember(BoatClubMember currentMemberState) {
         try {
-            addToRegistry(state);
+            addToRegistry(currentMemberState);
             return true;
         } catch (IOException e) {
             return false;

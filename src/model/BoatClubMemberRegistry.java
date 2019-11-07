@@ -35,11 +35,11 @@ public class BoatClubMemberRegistry {
     /**
      * Overwrites Object in InstanceState.
      *
-     * @param objectState State to overwrite with.
+     * @param boatClubMember State to overwrite with.
      */
-    public void update(BoatClubMember objectState) {
-        int index = boatClubMembers.indexOf(objectState);
-        boatClubMembers.set(index, objectState);
+    public void update(BoatClubMember boatClubMember) {
+        int index = boatClubMembers.indexOf(boatClubMember);
+        boatClubMembers.set(index, boatClubMember);
     }
 
     /**
