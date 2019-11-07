@@ -88,10 +88,10 @@ public abstract class BaseView {
      */
     protected boolean isMemberVerified() {
 
-        String input = requireInput("Please enter your member ID: ");
+        String id = requireInput("Please enter your member ID: ");
 
-        if(!controller.hasMemberId(input)){
-            System.out.println("Could not find a member with ID: " + input);
+        if(!controller.hasMemberId(id)){
+            System.out.println("Could not find a member with ID: " + id);
             return false;
         }
 

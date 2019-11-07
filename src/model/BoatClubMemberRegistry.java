@@ -68,9 +68,9 @@ public class BoatClubMemberRegistry {
      * @return Current ID state.
      */
     public BoatClubMember getMemberById(String id) {
-        for (BoatClubMember state : boatClubMembers) {
-            if (state.getMember().getId().equalsIgnoreCase(id)) {
-                return state;
+        for (BoatClubMember boatClubMember : boatClubMembers) {
+            if (boatClubMember.getMember().getId().equalsIgnoreCase(id)) {
+                return boatClubMember;
             }
         }
         throw new NoSuchElementException("Entry not found.");
