@@ -46,8 +46,8 @@ public class MenuView extends BaseView {
     @Override
     protected void getInputAction() {
         try {
-            String key = sc.next();
-            switch (key) {
+            String input = sc.next();
+            switch (input) {
                 case "1":
                     new EditMemberView(controller).register();
                     break;
