@@ -1,0 +1,67 @@
+@startuml sequenceDiagramViewMember
+!define DARKBLUE
+!includeurl https://raw.githubusercontent.com/Drakemor/RedDress-PlantUML/master/style.puml
+actor User
+User <- MenuView : getInputAction()
+activate MenuView
+User --> MenuView : input
+MenuView -> BaseView : isMemberVerified()
+activate BaseView
+BaseView -> User : requireInput()
+User --> BaseView : id
+BaseView -> RegisterController : hasMemberId(id)
+activate RegisterController
+RegisterController -> BaseController : getMemberById(id)
+activate BaseController
+BaseController -> BoatClubMemberRegistry : getMemberById(id)
+activate BoatClubMemberRegistry
+loop for BoatClubMember in BoatClubMemberRegistry
+BoatClubMemberRegistry -> BoatClubMember : getMember()
+activate BoatClubMember
+BoatClubMember --> BoatClubMemberRegistry : BoatClubMember
+deactivate BoatClubMember
+BoatClubMemberRegistry -> Member : getId()
+activate Member
+Member --> BoatClubMemberRegistry : boatClubMember.id
+deactivate Member
+alt boatClubMember.id != id
+BoatClubMemberRegistry --> BaseController : NoSuchElementException
+BaseController --> RegisterController : null
+RegisterController --> BaseView : currentMember != null
+BaseView --> MenuView : false
+MenuView --> User : "Member not Found"
+MenuView -> MenuView : onViewInit()
+MenuView -> MenuView : welcomeMessage()
+MenuView -> MenuView : presentActions(presentActions)
+MenuView -> User: getInputAction()
+end
+end
+BoatClubMemberRegistry --> BaseController : boatClubMember
+deactivate BoatClubMemberRegistry
+BaseController --> RegisterController : boatClubMember
+deactivate BaseController
+RegisterController --> BaseView : currentMember != null
+BaseView --> MenuView : true
+deactivate BaseView
+MenuView -> EditMemberView : viewMember()
+deactivate MenuView
+activate EditMemberView
+EditMemberView -> EditMemberView : clearConsole()
+EditMemberView -> RegisterController : getMember()
+RegisterController --> EditMemberView : member
+EditMemberView -> Member : getId()
+activate Member
+Member --> EditMemberView : id
+EditMemberView -> RegisterController : getMember()
+RegisterController --> EditMemberView : member
+EditMemberView -> Member : getName()
+Member --> EditMemberView : name
+EditMemberView -> RegisterController : getMember()
+RegisterController --> EditMemberView : member
+deactivate RegisterController
+EditMemberView -> Member : getPersonalNumber()
+Member --> EditMemberView : personalNumber
+deactivate Member
+EditMemberView -> User : "Display member info"
+deactivate EditMemberView
+@enduml

@@ -1,0 +1,88 @@
+@startuml sequenceDiagramViewMember
+!define DARKBLUE
+!includeurl https://raw.githubusercontent.com/Drakemor/RedDress-PlantUML/master/style.puml
+actor User
+User <- MenuView : getInputAction()
+activate MenuView
+User --> MenuView : input
+MenuView -> EditMemberView : register()
+deactivate MenuView
+activate EditMemberView
+EditMemberView -> EditMemberView : clearConsole()
+EditMemberView -> User : requireInput()
+User --> EditMemberView : answer
+EditMemberView -> Member : setName(answer)
+activate Member
+EditMemberView -> User : requireInput()
+User --> EditMemberView : answer
+EditMemberView -> Member : setPersonalNumber(answer)
+deactivate Member
+EditMemberView -> EditMemberView : isMemberCreated(member)
+EditMemberView -> RegisterController : onMemberCreated(member)
+deactivate EditMemberView
+activate RegisterController
+RegisterController -> RegisterController : setMember(member)
+RegisterController -> RegisterController : saveBoatClubMember(currentMember)
+RegisterController -> BaseController : addToRegistry(curretnMemberState)
+deactivate RegisterController
+activate BaseController
+BaseController -> BoatClubMemberRegistry : contains(currentMember)
+
+alt contains(currentMember) == true
+activate BoatClubMemberRegistry
+BaseController -> BoatClubMemberRegistry : update(boatClubmember)
+BaseController -> BoatClubMemberRegistry : indexOf(boatClubMember)
+BoatClubMemberRegistry --> BaseController : index
+BaseController -> BoatClubMemberRegistry : set(index, boatClubMember)
+deactivate BoatClubMemberRegistry
+else contains(currentMember) == false
+BaseController -> BoatClubMember : getmember()
+activate BoatClubMember
+BoatClubMember --> BaseController : member
+deactivate BoatClubMember
+BaseController -> Member : getId()
+activate Member
+Member --> BaseController : id
+activate BoatClubMemberRegistry
+loop for BoatClubMember in BoatClubMemberRegistry
+BoatClubMemberRegistry -> BoatClubMember : getMember()
+activate BoatClubMember
+BoatClubMember --> BoatClubMemberRegistry : BoatClubMember
+deactivate BoatClubMember
+BoatClubMemberRegistry -> Member : getId()
+activate Member
+Member --> BoatClubMemberRegistry : boatClubMember.id
+deactivate Member
+end
+loop while member id exist == true
+BaseController -> BoatClubMember : getmember()
+activate BoatClubMember
+BoatClubMember --> BaseController : member
+deactivate BoatClubMember
+BaseController -> Member : getId()
+Member --> BaseController : id
+BaseController -> Member : setId()
+deactivate Member
+end
+BaseController -> BoatClubMemberRegistry : add(currentMember)
+activate BoatClubMemberRegistry
+deactivate BoatClubMemberRegistry
+end
+BaseController -> BaseController : writeToDB(gsonObj)
+BaseController -> Gson : toJson(boatClubMemberRegistry)
+activate Gson
+Gson --> BaseController : formatted
+deactivate Gson
+database Database
+BaseController -> Database : writeString(dbFile, formatted)
+activate Database
+deactivate Database
+BaseController --> RegisterController 
+deactivate BaseController
+activate RegisterController
+RegisterController --> EditMemberView : onMemberCreated = true
+deactivate RegisterController
+activate EditMemberView
+EditMemberView --> User : "Member created"
+deactivate EditMemberView
+@enduml
