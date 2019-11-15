@@ -59,9 +59,10 @@ deactivate BoatClubMember
 BoatClubMemberRegistry -> Member : getId()
 activate Member
 Member --> BoatClubMemberRegistry : boatClubMember.id
+deactivate Member
 alt boatClubMember.id exsist
 BoatClubMemberRegistry --> BaseController : true
-deactivate Member
+
 end
 else 
 end
