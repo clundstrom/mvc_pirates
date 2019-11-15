@@ -11,6 +11,16 @@ activate EditMemberView
 EditMemberView -> EditMemberView : clearConsole()
 EditMemberView -> User : requireInput()
 User --> EditMemberView : answer
+alt answer == "r"
+EditMemberView --> MenuView 
+activate MenuView
+MenuView --> User : "invalid input"
+MenuView -> MenuView : onViewInit()
+MenuView -> MenuView : welcomeMessage()
+MenuView -> MenuView : presentActions(presentActions)
+MenuView -> User : getInputAction()
+deactivate MenuView
+end
 EditMemberView -> Member : setName(answer)
 activate Member
 EditMemberView -> User : requireInput()
@@ -36,38 +46,39 @@ BoatClubMemberRegistry --> BaseController : index
 BaseController -> BoatClubMemberRegistry : set(index, boatClubMember)
 deactivate BoatClubMemberRegistry
 else contains(currentMember) == false
-BaseController -> BoatClubMember : getmember()
-activate BoatClubMember
-BoatClubMember --> BaseController : member
-deactivate BoatClubMember
-BaseController -> Member : getId()
-activate Member
-Member --> BaseController : id
+loop while currentMember.id == hasMemberById()
+BaseController -> BoatClubMemberRegistry : hasMemberById()
 activate BoatClubMemberRegistry
+
+
 loop for BoatClubMember in BoatClubMemberRegistry
 BoatClubMemberRegistry -> BoatClubMember : getMember()
 activate BoatClubMember
-BoatClubMember --> BoatClubMemberRegistry : BoatClubMember
+BoatClubMember --> BoatClubMemberRegistry : currentMember
 deactivate BoatClubMember
 BoatClubMemberRegistry -> Member : getId()
 activate Member
 Member --> BoatClubMemberRegistry : boatClubMember.id
+alt boatClubMember.id exsist
+BoatClubMemberRegistry --> BaseController : true
 deactivate Member
 end
-loop while member id exist == true
-BaseController -> BoatClubMember : getmember()
+else 
+end
+BoatClubMemberRegistry --> BaseController : false
+deactivate BoatClubMemberRegistry
+
+BaseController -> BoatClubMember : getMember()
 activate BoatClubMember
 BoatClubMember --> BaseController : member
 deactivate BoatClubMember
-BaseController -> Member : getId()
-Member --> BaseController : id
 BaseController -> Member : setId()
+activate Member
 deactivate Member
 end
 BaseController -> BoatClubMemberRegistry : add(currentMember)
 activate BoatClubMemberRegistry
 deactivate BoatClubMemberRegistry
-end
 BaseController -> BaseController : writeToDB(gsonObj)
 BaseController -> Gson : toJson(boatClubMemberRegistry)
 activate Gson
