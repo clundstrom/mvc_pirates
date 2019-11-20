@@ -31,6 +31,11 @@ public class BoatClubMemberRegistry {
         boatClubMembers.add(objectState);
     }
 
+    /**
+     * Checks if a certain member exists in the registry.
+     * @param objectState A BoatClubMember.
+     * @return true/false
+     */
     public boolean contains(BoatClubMember objectState) {
         return boatClubMembers.contains(objectState);
     }
@@ -79,7 +84,12 @@ public class BoatClubMemberRegistry {
         throw new NoSuchElementException("Entry not found.");
     }
 
-    public boolean hasMemberById(String id) {
+    /**
+     * Checks if a certain ID exists in the member registry.
+     * @param id String id.
+     * @return true/false
+     */
+    private boolean hasMemberById(String id) {
         for (BoatClubMember member : boatClubMembers) {
             if (member.getMember().getId().equalsIgnoreCase(id)) {
                 return true;

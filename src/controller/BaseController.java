@@ -108,11 +108,11 @@ public class BaseController {
     }
 
     /**
-     * Adds or overwrites state depending on previous entries.
+     * Adds or overwrites BoatClubMember depending on previous entries.
      *
-     * @param currentMember
+     * @param currentMember Member to be added/overwritten.
      */
-    protected void addToRegistry(BoatClubMember currentMember) throws IOException {
+    void addToRegistry(BoatClubMember currentMember) throws IOException {
         if (boatClubMemberRegistry.contains(currentMember)) {
             boatClubMemberRegistry.update(currentMember);
         } else {
@@ -126,7 +126,7 @@ public class BaseController {
      *
      * @param state
      */
-    protected boolean removeFromRegistry(BoatClubMember state) {
+    boolean removeFromRegistry(BoatClubMember state) {
         if (this.boatClubMemberRegistry.getBoatClubMembers().contains(state)) {
             this.boatClubMemberRegistry.remove(state);
             writeToDB(new Gson());
