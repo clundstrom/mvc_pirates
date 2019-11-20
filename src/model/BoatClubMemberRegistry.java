@@ -25,6 +25,9 @@ public class BoatClubMemberRegistry {
      * @param objectState
      */
     public void add(BoatClubMember objectState) {
+        while (hasMemberById(objectState.getMember().getId())) {
+            objectState.getMember().setId();
+        }
         boatClubMembers.add(objectState);
     }
 

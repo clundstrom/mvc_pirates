@@ -116,10 +116,6 @@ public class BaseController {
         if (boatClubMemberRegistry.contains(currentMember)) {
             boatClubMemberRegistry.update(currentMember);
         } else {
-            while (boatClubMemberRegistry.hasMemberById(currentMember.getMember().getId())) {
-                currentMember.getMember().setId();
-            }
-
             boatClubMemberRegistry.add(currentMember);
         }
         writeToDB(new Gson());

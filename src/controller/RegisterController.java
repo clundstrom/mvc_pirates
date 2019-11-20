@@ -62,10 +62,7 @@ public class RegisterController extends BaseController {
      */
     public boolean onMemberDeleted(String id) {
         try {
-            if (removeFromRegistry(getMemberById(id))) {
-                return true;
-            }
-            return false;
+            return removeFromRegistry(getMemberById(id));
         } catch (Exception e) {
             return false;
         }

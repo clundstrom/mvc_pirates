@@ -42,7 +42,7 @@ public class Member {
     /**
      * Sets a 6 digit random id for member
      */
-    public void setId() {
+    void setId() {
         Random rand = new Random();
         int maxIdLength = 6;
         String temp = "";
