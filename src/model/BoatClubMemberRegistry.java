@@ -22,22 +22,22 @@ public class BoatClubMemberRegistry {
     /**
      * Adds a BoatClubMember to the current instance.
      *
-     * @param objectState
+     * @param currentMember
      */
-    public void add(BoatClubMember objectState) {
-        while (hasMemberById(objectState.getMember().getId())) {
-            objectState.getMember().setId();
+    public void add(BoatClubMember currentMember) {
+        while (hasMemberById(currentMember.getMember().getId())) {
+            currentMember.getMember().setId();
         }
-        boatClubMembers.add(objectState);
+        boatClubMembers.add(currentMember);
     }
 
     /**
      * Checks if a certain member exists in the registry.
-     * @param objectState A BoatClubMember.
+     * @param currentMember A BoatClubMember.
      * @return true/false
      */
-    public boolean contains(BoatClubMember objectState) {
-        return boatClubMembers.contains(objectState);
+    public boolean contains(BoatClubMember currentMember) {
+        return boatClubMembers.contains(currentMember);
     }
 
     /**
@@ -53,10 +53,10 @@ public class BoatClubMemberRegistry {
     /**
      * Removes provided state from BoatClubMemberRegistry.
      *
-     * @param objectState
+     * @param currentMember
      */
-    public void remove(BoatClubMember objectState) {
-        boatClubMembers.remove(objectState);
+    public void remove(BoatClubMember currentMember) {
+        boatClubMembers.remove(currentMember);
     }
 
 

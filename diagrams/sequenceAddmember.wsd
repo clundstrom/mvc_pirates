@@ -33,7 +33,7 @@ deactivate EditMemberView
 activate RegisterController
 RegisterController -> RegisterController : setMember(member)
 RegisterController -> RegisterController : saveBoatClubMember(currentMember)
-RegisterController -> BaseController : addToRegistry(curretnMemberState)
+RegisterController -> BaseController : addToRegistry(currentMemberState)
 deactivate RegisterController
 activate BaseController
 BaseController -> BoatClubMemberRegistry : contains(currentMember)
@@ -46,40 +46,27 @@ BoatClubMemberRegistry --> BaseController : index
 BaseController -> BoatClubMemberRegistry : set(index, boatClubMember)
 deactivate BoatClubMemberRegistry
 else contains(currentMember) == false
-loop while currentMember.id == hasMemberById()
-BaseController -> BoatClubMemberRegistry : hasMemberById()
+
+
+BaseController -> BoatClubMemberRegistry : add(currentMember)
+
+loop while hasMemberById(currentMember.id)
+
 activate BoatClubMemberRegistry
 
-
-loop for BoatClubMember in BoatClubMemberRegistry
 BoatClubMemberRegistry -> BoatClubMember : getMember()
 activate BoatClubMember
-BoatClubMember --> BoatClubMemberRegistry : currentMember
+BoatClubMember --> BoatClubMemberRegistry : member
+BoatClubMemberRegistry -> BoatClubMember : setId() 
 deactivate BoatClubMember
-BoatClubMemberRegistry -> Member : getId()
-activate Member
-Member --> BoatClubMemberRegistry : boatClubMember.id
-deactivate Member
-alt boatClubMember.id exsist
-BoatClubMemberRegistry --> BaseController : true
 
-end
+
 else 
 end
-BoatClubMemberRegistry --> BaseController : false
+BoatClubMemberRegistry -> BoatClubMemberRegistry : add(currentMember)
+end
 deactivate BoatClubMemberRegistry
 
-BaseController -> BoatClubMember : getMember()
-activate BoatClubMember
-BoatClubMember --> BaseController : member
-deactivate BoatClubMember
-BaseController -> Member : setId()
-activate Member
-deactivate Member
-end
-BaseController -> BoatClubMemberRegistry : add(currentMember)
-activate BoatClubMemberRegistry
-deactivate BoatClubMemberRegistry
 BaseController -> BaseController : writeToDB(gsonObj)
 BaseController -> Gson : toJson(boatClubMemberRegistry)
 activate Gson
