@@ -54,6 +54,7 @@ loop while hasMemberById(currentMember.id)
 
 activate BoatClubMemberRegistry
 
+
 BoatClubMemberRegistry -> BoatClubMember : getMember()
 activate BoatClubMember
 BoatClubMember --> BoatClubMemberRegistry : member
@@ -65,8 +66,9 @@ else
 end
 BoatClubMemberRegistry -> BoatClubMemberRegistry : add(currentMember)
 end
-deactivate BoatClubMemberRegistry
 
+BoatClubMemberRegistry --> BaseController 
+deactivate BoatClubMemberRegistry
 BaseController -> BaseController : writeToDB(gsonObj)
 BaseController -> Gson : toJson(boatClubMemberRegistry)
 activate Gson
